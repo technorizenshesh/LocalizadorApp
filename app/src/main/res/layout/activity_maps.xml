@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".act.MapsActivity"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_alignParentBottom="true"
+        app:cardCornerRadius="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:padding="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:background="@color/black"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/bg_SPLASH"
+                android:textSize="@dimen/_14sdp"
+                android:text="Now let’s locate your loved one!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+            <RelativeLayout
+                android:background="@drawable/btn_new"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                >
+
+                <TextView
+                    android:id="@+id/txtCountry"
+                    android:textSize="@dimen/_16sdp"
+                    android:gravity="center"
+                    android:text="+91"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="match_parent">
+
+                </TextView>
+
+                <View
+                    android:id="@+id/br"
+                    android:background="@color/bg_SPLASH"
+                    android:layout_toRightOf="@+id/txtCountry"
+                    android:layout_width="1sp"
+                    android:layout_height="match_parent">
+
+                </View>
+
+                <EditText
+                    android:textSize="@dimen/_14sdp"
+                    android:hint="Phone number"
+                    android:layout_toRightOf="@+id/br"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                </EditText>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_gravity="center"
+                android:textColor="@color/bg_SPLASH"
+                android:textSize="@dimen/_14sdp"
+                android:gravity="center"
+                android:text="Add from contacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+            <RelativeLayout
+                android:id="@+id/RRtrack"
+                android:background="@drawable/btn_bg"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                >
+
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp"
+                    android:gravity="center"
+                    android:text="Start Tracking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_gravity="center"
+                android:textColor="@color/bg_SPLASH"
+                android:textSize="@dimen/_14sdp"
+                android:gravity="center"
+                android:text="Later"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

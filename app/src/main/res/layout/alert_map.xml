@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/_5sdp"
+    >
+
+
+    <ImageView
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_gravity="center"
+        android:src="@drawable/share_img"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
+        >
+
+    </ImageView>
+
+    <TextView
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:text="Share for"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/_5sdp"
+        android:padding="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="15 minutes"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp">
+
+        </TextView>
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/selected_radio_btn"
+            android:layout_width="@dimen/_17sdp"
+            android:layout_height="@dimen/_17sdp">
+
+        </ImageView>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:padding="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:text="30 minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/unselected_radio_btn">
+
+        </ImageView>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:padding="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:text="1 hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/unselected_radio_btn">
+
+        </ImageView>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:padding="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:text="8 hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/unselected_radio_btn"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp">
+
+        </ImageView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/_20sdp"
+        android:id="@+id/RRShare"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@drawable/btn_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Share Location"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp">
+
+        </TextView>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

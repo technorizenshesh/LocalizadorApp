@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">LocalizadorApp</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="privacy_policy"><u>Privacy Policy</u></string>
+    <string name="terms_of_use"><u>Terms of Use</u></string>
+    <string name="remove_ads"><u>Remove Ads</u></string>
+    <string name="skip_all_tips"><u>Skip all tips</u></string>
+    <string name="remove_ads1"><u>Remove Ads</u></string>
+    <string name="sharing_history">Sharing History</string>
+    <string name="purchase_devices">Purchase Devices</string>
+</resources>

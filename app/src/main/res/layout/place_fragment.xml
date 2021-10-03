@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:id="@+id/txt1"
+            android:text="Places"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp">
+
+        </TextView>
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_below="@+id/txt1"
+            android:weightSum="3"
+            android:background="@drawable/rect"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            >
+
+            <TextView
+                android:background="@color/bg_SPLASH"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="My Places"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp">
+
+            </TextView>
+
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Most Visited"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp">
+
+            </TextView>
+
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Places for geo \nreminders"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp">
+
+            </TextView>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:padding="@dimen/_10sdp"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:src="@drawable/llustration_places"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+            </ImageView>
+            <TextView
+                android:padding="@dimen/_10sdp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:id="@+id/txt"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="You need to have at least one other member in your circle to create Places.s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp">
+
+            </TextView>
+
+            <RelativeLayout
+                android:id="@+id/RRContinue"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/btn_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Invite a Member to continue"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp">
+
+                </TextView>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</layout>

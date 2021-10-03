@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <fragment
+            android:layout_above="@+id/card"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".act.MapsActivity"
+            />
+
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:id="@+id/cardMycircle"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:background="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:padding="@dimen/_5sdp"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:drawableRight="@drawable/drp_dwn_white"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    android:text="My Circle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_below="@+id/cardMycircle"
+            app:cardCornerRadius="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_toLeftOf="@id/ll_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/RR_btm"
+                android:background="@color/black"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:text="Circles"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:text="Join or create different groups of people
+(like friends, Colleagues, etc)"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp">
+
+                </TextView>
+
+                <TextView
+                    android:text="@string/skip_all_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:textColor="@color/bg_SPLASH"
+                    android:textSize="@dimen/_10sdp">
+
+                </TextView>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <LinearLayout
+            android:id="@+id/ll_data"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:src="@drawable/premium"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                >
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imgNotification"
+                android:scaleType="fitXY"
+                android:src="@drawable/notification"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                >
+
+            </ImageView>
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:src="@drawable/location"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                >
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imgShare"
+                android:scaleType="fitXY"
+                android:src="@drawable/share"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                >
+
+            </ImageView>
+
+
+        </LinearLayout>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/RR_btm"
+                android:background="@color/black"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <ImageView
+                        android:id="@+id/user"
+                        android:src="@drawable/user"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp">
+
+                    </ImageView>
+
+                    <LinearLayout
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:orientation="vertical"
+                        android:layout_toRightOf="@+id/user"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <TextView
+                            android:text="Me"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/bg_SPLASH"
+                            android:textSize="@dimen/_12sdp">
+
+                        </TextView>
+
+                        <TextView
+                            android:text="Just Updated"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/bg_SPLASH"
+                            android:textSize="@dimen/_12sdp">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="Yashwant Plaza, F-53 Sapna Sangeeta Rd, Sapna Sangeeta, Opposite Railway Station, Snehnagar, Indore, Since 03:55 pm, Sep 24"
+                    android:textColor="@color/bg_SPLASH"
+                    android:textSize="@dimen/_11sdp">
+
+                </TextView>
+
+                <View
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@color/bg_SPLASH"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp">
+
+                </View>
+
+
+                <RelativeLayout
+                    android:id="@+id/RRContinue"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/btn_bg">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Add New Member"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp">
+
+                    </TextView>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</layout>
