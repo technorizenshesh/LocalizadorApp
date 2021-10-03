@@ -37,7 +37,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text="FAQ’s"
+                android:text="Manage Invitations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -50,23 +50,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-            <RelativeLayout
+
+            <LinearLayout
+                android:padding="@dimen/_20sdp"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
 
+
+                <ImageView
+                    android:layout_marginTop="@dimen/_100sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/manager_invitatin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                </ImageView>
+
+
                 <TextView
-                    android:padding="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_gravity="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16sdp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elit, morbi ut maecenas. Enim elementum, libero molestie suspendisse sit nibh. Scelerisque malesuada interdum quam risus. Elementum proin ac rhoncus lectus proin orci sed egestas. Aliquam ipsum, dolor vitae turpis. Eget venenatis consectetur pharetra sed. Orci mattis magnis vitae lorem in. Blandit sed viverra bibendum enim pretium. Cursus adipiscing egestas eget tempor risus eu commodo. Orci vestibulum orci massa leo. Id purus, facilisi neque non est. Ut velit amet porttitor enim pellentesque sollicitudin accumsan. At tristique nulla dui, diam non accumsan tempor. Est arcu neque proin rhoncus. Consequat gravida enim, sodales curabitur. Ut nec mauris pellentesque leo curabitur ultricies at pellentesque diam. Sed tempus ac velit volutpat ipsum id. At euismod tellus elit et at sapien. Ut ultrices sit euismod nunc. Pellentesque nunc, vel et aenean tortor pellentesque odio ut sit. Tortor dolor sit venenatis nulla id consequat leo integer. Enim vestibulum ipsum, tortor lacus proin tellus et feugiat. Maecenas eu et nulla tellus. Aliquet phasellus arcu sodales egestas fringilla elementum viverra. Quis porttitor ac fringilla ipsum. Ut fusce sagittis tristique tempus. Aliquam vitae consectetur aliquam pretium tristique tristique vestibulum maecenas. Orci, diam ultrices et aenean. Est interdum risus tortor aliquet pellentesque pellentesque. Pellentesque nisl, imperdiet pellentesque non elit. Magna purus aliquam hac etiam nisl ultricies amet tortor aenean. Habitasse fermentum magna amet, vulputate. Fringilla iaculis porttitor tortor, urna, neque lacus."
+                    android:textSize="@dimen/_14sdp"
+                    android:text="Invitations from your friends and family will be placed here."
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                 </TextView>
 
-            </RelativeLayout>
+
+            </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 

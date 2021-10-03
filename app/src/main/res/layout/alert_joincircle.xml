@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/_5sdp"
+    >
+
+
+    <ImageView
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_gravity="center"
+        android:src="@drawable/joincircle"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        >
+
+    </ImageView>
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:text="Join Circle by Code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <TextView
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:text="Enter the invite code here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <TextView
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:text="LLL-IGT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <View
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:background="@color/gray_new"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="1sp">
+
+    </View>
+
+
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/_20sdp"
+        android:id="@+id/RRShare"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@drawable/btn_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Join"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp">
+
+        </TextView>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

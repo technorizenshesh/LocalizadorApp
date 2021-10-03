@@ -6,16 +6,15 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 
 import com.my.localizadorapp.R;
-import com.my.localizadorapp.databinding.ActivityFaqScreenBinding;
+import com.my.localizadorapp.databinding.ActivityDrivingProtectionBinding;
 
-public class FaqScreen extends AppCompatActivity {
+public class DrivingProtection extends AppCompatActivity {
 
-    ActivityFaqScreenBinding binding;
-
+    ActivityDrivingProtectionBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       binding= DataBindingUtil.setContentView(this,R.layout.activity_faq_screen);
+       binding= DataBindingUtil.setContentView(this,R.layout.activity_driving_protection);
 
        binding.RRback.setOnClickListener(v -> {
            onBackPressed();

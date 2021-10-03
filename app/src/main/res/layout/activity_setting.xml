@@ -9,75 +9,59 @@
         android:layout_height="match_parent"
         >
 
+        <LinearLayout
+            android:id="@+id/RRtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
+
+            <RelativeLayout
+                android:id="@+id/RRback"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="match_parent"
+                >
+
+                <ImageView
+                    android:src="@drawable/cross_icon"
+                    android:layout_centerInParent="true"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    >
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:text="FAQ’s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </LinearLayout>
+
         <androidx.core.widget.NestedScrollView
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_below="@+id/RRtoolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
             <LinearLayout
-                android:layout_marginTop="@dimen/_20sdp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
-
-                    <RelativeLayout
-                        android:background="@color/bg_SPLASH"
-                        android:layout_centerInParent="true"
-                        android:layout_width="match_parent"
-                         android:layout_height="@dimen/_30sdp"
-                        >
-
-
-                        <TextView
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/imgBack"
-                            android:id="@+id/txtName"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_12sdp"
-                            android:text="Enter your nickname"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                        </TextView>
-
-
-                        <ImageView
-                            android:id="@+id/imgBack"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/arrow"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            >
-
-                        </ImageView>
-
-                    </RelativeLayout>
-
-                    <ImageView
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:src="@drawable/user_nav"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        >
-
-                    </ImageView>
-
-                </RelativeLayout>
-
                 <LinearLayout
                     android:id="@+id/llPrimium"
                     android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
@@ -86,7 +70,7 @@
                     <ImageView
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
-                        android:src="@drawable/yellow_nav"
+                        android:src="@drawable/support"
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_25sdp">
 
@@ -109,7 +93,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/llSupport"
+                    android:id="@+id/llMyAccount"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
@@ -126,11 +111,11 @@
                     </ImageView>
 
                     <TextView
-                       
+
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
-                        android:text="Support"
+                        android:text="My Account"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -139,94 +124,87 @@
 
                 </LinearLayout>
 
-                <View
-                    android:background="@color/gray_new"
+                <LinearLayout
+                    android:id="@+id/llManageMeber"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                    android:layout_height="1sp">
+                    android:layout_height="@dimen/_30sdp"
+                    >
 
-                </View>
+                    <ImageView
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/support"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp">
+
+                    </ImageView>
+
+                    <TextView
+
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="Manage Members and Circles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/LLsharingHistory"
+                    android:id="@+id/llTodolist"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    >
+
+                    <ImageView
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/support"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp">
+
+                    </ImageView>
+
+                    <TextView
+
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="To-do List"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+
+                <View
+                    android:background="@color/gray_new"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_centerInParent="true"
-                    android:layout_width="match_parent"
-                     android:layout_height="@dimen/_30sdp"
-                    >
-
-                    <ImageView
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/support"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp">
-
-                    </ImageView>
-
-                    <TextView
-                       
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:textSize="@dimen/_16sdp"
-                        android:text="Sharing History"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                    </TextView>
-
-
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llPurchesitem"
-                    android:orientation="horizontal"
-                    android:layout_centerInParent="true"
-                    android:layout_width="match_parent"
-                     android:layout_height="@dimen/_30sdp"
-                    >
-
-                    <ImageView
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/support"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp">
-
-                    </ImageView>
-
-                    <TextView
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:textSize="@dimen/_16sdp"
-                        android:text="Purchase Item"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                    </TextView>
-
-
-                </LinearLayout>
-
-                <View
-                    android:background="@color/gray_new"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_width="match_parent"
                     android:layout_height="1sp">
 
                 </View>
 
+
                 <LinearLayout
-                    android:id="@+id/llJoinCircle"
-                    android:orientation="horizontal"
+                    android:id="@+id/llNotification"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                     android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     >
 
                     <ImageView
@@ -239,27 +217,25 @@
                     </ImageView>
 
                     <TextView
-                       
+
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
-                        android:text="Join Circle"
+                        android:text="Notifications"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                     </TextView>
 
 
-
-
-
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                     android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     >
 
                     <ImageView
@@ -272,11 +248,107 @@
                     </ImageView>
 
                     <TextView
-                       
+
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
-                        android:text="Message"
+                        android:text="Location Accuracy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llBateryAlert"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    >
+
+                    <ImageView
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/support"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp">
+
+                    </ImageView>
+
+                    <TextView
+
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="Battery Alerts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llInvitation"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    >
+
+                    <ImageView
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/support"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp">
+
+                    </ImageView>
+
+                    <TextView
+
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="Incoming Invitations"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llEmergancy"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    >
+
+                    <ImageView
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/support"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp">
+
+                    </ImageView>
+
+                    <TextView
+
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="Emergency Contacts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -287,52 +359,18 @@
 
                 <View
                     android:background="@color/gray_new"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_width="match_parent"
-                    android:layout_height="1sp">
-
-                </View>
-
-
-                <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                     android:layout_height="@dimen/_30sdp"
-                    >
+                    android:layout_height="1sp">
 
-                    <ImageView
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/support"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp">
-
-                    </ImageView>
-
-                    <TextView
-                       
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:textSize="@dimen/_16sdp"
-                        android:text="Fall Detection"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                    </TextView>
-
-
-
-
-
-                </LinearLayout>
+                </View>
 
                 <LinearLayout
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                     android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     >
 
                     <ImageView
@@ -345,11 +383,11 @@
                     </ImageView>
 
                     <TextView
-                       
+
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
-                        android:text="Driving Protection"
+                        android:text="Map Mode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -357,12 +395,13 @@
 
 
                 </LinearLayout>
-
                 <LinearLayout
+                    android:id="@+id/llDistanceUnit"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                     android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     >
 
                     <ImageView
@@ -375,11 +414,11 @@
                     </ImageView>
 
                     <TextView
-                       
+
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
-                        android:text="Emergency Alert"
+                        android:text="Distance Contacs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -390,52 +429,20 @@
 
                 <View
                     android:background="@color/gray_new"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_width="match_parent"
-                    android:layout_height="1sp">
-
-                </View>
-
-                <LinearLayout
-                    android:id="@+id/llSetting"
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                     android:layout_height="@dimen/_30sdp"
-                    >
+                    android:layout_height="1sp">
 
-                    <ImageView
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/support"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp">
+                </View>
 
-                    </ImageView>
-
-                    <TextView
-                       
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:textSize="@dimen/_16sdp"
-                        android:text="Settings"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                    </TextView>
-
-
-
-
-
-                </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llFaQ"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                     android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     >
 
                     <ImageView
@@ -448,11 +455,42 @@
                     </ImageView>
 
                     <TextView
-                       
+
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
-                        android:text="Tutorial"
+                        android:text="FAQ’s"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/SendFeedback"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    >
+
+                    <ImageView
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/support"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp">
+
+                    </ImageView>
+
+                    <TextView
+
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="Send Feedback/ Report a bug"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -461,20 +499,20 @@
 
                 </LinearLayout>
 
-
                 <View
                     android:background="@color/gray_new"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="1sp">
 
                 </View>
 
                 <LinearLayout
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                     android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     >
 
                     <ImageView
@@ -487,11 +525,41 @@
                     </ImageView>
 
                     <TextView
-                       
+
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
-                        android:text="Remove Ads"
+                        android:text="Map Mode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    >
+
+                    <ImageView
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/support"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp">
+
+                    </ImageView>
+
+                    <TextView
+
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="Distance Contacs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -500,47 +568,37 @@
 
                 </LinearLayout>
 
-
                 <View
                     android:background="@color/gray_new"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="1sp">
 
                 </View>
 
+
                 <LinearLayout
-                    android:id="@+id/llPrivacyPolicy"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                     android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     >
 
-                    <ImageView
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/support"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp">
-
-                    </ImageView>
 
                     <TextView
-                       
-                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:gravity="center"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
-                        android:text="Privacy Policy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:text="Sign in with different account"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
                     </TextView>
 
 
                 </LinearLayout>
-
-
 
             </LinearLayout>
 

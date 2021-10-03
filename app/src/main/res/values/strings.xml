@@ -8,4 +8,13 @@
     <string name="remove_ads1"><u>Remove Ads</u></string>
     <string name="sharing_history">Sharing History</string>
     <string name="purchase_devices">Purchase Devices</string>
+    <string name="to_do_list">To-do List</string>
+    <string name="my_task_list">My Task List</string>
+    <string name="assigned_by_me">Assigned by Me</string>
+    <string name="assing_task">Assing Task</string>
+    <string name="you_have_no_tasks_yet_create_a_task_by_tapping_the_button_below_provided">You have no tasks yet. Create a task by tapping the button below provided.</string>
+    <string name="battery_alerts">Battery Alerts</string>
+    <string name="invite_a_member_to_continue">Invite a member to continue</string>
+    <string name="emergency_contacts">Emergency Contacts</string>
+    <string name="most_visited_places">Most Visited Places</string>
 </resources>

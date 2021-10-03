@@ -6,19 +6,20 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 
 import com.my.localizadorapp.R;
-import com.my.localizadorapp.databinding.ActivityFaqScreenBinding;
+import com.my.localizadorapp.databinding.ActivityEmergancyContactBinding;
 
-public class FaqScreen extends AppCompatActivity {
+public class EmergancyContact extends AppCompatActivity {
 
-    ActivityFaqScreenBinding binding;
-
+    ActivityEmergancyContactBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       binding= DataBindingUtil.setContentView(this,R.layout.activity_faq_screen);
+       binding= DataBindingUtil.setContentView(this,R.layout.activity_emergancy_contact);
 
        binding.RRback.setOnClickListener(v -> {
+
            onBackPressed();
+
        });
     }
 }

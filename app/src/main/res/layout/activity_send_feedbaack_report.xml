@@ -37,7 +37,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text="FAQ’s"
+                android:text="Send Feedbaack/ Report a bug"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
