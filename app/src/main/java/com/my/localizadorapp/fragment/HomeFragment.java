@@ -4,11 +4,12 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +24,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.my.localizadorapp.GPSTracker;
 import com.my.localizadorapp.MainActivity;
 import com.my.localizadorapp.OnItemClickListener;
 import com.my.localizadorapp.R;
@@ -39,10 +42,11 @@ import com.my.localizadorapp.act.LoginActivity;
 import com.my.localizadorapp.act.NotificationScree;
 import com.my.localizadorapp.databinding.HomeFragmentBinding;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItemClickListener,
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
+public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItemClickListener {
 
     HomeFragmentBinding binding;
     private GoogleMap mMap;
@@ -50,12 +54,15 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
     private AlertDialog alertDialog;
     int PERMISSION_ID = 44;
     BottomFragmentMap bottomSheetFragment;
+    GPSTracker gpsTracker;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState)
     {
         binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false);
+
+        gpsTracker = new GPSTracker(getActivity());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this::onMapReady);
@@ -70,6 +77,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
             AlertDaliog();
 
+        });
+
+        binding.txtSkip.setOnClickListener(v -> {
+
+            binding.llJoinAlert.setVisibility(View.GONE);
         });
 
         binding.RRjoinCircle.setOnClickListener(v -> {
@@ -92,6 +104,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
         });
 
+        getCurrentLocation();
+
         return binding.getRoot();
     }
 
@@ -100,9 +114,24 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
         // Add a marker in Sydney and move the camera
         mMap = googleMap;
 
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.clear();
+        LatLng sydney = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+
+        Marker mSydney = mMap.addMarker(new MarkerOptions()
+                .position(sydney)
+                .title("Sydney")
+                .snippet("Population: 4,627,300")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.user)));
+
+
+      //  mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(getCameraPositionWithBearing(new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude()))));
+    }
+
+    @NonNull
+    private CameraPosition getCameraPositionWithBearing(LatLng latLng) {
+        return new CameraPosition.Builder().target(latLng).zoom(14).build();
     }
 
     private void AlertDaliog() {
@@ -163,7 +192,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
         }else if(position == 2)
         {
             if(mMap != null){
-                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
+                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
             }
 
             bottomSheetFragment.dismiss();
@@ -171,7 +201,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
         }else if(position == 3)
         {
             if(mMap != null){
-                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
             }
             bottomSheetFragment.dismiss();
 
@@ -185,23 +216,40 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
         }
     }
 
-    @Override
-    public void onLocationChanged(@NonNull Location location) {
+
+    public void getCurrentLocation(){
+        String loc = "";
+        if(gpsTracker.canGetLocation())
+        {
+             loc = getAddress(getActivity(),gpsTracker.getLatitude(),gpsTracker.getLongitude());
+        }
+        Log.e("Location=====",loc);
+    }
+
+    public String getAddress(Context context, double latitude, double longitute) {
+        List<Address> addresses;
+        String addressStreet="";
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitute, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            addressStreet = addresses.get(0).getAddressLine(0);
+            // address2 = addresses.get(0).getAddressLine(1); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+            //  city = addresses.get(0).getLocality();
+            String state = addresses.get(0).getAdminArea();
+            String country = addresses.get(0).getCountryName();
+            String postalCode = addresses.get(0).getPostalCode();
+            String region = addresses.get(0).getAdminArea();
+
+            binding.txtAddress.setText(addressStreet+"");
+
+            Log.e("region====", region);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return addressStreet;
 
     }
 
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
 }

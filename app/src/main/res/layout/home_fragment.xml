@@ -18,7 +18,6 @@
             />
 
         <androidx.cardview.widget.CardView
-            android:visibility="gone"
             app:cardCornerRadius="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:id="@+id/cardMycircle"
@@ -51,7 +50,6 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:visibility="gone"
             android:layout_below="@+id/cardMycircle"
             app:cardCornerRadius="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
@@ -63,6 +61,8 @@
             >
 
             <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/llJoinAlert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/RR_btm"
@@ -94,6 +94,8 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/txtSkip"
+                    android:padding="5sp"
                     android:text="@string/skip_all_tips"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,7 +112,6 @@
 
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/ll_data"
             android:layout_marginRight="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_35sdp"
@@ -226,16 +227,14 @@
 
                     </LinearLayout>
 
-
-
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/txtAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/_10sdp"
-                    android:text="Yashwant Plaza, F-53 Sapna Sangeeta Rd, Sapna Sangeeta, Opposite Railway Station, Snehnagar, Indore, Since 03:55 pm, Sep 24"
                     android:textColor="@color/bg_SPLASH"
                     android:textSize="@dimen/_11sdp">
 

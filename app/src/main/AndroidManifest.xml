@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.my.localizadorapp">
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the "MyLocation" functionality.
-    -->
+
+
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -13,12 +11,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LocalizadorApp">
-
+        android:theme="@style/Theme.LocalizadorApp"
+        >
 
         <activity
             android:name=".act.InviteNewFriend"
@@ -44,69 +42,91 @@
         <activity
             android:name=".act.DrivingProtection"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.MostVisited"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.ManageInvitations"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.EmergancyContact"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.BaterryAlertScreen"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.ToDoList"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.ManageMebersCircles"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.MyAccountActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.SettingActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.SendFeedbaackReport"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.FaqScreen"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.PurchaseItemsActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.ShariingHistory"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.MenuActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.TermsActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.PrivacyPolicy"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.SupportScreen"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.BenifitActiviity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.NotificationScree"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.HomeActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.WellCOmeActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.LoginActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".act.MapsActivity"
             android:label="@string/title_activity_maps"
@@ -115,6 +135,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
     </application>
 
 </manifest>
