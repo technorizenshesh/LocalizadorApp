@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <LinearLayout
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+
+        <LinearLayout
+            android:id="@+id/llAuto"
+            android:layout_margin="3sp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:src="@drawable/auto_map"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                >
+
+            </ImageView>
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="Auto"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp">
+
+            </TextView>
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llStreet"
+            android:layout_margin="3sp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:src="@drawable/street"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                >
+
+            </ImageView>
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="Street"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llSatellite"
+            android:layout_margin="3sp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:src="@drawable/auto_map"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                >
+
+            </ImageView>
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="@string/satellite"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</layout>

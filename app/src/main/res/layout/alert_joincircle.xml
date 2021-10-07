@@ -8,7 +8,7 @@
     >
 
 
-    <ImageView
+   <ImageView
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_gravity="center"
         android:src="@drawable/joincircle"
@@ -41,32 +41,25 @@
 
     </TextView>
 
-    <TextView
+    <EditText
+        android:padding="@dimen/_10sdp"
+        android:gravity="center"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:textSize="@dimen/_14sdp"
-        android:text="LLL-IGT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </TextView>
-
-    <View
-        android:layout_marginRight="@dimen/_20sdp"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:background="@color/gray_new"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:hint="LLL-IGT"
         android:layout_width="match_parent"
-        android:layout_height="1sp">
+        android:layout_height="@dimen/_50sdp">
 
-    </View>
+    </EditText>
+
 
 
 
     <RelativeLayout
         android:layout_marginTop="@dimen/_20sdp"
-        android:id="@+id/RRShare"
+        android:id="@+id/RRjoinCircle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:background="@drawable/btn_bg">

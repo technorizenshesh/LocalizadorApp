@@ -17,4 +17,13 @@
     <string name="invite_a_member_to_continue">Invite a member to continue</string>
     <string name="emergency_contacts">Emergency Contacts</string>
     <string name="most_visited_places">Most Visited Places</string>
+    <string name="unlock_premium">Unlock Premium</string>
+    <string name="satellite">Satellite</string>
+    <string name="by_shaking_phone">By Shaking Phone</string>
+    <string name="share_this_invite_code_with_your_friends_and_family">Share this invite code with your friends and family.</string>
+    <string name="cwg_tcb">CWG-TCB</string>
+    <string name="from_contacts">From Contacts</string>
+    <string name="find_neraby">Find Neraby</string>
+    <string name="by_other_options">By other options</string>
+    <string name="my_circle">My Circle</string>
 </resources>

@@ -7,6 +7,9 @@
          location permissions for the "MyLocation" functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -15,34 +18,86 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LocalizadorApp">
-        <activity android:name=".act.DrivingProtection"></activity>
-        <activity android:name=".act.MostVisited" />
-        <activity android:name=".act.ManageInvitations" />
-        <activity android:name=".act.EmergancyContact" />
-        <activity android:name=".act.BaterryAlertScreen" />
-        <activity android:name=".act.ToDoList" />
-        <activity android:name=".act.ManageMebersCircles" />
-        <activity android:name=".act.MyAccountActivity" />
-        <activity android:name=".act.SettingActivity" />
-        <activity android:name=".act.SendFeedbaackReport" />
-        <activity android:name=".act.FaqScreen" />
-        <activity android:name=".act.PurchaseItemsActivity" />
-        <activity android:name=".act.ShariingHistory" />
-        <activity android:name=".act.MenuActivity" />
-        <activity android:name=".act.TermsActivity" />
-        <activity android:name=".act.PrivacyPolicy" />
-        <activity android:name=".act.SupportScreen" />
-        <activity android:name=".act.BenifitActiviity" />
-        <activity android:name=".act.NotificationScree" />
+
+
+        <activity
+            android:name=".act.InviteNewFriend"
+            android:screenOrientation="portrait"
+            />
+
+        <activity
+            android:name=".act.OtpScreenActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
+        <activity
+            android:name=".act.DrivingProtection"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.MostVisited"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.ManageInvitations"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.EmergancyContact"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.BaterryAlertScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.ToDoList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.ManageMebersCircles"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.MyAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.SendFeedbaackReport"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.FaqScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.PurchaseItemsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.ShariingHistory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.MenuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.TermsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.PrivacyPolicy"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.SupportScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.BenifitActiviity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.NotificationScree"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".act.HomeActivity"
             android:screenOrientation="portrait" />

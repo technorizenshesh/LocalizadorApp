@@ -36,5 +36,6 @@ public class PlaceFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.place_fragment, container, false);
 
         return binding.getRoot();
+
     }
 }
