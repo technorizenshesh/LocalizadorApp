@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/progresh_background"
+            android:elevation="6dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/purple_200"
+            android:indeterminateTintMode="src_atop"
+            android:padding="5dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/RRtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
+
+            <RelativeLayout
+                android:id="@+id/RRback"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="match_parent"
+                >
+
+                <ImageView
+                    android:src="@drawable/cross_icon"
+                    android:layout_centerInParent="true"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    >
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:text="Circle Details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_below="@+id/RRtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <RelativeLayout
+                    android:id="@+id/RRupdateCircle"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:id="@+id/txtCircleName"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="Circle Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/edit"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        >
+
+                    </ImageView>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/RRInvite"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <RelativeLayout
+                        android:background="@drawable/circle_new"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp">
+
+                        <ImageView
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:src="@drawable/add_profile"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            >
+
+                        </ImageView>
+
+
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="Invite New Member"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/RRUserProfile"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/RRuser"
+                        android:background="@drawable/circle_new"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp">
+
+                        <ImageView
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:src="@drawable/user_nav"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            >
+
+                        </ImageView>
+
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/RRuser"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="User"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <ImageView
+                        android:src="@drawable/arr_right"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        >
+
+                    </ImageView>
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+
+    </RelativeLayout>
+
+</layout>

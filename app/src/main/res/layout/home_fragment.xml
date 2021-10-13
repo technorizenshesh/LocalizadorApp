@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     >
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,9 +18,23 @@
             tools:context=".act.MapsActivity"
             />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/progresh_background"
+            android:elevation="6dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/purple_200"
+            android:indeterminateTintMode="src_atop"
+            android:padding="5dp"
+            android:visibility="gone"
+            />
+
         <androidx.cardview.widget.CardView
             app:cardCornerRadius="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:id="@+id/cardMycircle"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
@@ -34,14 +49,16 @@
                 >
 
                 <TextView
+                    android:id="@+id/txtCircle"
                     android:padding="@dimen/_5sdp"
                     android:drawablePadding="@dimen/_10sdp"
                     android:drawableRight="@drawable/drp_dwn_white"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp"
-                    android:text="My Circle"
+                    android:text="@string/my_circle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    >
 
                 </TextView>
 
@@ -49,7 +66,79 @@
 
         </androidx.cardview.widget.CardView>
 
+        <LinearLayout
+            android:id="@+id/llListCircle"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerMyCircle"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+
+
+            <RelativeLayout
+                android:padding="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp"
+                >
+
+                <RelativeLayout
+                    android:id="@+id/RRjoin"
+                    android:background="@color/bg_SPLASH"
+                    android:layout_alignParentLeft="true"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp"
+                        android:text="Join Circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/RRCreate"
+                    android:background="@color/bg_SPLASH"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp"
+                        android:text="Create Circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
         <androidx.cardview.widget.CardView
+            android:visibility="gone"
             android:layout_below="@+id/cardMycircle"
             app:cardCornerRadius="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
@@ -61,7 +150,7 @@
             >
 
             <LinearLayout
-                android:visibility="gone"
+
                 android:id="@+id/llJoinAlert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,8 +199,8 @@
 
         </androidx.cardview.widget.CardView>
 
-
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_data"
             android:layout_marginRight="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_35sdp"
@@ -168,10 +257,8 @@
 
         </LinearLayout>
 
-
-
         <androidx.cardview.widget.CardView
-            android:id="@+id/card"
+            android:id="@+id/cardUserDetails"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -207,6 +294,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/txtUserName"
                             android:text="Me"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
@@ -224,6 +312,37 @@
                             android:textSize="@dimen/_12sdp">
 
                         </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <TextView
+                            android:id="@+id/txtBatery"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:layout_gravity="center"
+                            android:layout_centerVertical="true"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_13sdp"
+                            android:text="80%"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
+                        <ImageView
+                            android:src="@drawable/baterry"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp">
+
+                        </ImageView>
+
+
 
                     </LinearLayout>
 
@@ -248,27 +367,6 @@
 
                 </View>
 
-
-                <RelativeLayout
-                    android:id="@+id/RRAddMember"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_45sdp"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:background="@drawable/btn_bg">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Add New Member"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_14sdp">
-
-                    </TextView>
-
-                </RelativeLayout>
 
             </LinearLayout>
 

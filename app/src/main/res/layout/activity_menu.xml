@@ -28,6 +28,7 @@
                     >
 
                     <RelativeLayout
+                        android:id="@+id/RRProfile"
                         android:background="@color/bg_SPLASH"
                         android:layout_centerInParent="true"
                         android:layout_width="match_parent"
@@ -93,6 +94,7 @@
                     </ImageView>
 
                     <TextView
+                        android:textColor="@color/gray_new"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -126,13 +128,14 @@
                     </ImageView>
 
                     <TextView
-                       
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:textSize="@dimen/_16sdp"
-                        android:text="Support"
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="42dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:text="Support"
+                        android:textSize="@dimen/_16sdp">
 
                     </TextView>
 
@@ -166,7 +169,8 @@
                     </ImageView>
 
                     <TextView
-                       
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -200,6 +204,8 @@
                     </ImageView>
 
                     <TextView
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -239,7 +245,8 @@
                     </ImageView>
 
                     <TextView
-                       
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -272,7 +279,8 @@
                     </ImageView>
 
                     <TextView
-                       
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -312,7 +320,8 @@
                     </ImageView>
 
                     <TextView
-                       
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -345,7 +354,8 @@
                     </ImageView>
 
                     <TextView
-                       
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -375,7 +385,8 @@
                     </ImageView>
 
                     <TextView
-                       
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -415,7 +426,8 @@
                     </ImageView>
 
                     <TextView
-                       
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -432,6 +444,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llTutorial"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
@@ -448,7 +461,8 @@
                     </ImageView>
 
                     <TextView
-                       
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -487,7 +501,8 @@
                     </ImageView>
 
                     <TextView
-                       
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -527,7 +542,8 @@
                     </ImageView>
 
                     <TextView
-                       
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -540,6 +556,45 @@
 
                 </LinearLayout>
 
+                <View
+                    android:background="@color/gray_new"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp">
+
+                </View>
+
+                <LinearLayout
+                    android:id="@+id/llLogout"
+                    android:orientation="horizontal"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    >
+
+                    <ImageView
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/support"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp">
+
+                    </ImageView>
+
+                    <TextView
+                        android:gravity="center"
+                        android:textColor="@color/gray_new"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="Logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
 
 
             </LinearLayout>

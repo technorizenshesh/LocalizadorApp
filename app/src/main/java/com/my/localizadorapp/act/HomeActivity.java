@@ -18,12 +18,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.my.localizadorapp.MainActivity;
+import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityHomeBinding;
 import com.my.localizadorapp.databinding.ActivityHomeNavBinding;
 import com.my.localizadorapp.fragment.HomeFragment;
 import com.my.localizadorapp.fragment.PlaceFragment;
 import com.my.localizadorapp.fragment.PremiumFragment;
+import com.my.localizadorapp.utils.SessionManager;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -33,10 +36,16 @@ public class HomeActivity extends AppCompatActivity {
     private AlertDialog alertDialog;
     boolean doubleBackToExitPressedOnce = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_nav);
+
+
+        String UserName = Preference.get(HomeActivity.this,Preference.KEY_UserName);
+
+        binding.childNavDrawer.txtName.setText(UserName);
 
         binding.dashboard.RRHome.setOnClickListener(v -> {
 
@@ -124,6 +133,36 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+  binding.childNavDrawer.RRProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(HomeActivity.this, MyAccountActivity.class);
+                startActivity(i);
+            }
+        });
+
+  binding.childNavDrawer.llTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(HomeActivity.this, TutorialOneActivity.class);
+                startActivity(i);
+            }
+        });
+
+  binding.childNavDrawer.llLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Preference.clearPreference(HomeActivity.this);
+
+                Intent i = new Intent(HomeActivity.this, SignUpActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
 
         fragment = new HomeFragment();
         loadFragment(fragment);
@@ -183,12 +222,10 @@ public class HomeActivity extends AppCompatActivity {
         loadFragment(fragment);
 
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-
             @Override
             public void run() {
 
                 doubleBackToExitPressedOnce=false;
-
                 finishAffinity();
             }
         }, 2000);

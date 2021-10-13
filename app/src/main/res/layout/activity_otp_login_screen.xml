@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:id="@+id/RRtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
+
+            <RelativeLayout
+                android:id="@+id/RRback"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="match_parent"
+                >
+
+                <ImageView
+                    android:src="@drawable/cross_icon"
+                    android:layout_centerInParent="true"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    >
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/txtName"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:text="OTP Verification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp"
+            android:text="We have sent you the 6 digit code on your registered nu,ber."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_100sdp"
+            android:weightSum="4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:text="1"
+                android:id="@+id/edtOne"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:maxLines="1"
+                android:inputType="number"
+                android:maxLength="1"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:background="@color/white"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp">
+
+            </EditText>
+
+            <EditText
+                android:text="2"
+                android:id="@+id/edtTwo"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:maxLines="1"
+                android:inputType="number"
+                android:maxLength="1"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:background="@color/white"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp">
+
+            </EditText>
+
+            <EditText
+                android:text="3"
+                android:id="@+id/edtThree"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:maxLines="1"
+                android:inputType="number"
+                android:maxLength="1"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:background="@color/white"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp">
+
+            </EditText>
+
+            <EditText
+                android:text="4"
+                android:id="@+id/edtFour"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:maxLines="1"
+                android:inputType="number"
+                android:maxLength="1"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:background="@color/white"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp">
+
+            </EditText>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/RRContinue"
+            android:background="@drawable/btn_bg"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:gravity="center"
+                android:text="Verify and Proceed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

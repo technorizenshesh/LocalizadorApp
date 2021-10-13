@@ -17,10 +17,13 @@ public class WellCOmeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_well_c_ome);
 
-        binding.RRContinue.setOnClickListener(v -> {
+        binding.RRContinue.setOnClickListener(v ->
+        {
 
             startActivity(new Intent(WellCOmeActivity.this,HomeActivity.class));
 
         });
+
     }
+
 }

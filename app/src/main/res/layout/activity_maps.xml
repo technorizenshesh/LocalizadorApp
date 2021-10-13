@@ -69,6 +69,8 @@
                 </View>
 
                 <EditText
+                    android:maxLength="10"
+                    android:inputType="number"
                     android:textSize="@dimen/_14sdp"
                     android:hint="Phone number"
                     android:layout_toRightOf="@+id/br"

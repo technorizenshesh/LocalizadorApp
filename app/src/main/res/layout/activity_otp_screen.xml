@@ -72,6 +72,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:text="5"
                 android:id="@+id/edtOne"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
@@ -86,13 +87,13 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text="5"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_60sdp">
 
             </EditText>
 
             <EditText
+                android:text="5"
                 android:id="@+id/edtTwo"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
@@ -107,14 +108,13 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text="5"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_60sdp">
 
             </EditText>
 
-
             <EditText
+                android:text="5"
                 android:id="@+id/edtThree"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
@@ -123,19 +123,20 @@
                 android:maxLength="1"
                 android:elevation="@dimen/_5sdp"
                 android:layout_marginLeft="@dimen/_5sdp"
-                android:background="@color/bg_SPLASH"
+                android:background="@color/white"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text="5"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_60sdp">
 
             </EditText>
 
+
             <EditText
+                android:text="5"
                 android:id="@+id/edtFour"
                 android:layout_marginRight="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
@@ -151,7 +152,6 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_60sdp">
 

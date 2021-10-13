@@ -26,4 +26,11 @@
     <string name="find_neraby">Find Neraby</string>
     <string name="by_other_options">By other options</string>
     <string name="my_circle">My Circle</string>
+    <string name="checkInternet">Please Check Your Internet Connection</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="update_mobile">Update Mobile Number</string>
+    <string name="save">Save</string>
+    <string name="i_have_a_account">I Have a Account</string>
+    <string name="create_circle">Create Circle</string>
+    <string name="update_circle_name">Update Circle Name</string>
 </resources>

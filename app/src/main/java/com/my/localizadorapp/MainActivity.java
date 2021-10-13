@@ -18,46 +18,54 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.LocationSettingsResult;
+import com.my.localizadorapp.act.HomeActivity;
 import com.my.localizadorapp.act.LoginActivity;
 import com.my.localizadorapp.act.MapsActivity;
+import com.my.localizadorapp.act.SignUpActivity;
+import com.my.localizadorapp.utils.SessionManager;
 
 public class MainActivity extends AppCompatActivity implements
         LocationListener,
         ResultCallback<LocationSettingsResult> {
 
     public static final int RequestPermissionCode = 1;
-
+    SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+       sessionManager=new SessionManager(MainActivity.this);
+
         if (permissioncheck()) {
             finds();
         } else {
-            requestPermission();
-        }
 
+           requestPermission();
+        }
 
     }
 
     private boolean permissioncheck() {
-        int ThirdPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_NETWORK_STATE);
         int FourthPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION);
         int FifthPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION);
         return FourthPermissionResult ==
                 PackageManager.PERMISSION_GRANTED && FifthPermissionResult == PackageManager.PERMISSION_GRANTED;
     }
 
-
-
     private void requestPermission() {
         ActivityCompat.requestPermissions(MainActivity.this, new String[]
                 {
                         android.Manifest.permission.ACCESS_COARSE_LOCATION,
                         android.Manifest.permission.ACCESS_FINE_LOCATION
+
                 }, RequestPermissionCode);
 
+        if (permissioncheck()) {
+            finds();
+        } else {
+            requestPermission();
+        }
     }
 
     private void finds() {
@@ -65,10 +73,20 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void run() {
 
-                Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
+                String User_id = Preference.get(MainActivity.this,Preference.KEY_USER_ID);
 
+                if(User_id != null && !User_id.trim().equalsIgnoreCase("0")){
+
+                   Intent intent=new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }else
+                {
+                    Intent intent=new Intent(MainActivity.this, SignUpActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         }, 3000);
     }
@@ -77,9 +95,9 @@ public class MainActivity extends AppCompatActivity implements
     public void onLocationChanged(@NonNull Location location) {
 
     }
-
     @Override
     public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
 
     }
+
 }

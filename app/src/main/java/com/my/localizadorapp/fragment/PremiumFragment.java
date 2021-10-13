@@ -20,7 +20,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.my.localizadorapp.MainActivity;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.act.BenifitActiviity;
-import com.my.localizadorapp.act.LoginActivity;
 import com.my.localizadorapp.act.NotificationScree;
 import com.my.localizadorapp.act.PrivacyPolicy;
 import com.my.localizadorapp.act.TermsActivity;

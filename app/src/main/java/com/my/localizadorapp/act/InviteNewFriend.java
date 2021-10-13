@@ -7,17 +7,23 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityInviteNewFriendBinding;
 
 public class InviteNewFriend extends AppCompatActivity {
 
     ActivityInviteNewFriendBinding binding;
+    String UserCode="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        binding= DataBindingUtil.setContentView(this,R.layout.activity_invite_new_friend);
+
+         UserCode = Preference.get(InviteNewFriend.this,Preference.KEY_UserCode);
+
+        binding.txtCode.setText(UserCode);
 
        binding.RRShare.setOnClickListener(v -> {
            onShareClicked();
@@ -30,7 +36,7 @@ public class InviteNewFriend extends AppCompatActivity {
 
     private void onShareClicked() {
 
-        String link = "https://play.google.com/store/apps/details?id=com.recharge2mePlay.recharge2me : Code - CWG-TCB";
+        String link = "https://play.google.com/store/apps/details?id=com.recharge2mePlay.recharge2me : Code - "+UserCode;
 
         Uri uri = Uri.parse(link);
 
@@ -40,5 +46,6 @@ public class InviteNewFriend extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_TITLE, "Recharge2me");
 
         startActivity(Intent.createChooser(intent, "Share Link"));
+
     }
 }

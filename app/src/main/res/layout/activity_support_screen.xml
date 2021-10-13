@@ -8,6 +8,20 @@
         android:layout_height="match_parent"
         >
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/progresh_background"
+            android:elevation="6dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/purple_200"
+            android:indeterminateTintMode="src_atop"
+            android:padding="5dp"
+            android:visibility="gone" />
+
+
         <LinearLayout
             android:id="@+id/RRtoolbar"
             android:layout_width="match_parent"
@@ -56,11 +70,12 @@
                 >
 
                 <TextView
+                    android:id="@+id/txtSupport"
                     android:padding="@dimen/_10sdp"
                     android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sdp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elit, morbi ut maecenas. Enim elementum, libero molestie suspendisse sit nibh. Scelerisque malesuada interdum quam risus. Elementum proin ac rhoncus lectus proin orci sed egestas. Aliquam ipsum, dolor vitae turpis. Eget venenatis consectetur pharetra sed. Orci mattis magnis vitae lorem in. Blandit sed viverra bibendum enim pretium. Cursus adipiscing egestas eget tempor risus eu commodo. Orci vestibulum orci massa leo. Id purus, facilisi neque non est. Ut velit amet porttitor enim pellentesque sollicitudin accumsan. At tristique nulla dui, diam non accumsan tempor. Est arcu neque proin rhoncus. Consequat gravida enim, sodales curabitur. Ut nec mauris pellentesque leo curabitur ultricies at pellentesque diam. Sed tempus ac velit volutpat ipsum id. At euismod tellus elit et at sapien. Ut ultrices sit euismod nunc. Pellentesque nunc, vel et aenean tortor pellentesque odio ut sit. Tortor dolor sit venenatis nulla id consequat leo integer. Enim vestibulum ipsum, tortor lacus proin tellus et feugiat. Maecenas eu et nulla tellus. Aliquet phasellus arcu sodales egestas fringilla elementum viverra. Quis porttitor ac fringilla ipsum. Ut fusce sagittis tristique tempus. Aliquam vitae consectetur aliquam pretium tristique tristique vestibulum maecenas. Orci, diam ultrices et aenean. Est interdum risus tortor aliquet pellentesque pellentesque. Pellentesque nisl, imperdiet pellentesque non elit. Magna purus aliquam hac etiam nisl ultricies amet tortor aenean. Habitasse fermentum magna amet, vulputate. Fringilla iaculis porttitor tortor, urna, neque lacus."
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
