@@ -10,4 +10,7 @@
     <color name="gray">#AEAEAE</color>
     <color name="bg_SPLASH">#A6BFDD</color>
     <color name="gray_new">#5C5C5C</color>
+    <color name="red">#F11A1A</color>
+    <color name="gray_light">#F2F2F2</color>
+
 </resources>

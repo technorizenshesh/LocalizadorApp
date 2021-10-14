@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
+
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
@@ -24,23 +25,24 @@
 
         </TextView>
 
-
         <LinearLayout
+            android:id="@+id/RRtab"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_below="@+id/txt1"
             android:weightSum="3"
-            android:background="@drawable/rect"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             >
 
+
             <TextView
+                android:id="@+id/txtPlaces"
                 android:background="@color/bg_SPLASH"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="My Places"
+                android:text="@string/my_places"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"
@@ -48,8 +50,18 @@
 
             </TextView>
 
+            <View
+                android:layout_margin="3sp"
+                android:background="@color/gray"
+                android:layout_width="1sp"
+                android:layout_height="match_parent"
+                >
+
+            </View>
 
             <TextView
+                android:background="@color/gray_light"
+                android:id="@+id/txtVisited"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Most Visited"
@@ -60,8 +72,18 @@
 
             </TextView>
 
+            <View
+                android:layout_margin="3sp"
+                android:background="@color/gray"
+                android:layout_width="1sp"
+                android:layout_height="match_parent"
+                >
+
+            </View>
 
             <TextView
+                android:background="@color/gray_light"
+                android:id="@+id/txtgeo"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Places for geo \nreminders"
@@ -72,13 +94,13 @@
 
             </TextView>
 
-
-
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_below="@+id/RRtab"
+            android:visibility="visible"
             android:padding="@dimen/_10sdp"
-            android:layout_centerInParent="true"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -106,7 +128,7 @@
             </TextView>
 
             <RelativeLayout
-                android:id="@+id/RRContinue"
+                android:id="@+id/RRLocation"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_margin="@dimen/_10sdp"
@@ -118,7 +140,7 @@
                     android:layout_centerInParent="true"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Invite a Member to continue"
+                    android:text="@string/setup_location_alert"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp">
 
@@ -126,9 +148,43 @@
 
             </RelativeLayout>
 
-
         </LinearLayout>
 
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/RRAddressLst"
+            android:layout_below="@+id/RRtab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerMyAddress"
+                android:layout_above="@+id/RRAdd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <RelativeLayout
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/RRAdd"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/btn_bg">
+
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/plus"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    >
+                </ImageView>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
     SessionManager sessionManager;
     String addressStreet="";
 
-    private ArrayList<CircleListModel.Result> modelList_my_circle = new ArrayList<>();
+    ArrayList<CircleListModel.Result> modelList_my_circle = new ArrayList<>();
     MyCircleListAdapter mAdapter;
 
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
@@ -112,10 +112,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
             binding.txtBatery.setText(String.valueOf(batteryPct) + "%");
 
             Preference.save(getActivity(),Preference.KEY_battery,Battery);
-
         }
     };
-
 
     @Nullable
     @Override
@@ -227,6 +225,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
     public void onResume() {
         super.onResume();
 
+        binding.txtCircle.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getActivity(),R.drawable.drp_dwn_white), null);
+        binding.llData.setVisibility(View.VISIBLE);
+        binding.llListCircle.setVisibility(View.GONE);
+        isCircleList=false;
+
         if (sessionManager.isNetworkAvailable()) {
 
             binding.progressBar.setVisibility(View.VISIBLE);
@@ -236,7 +239,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
         }else {
 
             Toast.makeText(getActivity(), R.string.checkInternet, Toast.LENGTH_SHORT).show();
-
         }
     }
 
@@ -303,9 +305,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(gpsTracker, "Circle Join SucessFully", Toast.LENGTH_SHORT).show();
-
-             /*   String JoinCircle= edtCode.getText().toString();
+              String JoinCircle= edtCode.getText().toString();
 
                 if(!JoinCircle.equalsIgnoreCase(""))
                 {
@@ -321,7 +321,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
                     }
                 }else {
                     Toast.makeText(getActivity(), "Please Enter Mobile Number.", Toast.LENGTH_SHORT).show();
-                }*/
+                }
 
                 alertDialog.dismiss();
             }
@@ -466,16 +466,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
             @Override
             public void onItemClick(View view, int position, CircleListModel.Result model) {
 
-                Preference.save(getActivity(),Preference.KEY_Circle_ID,model.id);
-
-                Preference.save(getActivity(),Preference.KEY_CircleName,model.circleName);
-
-                startActivity(new Intent(getActivity(), CircleDetailsActivity.class));
-
             }
         });
     }
-
 
     public void ApiMethodCircleCreate(String cricelName) {
 
@@ -485,7 +478,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
         Call<CricleCreate> call = RetrofitClients
                 .getInstance()
                 .getApi()
-                .Api_create_circle(UserId,UserCode,cricelName, String.valueOf(latitude), String.valueOf(longitude));
+                .Api_create_circle(UserId,cricelName, String.valueOf(latitude), String.valueOf(longitude),"Yes");
         call.enqueue(new Callback<CricleCreate>() {
             @Override
             public void onResponse(Call<CricleCreate> call, Response<CricleCreate> response) {
@@ -546,7 +539,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
                     if (status.equalsIgnoreCase("1")){
 
-
+                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 
                     }else {
 
@@ -557,7 +550,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(Call<CricleCreate> call, Throwable t) {
                 binding.progressBar.setVisibility(View.GONE);

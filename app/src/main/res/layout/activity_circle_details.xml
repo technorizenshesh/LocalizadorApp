@@ -123,12 +123,9 @@
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="@dimen/_20sdp"
                             >
-
                         </ImageView>
 
-
                     </RelativeLayout>
-
 
                     <TextView
                         android:layout_marginLeft="@dimen/_10sdp"
@@ -140,8 +137,6 @@
                         android:layout_height="wrap_content">
 
                     </TextView>
-
-
 
                 </LinearLayout>
 
@@ -173,18 +168,38 @@
 
                     </RelativeLayout>
 
-                    <TextView
+                    <LinearLayout
+                        android:orientation="vertical"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/RRuser"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_16sdp"
-                        android:text="User"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                    </TextView>
+                        <TextView
+                            android:id="@+id/txtUser"
+                            android:textStyle="bold"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16sdp"
+                            android:text="User"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_toRightOf="@+id/RRuser"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16sdp"
+                            android:text="owner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
+                    </LinearLayout>
+
 
                     <ImageView
                         android:src="@drawable/arr_right"
@@ -193,19 +208,44 @@
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
                         >
-
                     </ImageView>
 
-
-
                 </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerMemebr"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
 
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:id="@+id/RRDelete"
+            android:background="@drawable/btn_bg"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
 
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:gravity="center"
+                android:text="@string/delete_circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
+            </TextView>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

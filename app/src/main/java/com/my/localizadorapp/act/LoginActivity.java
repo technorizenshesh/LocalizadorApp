@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         Call<SignUpModel> call = RetrofitClients
                 .getInstance()
                 .getApi()
-                .Api_login(Mobile,"bhhjvhh",latitude,longitude,"1234");
+                .Api_login(Mobile,"hjvjhv",latitude,longitude,"1234");
         call.enqueue(new Callback<SignUpModel>() {
             @Override
             public void onResponse(Call<SignUpModel> call, Response<SignUpModel> response) {

@@ -14,29 +14,33 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/logo"
+        android:icon="@drawable/logonew"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/logo"
+        android:roundIcon="@drawable/logonew"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        >
+        android:usesCleartextTraffic="true">
+
+        <activity android:name=".act.AllPlacessActivity"/>
+
+        <activity
+            android:name=".act.MyPlaceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
 
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".act.ChangeMobile"
+        <activity
+            android:name=".act.ChangeMobile"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
-
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".act.OtpLoginScreen"
             android:screenOrientation="portrait"
@@ -117,7 +121,6 @@
             android:name=".act.MyAccountActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".act.SettingActivity"
             android:screenOrientation="portrait"

@@ -53,6 +53,7 @@
                             android:src="@drawable/people" />
 
                         <TextView
+                            android:textStyle="bold"
                             android:id="@+id/txtHome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -92,6 +93,7 @@
                             android:src="@drawable/place" />
 
                         <TextView
+                            android:textStyle="bold"
                             android:id="@+id/txtOrder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -130,6 +132,7 @@
                             android:src="@drawable/star" />
 
                         <TextView
+                            android:textStyle="bold"
                             android:id="@+id/txtdelivery"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -168,6 +171,7 @@
                             android:src="@drawable/menu" />
 
                         <TextView
+                            android:textStyle="bold"
                             android:id="@+id/txtproduct"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

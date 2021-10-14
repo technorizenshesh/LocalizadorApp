@@ -1,9 +1,12 @@
 package com.my.localizadorapp.utils;
 
 
+import com.my.localizadorapp.model.AddAddressModel;
 import com.my.localizadorapp.model.ChangeMobileModel;
 import com.my.localizadorapp.model.CircleListModel;
 import com.my.localizadorapp.model.CricleCreate;
+import com.my.localizadorapp.model.DeleteModel;
+import com.my.localizadorapp.model.MemberListModel;
 import com.my.localizadorapp.model.PrivacyModel;
 import com.my.localizadorapp.model.SignUpModel;
 import com.my.localizadorapp.model.SignUpdataModel;
@@ -25,6 +28,9 @@ public interface Api {
     String Api_get_circle ="get_circle";
     String Api_update_circle_name ="update_circle_name";
     String Api_Join_circle ="join_circle";
+    String Api_get_member_detail ="get_member_detail";
+    String Api_delete_circle ="delete_circle";
+    String Api_add_address ="add_address";
 
     String Api_PrivacyPolicy ="get_privacy";
     String Api_Terms ="get_terms";
@@ -56,10 +62,19 @@ public interface Api {
     @POST(Api_create_circle)
   Call<CricleCreate> Api_create_circle(
             @Field("user_id") String user_id,
-            @Field("code") String code,
             @Field("circle_name") String circle_name,
             @Field("lat") String lat,
-            @Field("lon") String lon
+            @Field("lon") String lon,
+            @Field("owner") String owner
+
+    );
+
+  @FormUrlEncoded
+    @POST(Api_add_address)
+  Call<AddAddressModel> Api_add_address(
+            @Field("user_id") String user_id,
+            @Field("address_type") String address_type,
+            @Field("address") String address
 
     );
 
@@ -78,6 +93,18 @@ public interface Api {
   Call<UpdatedCircleModel> Api_update_circle_name(
             @Field("circle_id") String circle_id,
             @Field("circle_name") String circle_name
+    );
+
+  @FormUrlEncoded
+    @POST(Api_get_member_detail)
+  Call<MemberListModel> Api_get_member_detail(
+            @Field("code") String code
+    );
+
+  @FormUrlEncoded
+    @POST(Api_delete_circle)
+  Call<DeleteModel> Api_delete_circle(
+            @Field("circle_id") String circle_id
     );
 
  @FormUrlEncoded

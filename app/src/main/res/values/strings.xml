@@ -33,4 +33,10 @@
     <string name="i_have_a_account">I Have a Account</string>
     <string name="create_circle">Create Circle</string>
     <string name="update_circle_name">Update Circle Name</string>
+    <string name="my_places">My Places</string>
+    <string name="setup_location_alert">Setup location alert</string>
+    <string name="delete_circle">Delete Circle</string>
+    <string name="place">Place</string>
+    <string name="current_location">Current Location</string>
+    <string name="place_api_key">AIzaSyC4Eg_qGdkZrcW-td6QsmJAk2g4nzPaat0</string>
 </resources>

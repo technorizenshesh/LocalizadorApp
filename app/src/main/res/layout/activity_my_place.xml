@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:id="@+id/RRtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
+
+            <RelativeLayout
+                android:layout_alignParentLeft="true"
+                android:id="@+id/RRback"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="match_parent"
+                >
+
+                <ImageView
+                    android:src="@drawable/cross_icon"
+                    android:layout_centerInParent="true"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    >
+                </ImageView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/txtName"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:text="@string/place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+            </TextView>
+
+            <RelativeLayout
+                android:id="@+id/RRsave"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="match_parent"
+                >
+
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/bg_SPLASH"
+                    android:textSize="@dimen/_16sdp"
+                    android:text="@string/save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                </TextView>
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <fragment
+            android:layout_below="@+id/RRtoolbar"
+            android:id="@+id/map1"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".act.MapsActivity"
+            />
+
+        <LinearLayout
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_below="@+id/RRtoolbar"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:textColorHint="@color/white"
+                android:id="@+id/edtType"
+                android:padding="@dimen/_10sdp"
+                android:background="@drawable/btn_bg"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_16sdp"
+                android:hint="Home"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp">
+
+            </EditText>
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:textColorHint="@color/white"
+                android:padding="@dimen/_10sdp"
+                android:background="@drawable/btn_bg"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_16sdp"
+                android:text="@string/current_location"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/progresh_background"
+            android:elevation="6dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/purple_200"
+            android:indeterminateTintMode="src_atop"
+            android:padding="5dp"
+            android:visibility="gone"
+            />
+
+
+    </RelativeLayout>
+
+</layout>

@@ -14,14 +14,24 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
+import com.my.localizadorapp.adapter.MemberListAdapter;
+import com.my.localizadorapp.adapter.MyCircleListAdapter;
 import com.my.localizadorapp.databinding.ActivityCircleDetailsBinding;
+import com.my.localizadorapp.model.CircleListModel;
 import com.my.localizadorapp.model.CricleCreate;
+import com.my.localizadorapp.model.DeleteModel;
+import com.my.localizadorapp.model.MemberListDataModel;
+import com.my.localizadorapp.model.MemberListModel;
+import com.my.localizadorapp.model.RatingModel;
 import com.my.localizadorapp.model.UpdatedCircleModel;
 import com.my.localizadorapp.utils.RetrofitClients;
 import com.my.localizadorapp.utils.SessionManager;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +45,8 @@ public class CircleDetailsActivity extends AppCompatActivity {
     String CircleName = "";
     SessionManager sessionManager;
 
+    private ArrayList<MemberListDataModel> modelList = new ArrayList<>();
+    MemberListAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +61,21 @@ public class CircleDetailsActivity extends AppCompatActivity {
         binding.RRUserProfile.setOnClickListener(v -> {
 
             startActivity(new Intent(CircleDetailsActivity.this, MyAccountActivity.class));
+        });
+
+       binding.RRDelete.setOnClickListener(v -> {
+
+           if (sessionManager.isNetworkAvailable()) {
+
+               binding.progressBar.setVisibility(View.VISIBLE);
+
+               ApiDeleteCircle();
+
+           }else {
+
+               Toast.makeText(CircleDetailsActivity.this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
+           }
+
         });
 
         binding.RRback.setOnClickListener(v ->
@@ -67,6 +94,14 @@ public class CircleDetailsActivity extends AppCompatActivity {
             startActivity(i);
 
         });
+
+        if (sessionManager.isNetworkAvailable()) {
+
+            binding.progressBar.setVisibility(View.VISIBLE);
+            ApiGetMemberList();
+        }else {
+            Toast.makeText(CircleDetailsActivity.this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void AlertDaliogUpdateCircle() {
@@ -113,6 +148,24 @@ public class CircleDetailsActivity extends AppCompatActivity {
 
     }
 
+    private void setAdapter(ArrayList<MemberListDataModel> modelList) {
+
+        //this.modelList_my_circle.add(new RatingModel("Corn"));
+
+        mAdapter = new MemberListAdapter(CircleDetailsActivity.this,modelList);
+        binding.recyclerMemebr.setHasFixedSize(true);
+        // use a linear layout manager
+        binding.recyclerMemebr.setLayoutManager(new LinearLayoutManager(CircleDetailsActivity.this));
+        binding.recyclerMemebr.setAdapter(mAdapter);
+        mAdapter.SetOnItemClickListener(new MemberListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, MemberListDataModel model) {
+
+
+            }
+        });
+    }
+
     public void ApiMethodUpdate(String cricelName) {
 
         String CircleId = Preference.get(CircleDetailsActivity.this,Preference.KEY_Circle_ID);
@@ -149,6 +202,89 @@ public class CircleDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UpdatedCircleModel> call, Throwable t) {
+                binding.progressBar.setVisibility(View.GONE);
+                Toast.makeText(CircleDetailsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void ApiGetMemberList() {
+
+        String UserId = Preference.get(CircleDetailsActivity.this,Preference.KEY_USER_ID);
+        String UserCode = Preference.get(CircleDetailsActivity.this,Preference.KEY_UserCode);
+
+        Call<MemberListModel> call = RetrofitClients
+                .getInstance()
+                .getApi()
+                .Api_get_member_detail(UserCode);
+        call.enqueue(new Callback<MemberListModel>() {
+            @Override
+            public void onResponse(Call<MemberListModel> call, Response<MemberListModel> response) {
+                try {
+
+                    binding.progressBar.setVisibility(View.GONE);
+
+                    MemberListModel myclass= response.body();
+
+                    if (myclass.getStatus().equalsIgnoreCase("1")){
+
+                        binding.txtUser.setText(myclass.getOwnerDetail().getUserName());
+
+                        modelList = (ArrayList<MemberListDataModel>) myclass.getResult ();
+
+                        setAdapter(modelList);
+
+                    }else {
+
+                        Toast.makeText(CircleDetailsActivity.this, myclass.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MemberListModel> call, Throwable t) {
+                binding.progressBar.setVisibility(View.GONE);
+                Toast.makeText(CircleDetailsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void ApiDeleteCircle() {
+
+        String Circle_id = Preference.get(CircleDetailsActivity.this,Preference.KEY_Circle_ID);
+
+        Call<DeleteModel> call = RetrofitClients
+                .getInstance()
+                .getApi()
+                .Api_delete_circle(Circle_id);
+        call.enqueue(new Callback<DeleteModel>() {
+            @Override
+            public void onResponse(Call<DeleteModel> call, Response<DeleteModel> response) {
+                try {
+
+                    binding.progressBar.setVisibility(View.GONE);
+
+                    DeleteModel myclass= response.body();
+
+                    if (myclass.getStatus().equalsIgnoreCase("1")){
+
+                        startActivity(new Intent(CircleDetailsActivity.this,HomeActivity.class));
+
+                        Toast.makeText(CircleDetailsActivity.this, myclass.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }else {
+
+                        Toast.makeText(CircleDetailsActivity.this, myclass.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DeleteModel> call, Throwable t) {
                 binding.progressBar.setVisibility(View.GONE);
                 Toast.makeText(CircleDetailsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
