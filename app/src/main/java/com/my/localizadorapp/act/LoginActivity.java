@@ -1,13 +1,19 @@
 package com.my.localizadorapp.act;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.my.localizadorapp.GPSTracker;
 import com.my.localizadorapp.MainActivity;
 import com.my.localizadorapp.Preference;
@@ -21,6 +27,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.ContentValues.TAG;
+
 public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
@@ -30,12 +38,19 @@ public class LoginActivity extends AppCompatActivity {
     String latitude="";
     String longitude="";
 
+    String token="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
         sessionManager =new SessionManager(LoginActivity.this);
+
+       FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(runnable -> {
+            token = runnable.getToken();
+            Log.e( "Tokennnn" ,token);
+        });
 
         //Gps Lat Long
         gpsTracker=new GPSTracker(LoginActivity.this);
@@ -75,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
         Call<SignUpModel> call = RetrofitClients
                 .getInstance()
                 .getApi()
-                .Api_login(Mobile,"hjvjhv",latitude,longitude,"1234");
+                .Api_login(Mobile,token,latitude,longitude,"1234");
         call.enqueue(new Callback<SignUpModel>() {
             @Override
             public void onResponse(Call<SignUpModel> call, Response<SignUpModel> response) {
@@ -99,14 +114,18 @@ public class LoginActivity extends AppCompatActivity {
                         Preference.save(LoginActivity.this,Preference.KEY_USER_ID,UserId);
                         Preference.save(LoginActivity.this,Preference.KEY_UserName,UserName);
 
+                        Preference.save(LoginActivity.this,Preference.KEY_CircleName,myclass.result.circleName);
+                        Preference.save(LoginActivity.this,Preference.KEY_CircleCode,myclass.result.code);
+                        Preference.save(LoginActivity.this,Preference.KEY_CircleCode,myclass.result.code);
+
                         startActivity(new Intent(LoginActivity.this,HomeActivity.class).putExtra("mobile",Mobile));
 
                         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
 
-                    }else {
+                        }else {
 
-                        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-                    }
+                            Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

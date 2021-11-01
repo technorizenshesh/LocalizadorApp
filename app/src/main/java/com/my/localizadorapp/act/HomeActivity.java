@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.my.localizadorapp.MainActivity;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
+import com.my.localizadorapp.Upd.MyService;
 import com.my.localizadorapp.databinding.ActivityHomeBinding;
 import com.my.localizadorapp.databinding.ActivityHomeNavBinding;
 import com.my.localizadorapp.fragment.HomeFragment;
@@ -36,19 +38,17 @@ public class HomeActivity extends AppCompatActivity {
     private AlertDialog alertDialog;
     boolean doubleBackToExitPressedOnce = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_nav);
-
 
         String UserName = Preference.get(HomeActivity.this,Preference.KEY_UserName);
 
         binding.childNavDrawer.txtName.setText(UserName);
 
         binding.dashboard.RRHome.setOnClickListener(v -> {
-
+            navmenu();
             fragment = new HomeFragment();
             loadFragment(fragment);
 
@@ -59,23 +59,27 @@ public class HomeActivity extends AppCompatActivity {
         });
 
        binding.dashboard.RRPlace.setOnClickListener(v -> {
-
+           navmenu();
             fragment = new PlaceFragment();
             loadFragment(fragment);
 
         });
 
         binding.dashboard.RRPremium.setOnClickListener(v -> {
+            navmenu();
+            startActivity(new Intent(HomeActivity.this,PremiumActivity.class));
 
-            fragment = new PremiumFragment();
-            loadFragment(fragment);
+            //fragment = new PremiumFragment();
+            //loadFragment(fragment);
 
         });
 
         binding.childNavDrawer.llPrimium.setOnClickListener(v -> {
+            navmenu();
+            startActivity(new Intent(HomeActivity.this,PremiumActivity.class));
 
-            fragment = new PremiumFragment();
-            loadFragment(fragment);
+            /*fragment = new PremiumFragment();
+            loadFragment(fragment);*/
 
         });
 
@@ -83,7 +87,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.childNavDrawer.llSupport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                navmenu();
                 Intent i = new Intent(HomeActivity.this, SupportScreen.class);
                 startActivity(i);
             }
@@ -92,7 +96,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.childNavDrawer.LLsharingHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                navmenu();
                 Intent i = new Intent(HomeActivity.this, ShariingHistory.class);
                 startActivity(i);
             }
@@ -101,7 +105,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.childNavDrawer.llPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                navmenu();
                 Intent i = new Intent(HomeActivity.this, PrivacyPolicy.class);
                 startActivity(i);
             }
@@ -110,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.childNavDrawer.llPurchesitem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                navmenu();
                 Intent i = new Intent(HomeActivity.this, PurchaseItemsActivity.class);
                 startActivity(i);
             }
@@ -120,7 +124,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDaliog();
+                AlertDaliogJoinCircle();
             }
         });
 
@@ -169,6 +173,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ContextCompat.startForegroundService(getApplicationContext(),new Intent(getApplicationContext(), MyService.class));
+    }
 
     public void navmenu() {
         if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
@@ -186,20 +195,38 @@ public class HomeActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    private void AlertDaliog() {
-
+    private void AlertDaliogJoinCircle(){
         LayoutInflater li;
-        RelativeLayout RRShare;
+        RelativeLayout RRjoinCircle;
+        EditText edtCode;
         AlertDialog.Builder alertDialogBuilder;
         li = LayoutInflater.from(HomeActivity.this);
         promptsView = li.inflate(R.layout.alert_joincircle, null);
-        RRShare = (RelativeLayout) promptsView.findViewById(R.id.RRShare);
+        RRjoinCircle = (RelativeLayout) promptsView.findViewById(R.id.RRjoinCircle);
+        edtCode = (EditText) promptsView.findViewById(R.id.edtCode);
         alertDialogBuilder = new AlertDialog.Builder(HomeActivity.this);
         alertDialogBuilder.setView(promptsView);
 
-        RRShare.setOnClickListener(new View.OnClickListener() {
+        RRjoinCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+             /*   String JoinCircle = edtCode.getText().toString();
+
+                if (!JoinCircle.equalsIgnoreCase("")) {
+                    if (sessionManager.isNetworkAvailable()) {
+
+                        binding.progressBar.setVisibility(View.VISIBLE);
+
+                        ApiMethodJoinCircle(JoinCircle);
+
+                    } else {
+
+                        Toast.makeText(HomeActivity.this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(HomeActivity.this, "Please Enter Valid Code.", Toast.LENGTH_SHORT).show();
+                }*/
 
                 alertDialog.dismiss();
             }
@@ -208,6 +235,7 @@ public class HomeActivity extends AppCompatActivity {
         alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -231,6 +259,10 @@ public class HomeActivity extends AppCompatActivity {
         }, 2000);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(this, MyService.class));
+    }
 
 }

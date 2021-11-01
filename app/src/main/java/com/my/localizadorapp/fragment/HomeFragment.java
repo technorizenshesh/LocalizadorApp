@@ -1,39 +1,34 @@
 package com.my.localizadorapp.fragment;
 
-import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.LocationManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -41,30 +36,26 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.my.localizadorapp.GPSTracker;
-import com.my.localizadorapp.MainActivity;
+import com.my.localizadorapp.NewOnItemlisner;
 import com.my.localizadorapp.OnItemClickListener;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
-import com.my.localizadorapp.act.ChangeMobile;
-import com.my.localizadorapp.act.CircleAddScreen;
+import com.my.localizadorapp.Upd.UpdateLocationService;
 import com.my.localizadorapp.act.CircleDetailsActivity;
 import com.my.localizadorapp.act.HomeActivity;
 import com.my.localizadorapp.act.InviteNewFriend;
 import com.my.localizadorapp.act.NotificationScree;
-import com.my.localizadorapp.act.OtpScreenActivity;
-import com.my.localizadorapp.act.SignUpActivity;
+import com.my.localizadorapp.adapter.AvailableAdapter;
 import com.my.localizadorapp.adapter.MyCircleListAdapter;
-import com.my.localizadorapp.adapter.RatingPrimiumAdapter;
 import com.my.localizadorapp.databinding.HomeFragmentBinding;
-import com.my.localizadorapp.model.ChangeMobileModel;
 import com.my.localizadorapp.model.CircleListModel;
 import com.my.localizadorapp.model.CricleCreate;
-import com.my.localizadorapp.model.RatingModel;
-import com.my.localizadorapp.model.SignUpModel;
+import com.my.localizadorapp.model.MemberListDataModel;
+import com.my.localizadorapp.model.MemberListModel;
 import com.my.localizadorapp.utils.RetrofitClients;
 import com.my.localizadorapp.utils.SessionManager;
 
@@ -73,12 +64,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItemClickListener {
+public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItemClickListener,NewOnItemlisner {
 
     HomeFragmentBinding binding;
     private GoogleMap mMap;
@@ -90,57 +80,69 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
     BottomFragmentAllUser bottomSheetFragmentUser;
     GPSTracker gpsTracker;
 
-    boolean isCircleList=false;
+    boolean isCircleList = false;
+    boolean isMemberDetails = false;
 
-    double latitude=0;
-    double longitude=0;
-    String UserName="";
+    double latitude = 0;
+    double longitude = 0;
+    String UserName = "";
     SessionManager sessionManager;
-    String addressStreet="";
+    String addressStreet = "";
 
     ArrayList<CircleListModel.Result> modelList_my_circle = new ArrayList<>();
     MyCircleListAdapter mAdapter;
+    String CircleName ="";
+    String CircleCode ="";
+    String UserId = "";
+    String Battery="";
 
-    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
+
+    private ArrayList<MemberListDataModel> modelListCircleDetails = new ArrayList<>();
+    AvailableAdapter mAdapterCircleDetails;
+
+    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context ctxt, Intent intent) {
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
             int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-            float batteryPct = level * 100 / (float)scale;
-           String Battery =  String.valueOf(batteryPct);
+            float batteryPct = level * 100 / (float) scale;
+            Battery = String.valueOf(batteryPct);
 
             binding.txtBatery.setText(String.valueOf(batteryPct) + "%");
-
-            Preference.save(getActivity(),Preference.KEY_battery,Battery);
         }
     };
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState)
-    {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false);
 
         getActivity().registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
+        Preference.save(getActivity(), Preference.KEY_battery, Battery);
+
         //Gps Lat Long
-        gpsTracker=new GPSTracker(getActivity());
-        if(gpsTracker.canGetLocation()){
+        gpsTracker = new GPSTracker(getActivity());
+        if (gpsTracker.canGetLocation()) {
             latitude = gpsTracker.getLatitude();
             longitude = gpsTracker.getLongitude();
-        }else{
+        } else {
             gpsTracker.showSettingsAlert();
         }
 
-        sessionManager =new SessionManager(getActivity());
-
-         String UserId = Preference.get(getActivity(),Preference.KEY_USER_ID);
-         UserName = Preference.get(getActivity(),Preference.KEY_UserName);
-
-        binding.txtUserName.setText(UserName);
+        sessionManager = new SessionManager(getActivity());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this::onMapReady);
+
+        UserId = Preference.get(getActivity(), Preference.KEY_USER_ID);
+        CircleName = Preference.get(getActivity(), Preference.KEY_CircleName);
+        CircleCode = Preference.get(getActivity(), Preference.KEY_CircleCode);
+        UserName = Preference.get(getActivity(), Preference.KEY_UserName);
+
+
+        binding.txtUserName.setText(UserName);
+        binding.txtCircle.setText(CircleName);
 
         binding.imgNotification.setOnClickListener(v -> {
 
@@ -164,7 +166,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
         });
 
-        binding.RRCreate.setOnClickListener(v -> {
+        binding.RRCreate.setOnClickListener(v ->{
 
             AlertDaliogCircleCreate();
 
@@ -172,47 +174,67 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
         binding.RRjoinCircle.setOnClickListener(v -> {
 
-            if(isCircleList)
-            {
-                binding.txtCircle.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getActivity(),R.drawable.drp_dwn_white), null);
+            if (isCircleList) {
+                binding.txtCircle.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getActivity(), R.drawable.drp_dwn_white), null);
                 binding.llData.setVisibility(View.VISIBLE);
                 binding.llListCircle.setVisibility(View.GONE);
-                isCircleList=false;
+                isCircleList = false;
 
-            }else
-            {
-                binding.txtCircle.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getActivity(),R.drawable.up_down), null);
+            } else {
+                binding.txtCircle.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getActivity(), R.drawable.up_down), null);
                 binding.llData.setVisibility(View.GONE);
                 binding.llListCircle.setVisibility(View.VISIBLE);
-                isCircleList=true;
+                isCircleList = true;
             }
-          //  AlertDaliogJoinCircle();
+            //  AlertDaliogJoinCircle();
         });
 
-        binding.imgMap.setOnClickListener(v -> {
+        binding.imgMap.setOnClickListener(v ->{
 
-            bottomSheetFragment = new BottomFragmentMap(getActivity(),HomeFragment.this,mMap);
+            bottomSheetFragment = new BottomFragmentMap(getActivity(), HomeFragment.this, mMap);
             bottomSheetFragment.show(getActivity().getSupportFragmentManager(), "BottomSheet");
 
         });
 
         binding.cardUserDetails.setOnClickListener(v -> {
 
-            bottomSheetFragmentUser = new BottomFragmentAllUser(getActivity(),addressStreet);
-            bottomSheetFragmentUser.show(getActivity().getSupportFragmentManager(), "BottomSheet");
+            if (isMemberDetails) {
 
+                binding.imgMember.setImageResource(R.drawable.up_down);
+                binding.RRMeberDetails.setVisibility(View.GONE);
+                collapse(binding.RRMeberDetails);
+
+                isMemberDetails = false;
+
+            } else {
+                binding.imgMember.setImageResource(R.drawable.drp_dwn_white);
+                binding.RRMeberDetails.setVisibility(View.VISIBLE);
+                expand(binding.RRMeberDetails);
+                isMemberDetails = true;
+            }
+
+           /* bottomSheetFragmentUser = new BottomFragmentAllUser(getActivity(), addressStreet);
+            bottomSheetFragmentUser.show(getActivity().getSupportFragmentManager(), "BottomSheet");
+*/
         });
 
-        if (sessionManager.isNetworkAvailable()) {
+          binding.RRAddMember.setOnClickListener(v -> {
 
+              Intent i = new Intent(getActivity(), InviteNewFriend.class);
+              startActivity(i);
+
+          });
+
+        if (sessionManager.isNetworkAvailable()) {
             binding.progressBar.setVisibility(View.VISIBLE);
 
             ApiGetCircleList();
 
-        }else {
+            ApiGetMemberList(CircleCode);
+
+        } else {
 
             Toast.makeText(getActivity(), R.string.checkInternet, Toast.LENGTH_SHORT).show();
-
         }
 
         getCurrentLocation();
@@ -225,18 +247,20 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
     public void onResume() {
         super.onResume();
 
-        binding.txtCircle.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getActivity(),R.drawable.drp_dwn_white), null);
+      //  ContextCompat.startForegroundService(getActivity(),new Intent(getActivity(), UpdateLocationService.class));
+
+
+        binding.txtCircle.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getActivity(), R.drawable.drp_dwn_white), null);
         binding.llData.setVisibility(View.VISIBLE);
         binding.llListCircle.setVisibility(View.GONE);
-        isCircleList=false;
+        isCircleList = false;
 
         if (sessionManager.isNetworkAvailable()) {
 
             binding.progressBar.setVisibility(View.VISIBLE);
-
             ApiGetCircleList();
 
-        }else {
+        } else {
 
             Toast.makeText(getActivity(), R.string.checkInternet, Toast.LENGTH_SHORT).show();
         }
@@ -253,11 +277,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
         Marker mSydney = mMap.addMarker(new MarkerOptions()
                 .position(sydney)
-                .title("Sydney")
+                .title(UserName)
                 .snippet("Population: 4,627,300")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.user)));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.new_user)));
 
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(getCameraPositionWithBearing(new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude()))));
+
     }
 
     @NonNull
@@ -305,22 +330,21 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
             @Override
             public void onClick(View view) {
 
-              String JoinCircle= edtCode.getText().toString();
+                String JoinCircle = edtCode.getText().toString();
 
-                if(!JoinCircle.equalsIgnoreCase(""))
-                {
+                if (!JoinCircle.equalsIgnoreCase("")) {
                     if (sessionManager.isNetworkAvailable()) {
 
                         binding.progressBar.setVisibility(View.VISIBLE);
 
                         ApiMethodJoinCircle(JoinCircle);
 
-                    }else {
+                    } else {
 
                         Toast.makeText(getActivity(), R.string.checkInternet, Toast.LENGTH_SHORT).show();
                     }
                 }else {
-                    Toast.makeText(getActivity(), "Please Enter Mobile Number.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Please Enter Valid Code.", Toast.LENGTH_SHORT).show();
                 }
 
                 alertDialog.dismiss();
@@ -348,21 +372,20 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
             @Override
             public void onClick(View view) {
 
-              String CricelName= edtCircleName.getText().toString();
+                String CricelName = edtCircleName.getText().toString();
 
-                if(!CricelName.equalsIgnoreCase(""))
-                {
+                if (!CricelName.equalsIgnoreCase("")) {
                     if (sessionManager.isNetworkAvailable()) {
 
                         binding.progressBar.setVisibility(View.VISIBLE);
 
                         ApiMethodCircleCreate(CricelName);
 
-                    }else {
+                    } else {
 
                         Toast.makeText(getActivity(), R.string.checkInternet, Toast.LENGTH_SHORT).show();
                     }
-                }else {
+                } else {
                     Toast.makeText(getActivity(), "Please Enter Mobile Number.", Toast.LENGTH_SHORT).show();
                 }
 
@@ -374,40 +397,36 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
         alertDialog_create = alertDialogBuilder.create();
         alertDialog_create.show();
 
-       alertDialog_create.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog_create.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
     }
 
     @Override
     public void onItemClick(int position, GoogleMap map) {
         mMap = map;
-        if(position ==1)
-        {
-            if(mMap != null){
+        if (position == 1) {
+            if (mMap != null) {
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             }
             bottomSheetFragment.dismiss();
 
-        }else if(position == 2)
-        {
-            if(mMap != null){
+        } else if (position == 2) {
+            if (mMap != null) {
 
                 mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
             }
 
             bottomSheetFragment.dismiss();
 
-        }else if(position == 3)
-        {
-            if(mMap != null){
+        } else if (position == 3) {
+            if (mMap != null) {
                 mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
             }
             bottomSheetFragment.dismiss();
 
-        }else
-        {
-            if(mMap != null){
+        } else {
+            if (mMap != null) {
 
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
@@ -416,13 +435,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
     }
 
 
-    public void getCurrentLocation(){
+    public void getCurrentLocation() {
         String loc = "";
-        if(gpsTracker.canGetLocation())
-        {
-             loc = getAddress(getActivity(),gpsTracker.getLatitude(),gpsTracker.getLongitude());
+        if (gpsTracker.canGetLocation()) {
+            loc = getAddress(getActivity(), gpsTracker.getLatitude(), gpsTracker.getLongitude());
         }
-        Log.e("Location=====",loc);
+        Log.e("Location=====", loc);
     }
 
     public String getAddress(Context context, double latitude, double longitute) {
@@ -438,9 +456,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
             String postalCode = addresses.get(0).getPostalCode();
             String region = addresses.get(0).getAdminArea();
 
-            Preference.save(getActivity(),Preference.KEY_address,addressStreet);
+            Preference.save(getActivity(), Preference.KEY_address, addressStreet);
 
-            binding.txtAddress.setText(addressStreet+"");
+            binding.txtAddress.setText(addressStreet + "");
 
             Log.e("region====", region);
 
@@ -452,12 +470,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
     }
 
 
-
     private void setAdapter(ArrayList<CircleListModel.Result> modelList_my_circle) {
 
         //this.modelList_my_circle.add(new RatingModel("Corn"));
 
-        mAdapter = new MyCircleListAdapter(getActivity(), this.modelList_my_circle);
+        mAdapter = new MyCircleListAdapter(getActivity(), this.modelList_my_circle,HomeFragment.this);
         binding.recyclerMyCircle.setHasFixedSize(true);
         // use a linear layout manager
         binding.recyclerMyCircle.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -472,13 +489,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
     public void ApiMethodCircleCreate(String cricelName) {
 
-        String UserId = Preference.get(getActivity(),Preference.KEY_USER_ID);
-        String UserCode = Preference.get(getActivity(),Preference.KEY_UserCode);
+        String UserId = Preference.get(getActivity(), Preference.KEY_USER_ID);
+        String UserCode = Preference.get(getActivity(), Preference.KEY_CircleCode);
 
         Call<CricleCreate> call = RetrofitClients
                 .getInstance()
                 .getApi()
-                .Api_create_circle(UserId,cricelName, String.valueOf(latitude), String.valueOf(longitude),"Yes");
+                .Api_create_circle(UserId, cricelName, String.valueOf(latitude), String.valueOf(longitude), "Yes",Battery);
         call.enqueue(new Callback<CricleCreate>() {
             @Override
             public void onResponse(Call<CricleCreate> call, Response<CricleCreate> response) {
@@ -486,20 +503,20 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
                     binding.progressBar.setVisibility(View.GONE);
 
-                    CricleCreate myclass= response.body();
+                    CricleCreate myclass = response.body();
 
                     String status = myclass.status;
                     String message = myclass.message;
 
-                    if (status.equalsIgnoreCase("1")){
+                    if (status.equalsIgnoreCase("1")) {
 
-                        binding.txtCircle.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getActivity(),R.drawable.up_down), null);
+                        binding.txtCircle.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getActivity(), R.drawable.up_down), null);
                         binding.llData.setVisibility(View.GONE);
                         binding.llListCircle.setVisibility(View.VISIBLE);
 
                         ApiGetCircleList();
 
-                    }else {
+                    } else {
 
                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 
@@ -517,14 +534,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
         });
     }
 
-    public void ApiMethodJoinCircle(String Code){
+    public void ApiMethodJoinCircle(String Code) {
 
-        String UserId = Preference.get(getActivity(),Preference.KEY_USER_ID);
+        String UserId = Preference.get(getActivity(), Preference.KEY_USER_ID);
 
         Call<CricleCreate> call = RetrofitClients
                 .getInstance()
                 .getApi()
-                .Api_Join_circle(UserId,Code,String.valueOf(latitude), String.valueOf(longitude));
+                .Api_Join_circle(UserId, Code, String.valueOf(latitude), String.valueOf(longitude),Battery);
         call.enqueue(new Callback<CricleCreate>() {
             @Override
             public void onResponse(Call<CricleCreate> call, Response<CricleCreate> response) {
@@ -532,16 +549,16 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
                     binding.progressBar.setVisibility(View.GONE);
 
-                    CricleCreate myclass= response.body();
+                    CricleCreate myclass = response.body();
 
                     String status = myclass.status;
                     String message = myclass.message;
 
-                    if (status.equalsIgnoreCase("1")){
+                    if (status.equalsIgnoreCase("1")) {
 
                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 
-                    }else {
+                    } else {
 
                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 
@@ -550,6 +567,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<CricleCreate> call, Throwable t) {
                 binding.progressBar.setVisibility(View.GONE);
@@ -561,7 +579,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
     public void ApiGetCircleList() {
 
-        String UserId = Preference.get(getActivity(),Preference.KEY_USER_ID);
+        String UserId = Preference.get(getActivity(), Preference.KEY_USER_ID);
 
         Call<CircleListModel> call = RetrofitClients
                 .getInstance()
@@ -574,20 +592,20 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
                     binding.progressBar.setVisibility(View.GONE);
 
-                    CircleListModel myclass= response.body();
+                    CircleListModel myclass = response.body();
 
                     String status = myclass.status;
                     String message = myclass.message;
 
-                    if (status.equalsIgnoreCase("1")){
+                    if (status.equalsIgnoreCase("1")) {
+
+                        Preference.save(getActivity(),Preference.KEY_CircleCount, String.valueOf(myclass.circleCount));
 
                         modelList_my_circle = (ArrayList<CircleListModel.Result>) myclass.result;
 
                         setAdapter(modelList_my_circle);
 
-                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-
-                    }else {
+                    } else {
 
                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 
@@ -604,4 +622,191 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
             }
         });
     }
+
+    public void ApiGetMemberList(String CircleCode) {
+
+        Log.e("CircleCode---------",""+CircleCode);
+
+        Call<MemberListModel> call = RetrofitClients
+                .getInstance()
+                .getApi()
+                .Api_get_member_detail(CircleCode);
+        call.enqueue(new Callback<MemberListModel>() {
+            @Override
+            public void onResponse(Call<MemberListModel> call, Response<MemberListModel> response) {
+                try {
+
+                    binding.progressBar.setVisibility(View.GONE);
+
+                    MemberListModel myclass= response.body();
+
+                    if (myclass.getStatus().equalsIgnoreCase("1")){
+
+                        if(myclass.getResult()!=null)
+                        {
+                            modelListCircleDetails.clear();
+                            modelListCircleDetails = (ArrayList<MemberListDataModel>) myclass.getResult ();
+                            setAdapterCircleDetails(modelListCircleDetails);
+
+                            if(!modelListCircleDetails.isEmpty())
+                            {
+                                ArrayList<Marker> markers = new ArrayList<>();
+                                mMap.clear();
+
+                                for(int i=0;i<modelListCircleDetails.size();i++)
+                                {
+                                    LatLng sydney = new LatLng(Double.parseDouble(modelListCircleDetails.get(i).getLat()), Double.parseDouble(modelListCircleDetails.get(i).getLon()));
+
+                                    Marker mSydney = mMap.addMarker(new MarkerOptions()
+                                            .position(sydney)
+                                            .title(UserName)
+                                            .snippet("Population: 4,627,300")
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.new_user)));
+                                    markers.add(mSydney);
+                                }
+
+                                LatLng sydney = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLatitude());
+
+                                Marker mark1 = mMap.addMarker(new MarkerOptions()
+                                        .position(sydney)
+                                        .title(UserName)
+                                        .snippet("Population: 4,627,300")
+                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.user)));
+                                markers.add(mark1);
+
+
+                              //  mMap.animateCamera(CameraUpdateFactory.newCameraPosition(getCameraPositionWithBearing(new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude()))));
+
+                                allINGoogleMap(markers);
+
+                            }
+
+                        }
+                    }else {
+                        modelListCircleDetails.clear();
+                        setAdapterCircleDetails(null);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<MemberListModel> call, Throwable t) {
+                modelListCircleDetails.clear();
+                setAdapterCircleDetails(null);
+                binding.progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void allINGoogleMap(ArrayList<Marker> markers){
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (Marker marker : markers) {
+            builder.include(marker.getPosition());
+        }
+        LatLngBounds bounds = builder.build();
+        int padding = 100; // offset from edges of the map in pixels
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        //mMap.animateCamera(CameraUpdateFactory.newCameraPosition(getCameraPositionWithBearing(new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude()))));
+        mMap.animateCamera(cu);
+    }
+
+    private void setAdapterCircleDetails(ArrayList<MemberListDataModel> modelListCircleDetails) {
+
+        //this.modelList_my_circle.add(new RatingModel("Corn"));
+
+        mAdapterCircleDetails = new AvailableAdapter(getActivity(),modelListCircleDetails);
+        binding.recyclerMemebr.setHasFixedSize(true);
+
+        // use a linear layout manager
+        binding.recyclerMemebr.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerMemebr.setAdapter(mAdapterCircleDetails);
+        mAdapterCircleDetails.SetOnItemClickListener(new AvailableAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, MemberListDataModel model) {
+
+            }
+        });
+    }
+
+
+
+
+    public static void expand(final View v) {
+        int matchParentMeasureSpec = View.MeasureSpec.makeMeasureSpec(((View) v.getParent()).getWidth(), View.MeasureSpec.EXACTLY);
+        int wrapContentMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        v.measure(matchParentMeasureSpec, wrapContentMeasureSpec);
+        final int targetHeight = v.getMeasuredHeight();
+
+        // Older versions of android (pre API 21) cancel animations for views with a height of 0.
+        v.getLayoutParams().height = 5;
+        v.setVisibility(View.VISIBLE);
+        Animation a = new Animation()
+        {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                v.getLayoutParams().height = interpolatedTime == 5
+                        ? ViewGroup.LayoutParams.WRAP_CONTENT
+                        : (int)(targetHeight * interpolatedTime);
+                v.requestLayout();
+            }
+
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
+
+        // Expansion speed of 1dp/ms
+        a.setDuration((int)(targetHeight / v.getContext().getResources().getDisplayMetrics().density));
+        v.startAnimation(a);
+    }
+
+    public static void collapse(final View v) {
+        final int initialHeight = v.getMeasuredHeight();
+
+        Animation a = new Animation()
+        {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                if(interpolatedTime == 5){
+                    v.setVisibility(View.GONE);
+                }else{
+                    v.getLayoutParams().height = initialHeight - (int)(initialHeight * interpolatedTime);
+                    v.requestLayout();
+                }
+            }
+
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
+
+        // Collapse speed of 1dp/ms
+        a.setDuration((int)(initialHeight / v.getContext().getResources().getDisplayMetrics().density));
+        v.startAnimation(a);
+    }
+
+
+    @Override
+    public void onItemClick(String code,String CIrcleName) {
+        CircleName = CIrcleName;
+        binding.txtCircle.setText(CircleName);
+        binding.llListCircle.setVisibility(View.GONE);
+        binding.llData.setVisibility(View.VISIBLE);
+
+        if (sessionManager.isNetworkAvailable()) {
+            binding.progressBar.setVisibility(View.VISIBLE);
+            Log.e("bhbjhv","aya"+code);
+
+            ApiGetMemberList(code);
+
+        }else{
+            Toast.makeText(getActivity(), R.string.checkInternet, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
 }

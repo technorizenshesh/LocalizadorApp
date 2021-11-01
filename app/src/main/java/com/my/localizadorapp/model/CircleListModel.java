@@ -9,6 +9,9 @@ public class CircleListModel {
     @SerializedName("result")
     @Expose
     public List<Result> result = null;
+    @SerializedName("circle_count")
+    @Expose
+    public Integer circleCount;
     @SerializedName("message")
     @Expose
     public String message;

@@ -47,6 +47,7 @@ public class CircleDetailsActivity extends AppCompatActivity {
 
     private ArrayList<MemberListDataModel> modelList = new ArrayList<>();
     MemberListAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,14 @@ public class CircleDetailsActivity extends AppCompatActivity {
         sessionManager =new SessionManager(CircleDetailsActivity.this);
 
         CircleName = Preference.get(CircleDetailsActivity.this, Preference.KEY_CircleName);
+
+        String CircleCount =Preference.get(CircleDetailsActivity.this,Preference.KEY_CircleCount);
+
+        if(CircleCount.equalsIgnoreCase("1"))
+        {
+           binding.RRDelete.setVisibility(View.GONE);
+        }
+
         binding.txtCircleName.setText(CircleName);
 
 
@@ -169,7 +178,7 @@ public class CircleDetailsActivity extends AppCompatActivity {
     public void ApiMethodUpdate(String cricelName) {
 
         String CircleId = Preference.get(CircleDetailsActivity.this,Preference.KEY_Circle_ID);
-        String UserCode = Preference.get(CircleDetailsActivity.this,Preference.KEY_UserCode);
+        String UserCode = Preference.get(CircleDetailsActivity.this,Preference.KEY_CircleCode);
 
         Call<UpdatedCircleModel> call = RetrofitClients
                 .getInstance()
@@ -211,7 +220,8 @@ public class CircleDetailsActivity extends AppCompatActivity {
     public void ApiGetMemberList() {
 
         String UserId = Preference.get(CircleDetailsActivity.this,Preference.KEY_USER_ID);
-        String UserCode = Preference.get(CircleDetailsActivity.this,Preference.KEY_UserCode);
+        String UserName = Preference.get(CircleDetailsActivity.this,Preference.KEY_UserName);
+        String UserCode = Preference.get(CircleDetailsActivity.this,Preference.KEY_CircleCode);
 
         Call<MemberListModel> call = RetrofitClients
                 .getInstance()
@@ -228,25 +238,29 @@ public class CircleDetailsActivity extends AppCompatActivity {
 
                     if (myclass.getStatus().equalsIgnoreCase("1")){
 
-                        binding.txtUser.setText(myclass.getOwnerDetail().getUserName());
+                        if(myclass.getOwnerDetail()!=null)
+                        {
+                            binding.txtUser.setText(myclass.getOwnerDetail().getUserName());
 
-                        modelList = (ArrayList<MemberListDataModel>) myclass.getResult ();
+                        }else
+                        {
+                            binding.txtUser.setText(UserName);
+                        }
 
-                        setAdapter(modelList);
+                        if(myclass.getResult()!=null)
+                        {
+                            modelList = (ArrayList<MemberListDataModel>) myclass.getResult();
 
-                    }else {
-
-                        Toast.makeText(CircleDetailsActivity.this, myclass.getMessage(), Toast.LENGTH_SHORT).show();
+                            setAdapter(modelList);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(Call<MemberListModel> call, Throwable t) {
                 binding.progressBar.setVisibility(View.GONE);
-                Toast.makeText(CircleDetailsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

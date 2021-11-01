@@ -21,7 +21,7 @@ public class InviteNewFriend extends AppCompatActivity {
         super.onCreate(savedInstanceState);
        binding= DataBindingUtil.setContentView(this,R.layout.activity_invite_new_friend);
 
-         UserCode = Preference.get(InviteNewFriend.this,Preference.KEY_UserCode);
+         UserCode = Preference.get(InviteNewFriend.this,Preference.KEY_CircleCode);
 
         binding.txtCode.setText(UserCode);
 

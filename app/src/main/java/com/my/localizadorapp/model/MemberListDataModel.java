@@ -26,6 +26,9 @@ public class MemberListDataModel {
     @SerializedName("date_time")
     @Expose
     private String dateTime;
+    @SerializedName("battery")
+    @Expose
+    private String battery;
     @SerializedName("user_detail")
     @Expose
     private UserDetailModel userDetail;
@@ -86,6 +89,14 @@ public class MemberListDataModel {
         this.dateTime = dateTime;
     }
 
+    public String getBattery() {
+        return battery;
+    }
+
+    public void setBattery(String battery) {
+        this.battery = battery;
+    }
+
     public UserDetailModel getUserDetail() {
         return userDetail;
     }
@@ -93,4 +104,5 @@ public class MemberListDataModel {
     public void setUserDetail(UserDetailModel userDetail) {
         this.userDetail = userDetail;
     }
+
 }

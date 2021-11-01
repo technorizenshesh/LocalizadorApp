@@ -28,4 +28,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="myFullscreenAlertDialogStyle"
+        parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowAnimationStyle">@color/white</item>
+        <item name="colorAccent">@color/purple_200</item>
+    </style>
+
+
 </resources>

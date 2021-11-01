@@ -10,6 +10,7 @@ import com.my.localizadorapp.model.MemberListModel;
 import com.my.localizadorapp.model.PrivacyModel;
 import com.my.localizadorapp.model.SignUpModel;
 import com.my.localizadorapp.model.SignUpdataModel;
+import com.my.localizadorapp.model.UpdateLocationModel;
 import com.my.localizadorapp.model.UpdatedCircleModel;
 
 import okhttp3.ResponseBody;
@@ -31,13 +32,14 @@ public interface Api {
     String Api_get_member_detail ="get_member_detail";
     String Api_delete_circle ="delete_circle";
     String Api_add_address ="add_address";
+    String update_location ="update_location";
 
     String Api_PrivacyPolicy ="get_privacy";
     String Api_Terms ="get_terms";
     String Api_get_support ="get_support";
 
   @FormUrlEncoded
-    @POST(Api_signup)
+  @POST(Api_signup)
   Call<SignUpdataModel> Api_signup(
             @Field("name") String name ,
             @Field("circle_name") String circle_name,
@@ -45,8 +47,10 @@ public interface Api {
             @Field("register_id") String register_id,
             @Field("lat") String lat,
             @Field("lon") String lon,
-            @Field("password") String password
-    );
+            @Field("password") String password,
+            @Field("owner") String owner,
+            @Field("battery") String battery
+  );
 
   @FormUrlEncoded
     @POST(Api_login)
@@ -65,8 +69,8 @@ public interface Api {
             @Field("circle_name") String circle_name,
             @Field("lat") String lat,
             @Field("lon") String lon,
-            @Field("owner") String owner
-
+            @Field("owner") String owner,
+            @Field("battery") String battery
     );
 
   @FormUrlEncoded
@@ -79,13 +83,22 @@ public interface Api {
     );
 
   @FormUrlEncoded
-    @POST(Api_Join_circle)
+  @POST(Api_Join_circle)
   Call<CricleCreate> Api_Join_circle(
             @Field("user_id") String user_id,
             @Field("code") String code,
             @Field("lat") String lat,
-            @Field("lon") String lon
+            @Field("lon") String lon,
+            @Field("battery") String battery
+    );
 
+  @FormUrlEncoded
+  @POST(update_location)
+  Call<UpdateLocationModel> update_location(
+            @Field("user_id") String user_id,
+            @Field("lat") String lat,
+            @Field("lon") String lon,
+            @Field("battery") String battery
     );
 
   @FormUrlEncoded
@@ -121,7 +134,7 @@ public interface Api {
     );
 
   @FormUrlEncoded
-    @POST(Api_get_profile)
+  @POST(Api_get_profile)
   Call<SignUpModel> Api_get_profile(
             @Field("user_id") String user_id
     );
@@ -134,4 +147,5 @@ public interface Api {
 
      @POST(Api_get_support)
     Call<PrivacyModel> Api_get_support();
+
 }

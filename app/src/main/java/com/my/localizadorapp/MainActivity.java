@@ -30,12 +30,13 @@ public class MainActivity extends AppCompatActivity implements
 
     public static final int RequestPermissionCode = 1;
     SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       sessionManager=new SessionManager(MainActivity.this);
+        sessionManager=new SessionManager(MainActivity.this);
 
         if (permissioncheck()) {
             finds();
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements
                     finish();
                 }
             }
+            
         }, 3000);
     }
 

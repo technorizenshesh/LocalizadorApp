@@ -17,8 +17,10 @@ public static String KEY_check_status = "check_status";
 public static String KEY_UserName = "user_name";
 public static String KEY_address = "address";
 public static String KEY_battery = "batery";
-public static String KEY_UserCode = "UserCode";
 public static String KEY_CircleName = "circleName";
+public static String KEY_CircleCode = "circleCode";
+public static String KEY_CircleCount = "circleCode";
+public static String key_switch_shift_change = "shift_change";
 
 
 

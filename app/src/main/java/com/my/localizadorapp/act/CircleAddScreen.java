@@ -3,12 +3,17 @@ package com.my.localizadorapp.act;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.my.localizadorapp.GPSTracker;
 import com.my.localizadorapp.Preference;
@@ -36,16 +41,42 @@ public class CircleAddScreen extends AppCompatActivity {
     String latitude="";
     String longitude="";
 
+    String Battery="";
+
+    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context ctxt, Intent intent) {
+            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+            int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+            float batteryPct = level * 100 / (float) scale;
+            Battery = String.valueOf(batteryPct);
+
+        }
+    };
+    private String token="";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_circle_add_screen);
 
+       registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(runnable -> {
+            token = runnable.getToken();
+            Log.e( "Tokennnn" ,token);
+        });
+
         //Gps Lat Long
         gpsTracker=new GPSTracker(this);
         if(gpsTracker.canGetLocation()){
-            latitude = String.valueOf(gpsTracker.getLatitude());
-            longitude = String.valueOf(gpsTracker.getLongitude());
+            latitude ="23.2599";
+            longitude ="77.4126";
+
+           // latitude = String.valueOf(gpsTracker.getLatitude());
+          //  longitude = String.valueOf(gpsTracker.getLongitude());
+
         }else{
             gpsTracker.showSettingsAlert();
         }
@@ -101,9 +132,12 @@ public class CircleAddScreen extends AppCompatActivity {
     }
 
 
-    public void ApiMethodSignUp() {
+    public void ApiMethodSignUp()
+    {
+        Log.e( "Tokennnn" ,token);
+
         Call<SignUpdataModel> call = RetrofitClients.getInstance().getApi()
-                .Api_signup(UserName,CircleName,Mobile,"bhhjvhh",latitude,longitude,"1234");
+                .Api_signup(UserName,CircleName,Mobile,token,latitude,longitude,"1234","yes",Battery);
         call.enqueue(new Callback<SignUpdataModel>() {
             @Override
             public void onResponse(Call<SignUpdataModel> call, Response<SignUpdataModel> response) {
@@ -127,7 +161,11 @@ public class CircleAddScreen extends AppCompatActivity {
 
                          Preference.save(CircleAddScreen.this,Preference.KEY_USER_ID,UserId);
                          Preference.save(CircleAddScreen.this,Preference.KEY_UserName,UserName);
-                         Preference.save(CircleAddScreen.this,Preference.KEY_UserCode,UserCode);
+                         Preference.save(CircleAddScreen.this,Preference.KEY_CircleCode,UserCode);
+
+                        Preference.save(CircleAddScreen.this,Preference.KEY_CircleName,myclass.result.circleName);
+                        Preference.save(CircleAddScreen.this,Preference.KEY_CircleCode,myclass.result.code);
+
 
                         startActivity(new Intent(CircleAddScreen.this,HomeActivity.class));
 
@@ -141,9 +179,8 @@ public class CircleAddScreen extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
             @Override
-            public void onFailure(Call<SignUpdataModel> call, Throwable t) {
+            public void onFailure(Call<SignUpdataModel> call, Throwable t){
                 call.cancel();
                 Log.e("error", String.valueOf(t));
                 binding.progressBar.setVisibility(View.GONE);

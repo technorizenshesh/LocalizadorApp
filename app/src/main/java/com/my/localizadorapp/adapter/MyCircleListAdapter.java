@@ -3,6 +3,7 @@ package com.my.localizadorapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.my.localizadorapp.NewOnItemlisner;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.act.CircleDetailsActivity;
@@ -26,11 +28,14 @@ public class MyCircleListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Context mContext;
     private ArrayList<CircleListModel.Result> modelList;
     private OnItemClickListener mItemClickListener;
+    private NewOnItemlisner newOnItemlisner;
+    int pos=0;
 
 
-    public MyCircleListAdapter(Context context, ArrayList<CircleListModel.Result> modelList) {
+    public MyCircleListAdapter(Context context, ArrayList<CircleListModel.Result> modelList,NewOnItemlisner newOnItemlisner) {
         this.mContext = context;
         this.modelList = modelList;
+        this.newOnItemlisner = newOnItemlisner;
     }
 
     public void updateList(ArrayList<CircleListModel.Result> modelList) {
@@ -51,20 +56,38 @@ public class MyCircleListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             final CircleListModel.Result model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
 
+            if(pos==position)
+            {
+                genericViewHolder.RRCircle.setBackgroundColor(Color.parseColor("#F2F2F2"));
+
+            }else
+            {
+                genericViewHolder.RRCircle.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
+            }
+
             genericViewHolder.RRDetails.setOnClickListener(v -> {
 
                 Preference.save(mContext,Preference.KEY_Circle_ID,model.id);
 
                 Preference.save(mContext,Preference.KEY_CircleName,model.circleName);
-                Preference.save(mContext,Preference.KEY_UserCode,model.code);
+                Preference.save(mContext,Preference.KEY_CircleCode,model.code);
 
                 mContext.startActivity(new Intent(mContext, CircleDetailsActivity.class));
 
             });
 
             genericViewHolder.RRCircle.setOnClickListener(v -> {
-                
-                Toast.makeText(mContext, "ok", Toast.LENGTH_SHORT).show();
+
+                pos= position;
+
+                notifyDataSetChanged();
+
+                newOnItemlisner.onItemClick(model.code,model.circleName);
+
+                Preference.save(mContext,Preference.KEY_CircleCode,model.code);
+
+                Preference.save(mContext,Preference.KEY_CircleName,model.circleName);
+
             });
 
             genericViewHolder.txtName.setText(model.circleName);

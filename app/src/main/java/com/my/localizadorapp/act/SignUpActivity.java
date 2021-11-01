@@ -111,6 +111,8 @@ public class SignUpActivity extends AppCompatActivity {
 
                         Preference.save(SignUpActivity.this,Preference.KEY_USER_ID,UserId);
                         Preference.save(SignUpActivity.this,Preference.KEY_UserName,UserName);
+                        Preference.save(SignUpActivity.this,Preference.KEY_CircleName,myclass.result.circleName);
+                        Preference.save(SignUpActivity.this,Preference.KEY_CircleCode,myclass.result.code);
 
                         startActivity(new Intent(SignUpActivity.this,HomeActivity.class).putExtra("mobile",Mobile));
 

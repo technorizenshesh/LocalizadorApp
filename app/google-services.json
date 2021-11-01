@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "918181947883",
+    "project_id": "locationapp-982c6",
+    "storage_bucket": "locationapp-982c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918181947883:android:59a3c349ad4fe142f991ae",
+        "android_client_info": {
+          "package_name": "com.my.localizadorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "918181947883-tj6uhdaikpkv69jf5mjbj4m4evj65rvf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.my.localizadorapp",
+            "certificate_hash": "07601957272bd2cdcf2c4b144175d46a1c7cc098"
+          }
+        },
+        {
+          "client_id": "918181947883-g8b7m6adei75ehls0lfbvirik58vj7n8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDan_tdhcTPG2UiWcoG8MXh1YcTljT-CEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "918181947883-g8b7m6adei75ehls0lfbvirik58vj7n8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -27,9 +27,9 @@
             android:layout_marginTop="@dimen/_50sdp"
             android:layout_centerHorizontal="true"
             android:scaleType="fitXY"
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="@dimen/_150sdp"
-            android:src="@mipmap/logo"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_120sdp"
+            android:src="@drawable/logonew"
             />
 
         <androidx.cardview.widget.CardView

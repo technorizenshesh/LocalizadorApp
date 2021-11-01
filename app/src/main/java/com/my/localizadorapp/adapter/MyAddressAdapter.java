@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
-import com.my.localizadorapp.act.CircleDetailsActivity;
-import com.my.localizadorapp.model.CircleListModel;
 import com.my.localizadorapp.model.RatingModel;
 
 import java.util.ArrayList;
