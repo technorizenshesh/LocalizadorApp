@@ -15,20 +15,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.my.localizadorapp.MainActivity;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.Upd.MyService;
-import com.my.localizadorapp.databinding.ActivityHomeBinding;
 import com.my.localizadorapp.databinding.ActivityHomeNavBinding;
 import com.my.localizadorapp.fragment.HomeFragment;
 import com.my.localizadorapp.fragment.PlaceFragment;
-import com.my.localizadorapp.fragment.PremiumFragment;
-import com.my.localizadorapp.utils.SessionManager;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -40,15 +35,16 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_nav);
 
-        String UserName = Preference.get(HomeActivity.this,Preference.KEY_UserName);
+        String UserName = Preference.get(HomeActivity.this, Preference.KEY_UserName);
 
         binding.childNavDrawer.txtName.setText(UserName);
 
         binding.dashboard.RRHome.setOnClickListener(v -> {
-            navmenu();
+
             fragment = new HomeFragment();
             loadFragment(fragment);
 
@@ -58,16 +54,15 @@ public class HomeActivity extends AppCompatActivity {
             navmenu();
         });
 
-       binding.dashboard.RRPlace.setOnClickListener(v -> {
-           navmenu();
+        binding.dashboard.RRPlace.setOnClickListener(v -> {
             fragment = new PlaceFragment();
             loadFragment(fragment);
 
         });
 
         binding.dashboard.RRPremium.setOnClickListener(v -> {
-            navmenu();
-            startActivity(new Intent(HomeActivity.this,PremiumActivity.class));
+
+            startActivity(new Intent(HomeActivity.this, PremiumActivity.class));
 
             //fragment = new PremiumFragment();
             //loadFragment(fragment);
@@ -76,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
 
         binding.childNavDrawer.llPrimium.setOnClickListener(v -> {
             navmenu();
-            startActivity(new Intent(HomeActivity.this,PremiumActivity.class));
+            startActivity(new Intent(HomeActivity.this, PremiumActivity.class));
 
             /*fragment = new PremiumFragment();
             loadFragment(fragment);*/
@@ -137,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-  binding.childNavDrawer.RRProfile.setOnClickListener(new View.OnClickListener() {
+        binding.childNavDrawer.RRProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -146,7 +141,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-  binding.childNavDrawer.llTutorial.setOnClickListener(new View.OnClickListener() {
+        binding.childNavDrawer.llTutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -155,7 +150,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-  binding.childNavDrawer.llLogout.setOnClickListener(new View.OnClickListener() {
+        binding.childNavDrawer.llLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -176,7 +171,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ContextCompat.startForegroundService(getApplicationContext(),new Intent(getApplicationContext(), MyService.class));
+        ContextCompat.startForegroundService(getApplicationContext(), new Intent(getApplicationContext(), MyService.class));
     }
 
     public void navmenu() {
@@ -195,7 +190,7 @@ public class HomeActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    private void AlertDaliogJoinCircle(){
+    private void AlertDaliogJoinCircle() {
         LayoutInflater li;
         RelativeLayout RRjoinCircle;
         EditText edtCode;
@@ -253,7 +248,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
                 finishAffinity();
             }
         }, 2000);

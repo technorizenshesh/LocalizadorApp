@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5sp"
+    android:id="@+id/card"
+    android:orientation="vertical"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/llCategory"
+        android:padding="@dimen/_10sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:inputType="text"
+            android:text="Pets"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+      />
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

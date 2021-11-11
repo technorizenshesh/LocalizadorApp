@@ -9,36 +9,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.my.localizadorapp.NewAddOnItemlisner;
 import com.my.localizadorapp.NewOnItemlisner;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.act.CircleDetailsActivity;
+import com.my.localizadorapp.act.CircleDetailsTwoActivity;
 import com.my.localizadorapp.model.CircleListModel;
-import com.my.localizadorapp.model.RatingModel;
 
 import java.util.ArrayList;
 
 
-public class MyCircleListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MyCircleListAdd_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context mContext;
-    private ArrayList<CircleListModel.Result> modelList;
+    private ArrayList<CircleListModel.CircleDatum> modelList;
     private OnItemClickListener mItemClickListener;
-    private NewOnItemlisner newOnItemlisner;
+    private NewAddOnItemlisner newOnItemlisner;
     int pos=0;
 
 
-    public MyCircleListAdapter(Context context, ArrayList<CircleListModel.Result> modelList,NewOnItemlisner newOnItemlisner) {
+    public MyCircleListAdd_Adapter(Context context, ArrayList<CircleListModel.CircleDatum> modelList, NewAddOnItemlisner newOnItemlisner) {
         this.mContext = context;
         this.modelList = modelList;
         this.newOnItemlisner = newOnItemlisner;
     }
 
-    public void updateList(ArrayList<CircleListModel.Result> modelList) {
+    public void updateList(ArrayList<CircleListModel.CircleDatum> modelList) {
         this.modelList = modelList;
         notifyDataSetChanged();
     }
@@ -53,10 +53,10 @@ public class MyCircleListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //Here you can fill your row view
         if (holder instanceof ViewHolder) {
-            final CircleListModel.Result model = getItem(position);
+            final CircleListModel.CircleDatum model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
 
-         /*   if(pos==position)
+          /*  if(pos==position)
             {
                 genericViewHolder.RRCircle.setBackgroundColor(Color.parseColor("#F2F2F2"));
 
@@ -72,16 +72,16 @@ public class MyCircleListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 Preference.save(mContext,Preference.KEY_CircleName,model.circleName);
                 Preference.save(mContext,Preference.KEY_CircleCode,model.code);
 
-                mContext.startActivity(new Intent(mContext, CircleDetailsActivity.class));
+                mContext.startActivity(new Intent(mContext, CircleDetailsTwoActivity.class));
 
             });
 
             genericViewHolder.RRCircle.setOnClickListener(v -> {
 
-               // pos= position;
+                // pos= position;
                 //notifyDataSetChanged();
 
-                newOnItemlisner.onItemClick(model.code,model.circleName);
+                newOnItemlisner.onItemClick1(model.code,model.circleName);
 
                 Preference.save(mContext,Preference.KEY_CircleCode,model.code);
 
@@ -104,14 +104,14 @@ public class MyCircleListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.mItemClickListener = mItemClickListener;
     }
 
-    private CircleListModel.Result getItem(int position) {
+    private CircleListModel.CircleDatum getItem(int position) {
         return modelList.get(position);
     }
 
 
     public interface OnItemClickListener {
 
-        void onItemClick(View view, int position, CircleListModel.Result model);
+        void onItemClick(View view, int position, CircleListModel.CircleDatum model);
 
     }
 

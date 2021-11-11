@@ -13,7 +13,7 @@ public static final String APP_PREF = "KapsiePreferences";
 public static SharedPreferences sp;
 public static String KEY_USER_ID = "user_id";
 public static String KEY_Circle_ID = "circle_id";
-public static String KEY_check_status = "check_status";
+public static String Product_id = "Product_id";
 public static String KEY_UserName = "user_name";
 public static String KEY_address = "address";
 public static String KEY_battery = "batery";

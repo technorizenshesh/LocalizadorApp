@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/progresh_background"
+            android:elevation="6dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/purple_200"
+            android:indeterminateTintMode="src_atop"
+            android:padding="5dp"
+            android:visibility="gone"
+            />
+
+        <RelativeLayout
+            android:id="@+id/RRToolbaar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+
+            <RelativeLayout
+                android:id="@+id/RRback"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/cross_icon"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    ></ImageView>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:textSize="@dimen/_16sdp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:text="Product Details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/RRToolbaar"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:background="#ECEFF1"
+                android:id="@+id/rr_super_item"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_180sdp">
+
+
+                <ImageView
+                    android:src="@drawable/computer"
+                    android:id="@+id/massage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="fitXY"/>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:padding="@dimen/_3sdp"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_below="@+id/rr_super_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <RelativeLayout
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/white"
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+
+                    <TextView
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:id="@+id/txtMassaeg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textSize="@dimen/_14sdp"
+                        android:text="Localizador de Celular GPS.."
+                        android:textColor="@color/black" />
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:id="@+id/txtDescrip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textSize="@dimen/_14sdp"
+                    android:text="Localizador"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textSize="@dimen/_14sdp"
+                    android:text="$79"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:id="@+id/RRContinue"
+            android:background="@drawable/btn_bg"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:gravity="center"
+                android:text="Pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

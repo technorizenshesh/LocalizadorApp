@@ -8,6 +8,20 @@
         android:layout_height="match_parent"
         >
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/progresh_background"
+            android:elevation="6dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/purple_200"
+            android:indeterminateTintMode="src_atop"
+            android:padding="5dp"
+            android:visibility="gone"
+            />
+
         <LinearLayout
             android:id="@+id/RRtoolbar"
             android:layout_width="match_parent"
@@ -45,58 +59,42 @@
 
         </LinearLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <RelativeLayout
             android:layout_below="@+id/RRtoolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             >
-            <RelativeLayout
-                android:layout_width="match_parent"
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCategory"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                >
+                android:layoutDirection="rtl"
+                android:scrollbars="vertical"
+                android:visibility="visible" />
 
-                <androidx.cardview.widget.CardView
-                    android:layout_margin="@dimen/_10sdp"
-                    android:elevation="@dimen/_10sdp"
-                    app:cardCornerRadius="@dimen/_5sdp"
-                    android:id="@+id/cardMycircle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/recyclerCategory"
+                android:id="@+id/recycleProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                />
 
-                    <RelativeLayout
-                        android:padding="@dimen/_10sdp"
-                        android:background="@color/white"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        >
+            <TextView
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:id="@+id/txtEmty"
+                android:layout_centerInParent="true"
+                android:text="No Record Found."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                        <TextView
-                            android:padding="@dimen/_5sdp"
-                            android:drawablePadding="@dimen/_10sdp"
-                            android:drawableRight="@drawable/drp_drn_btm"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp"
-                            android:text="How it Works?"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+            </TextView>
 
-                        </TextView>
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
-
-                </RelativeLayout>
-
-            </RelativeLayout>
-
-        </androidx.core.widget.NestedScrollView>
+        </RelativeLayout>
 
     </RelativeLayout>
 

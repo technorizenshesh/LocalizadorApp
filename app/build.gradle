@@ -39,6 +39,7 @@ android {
             force 'androidx.core:core-ktx:1.6.0'
         }
     }
+
 }
 
 dependencies {
@@ -82,4 +83,5 @@ dependencies {
     implementation 'com.braintreepayments:card-form:4.2.0'
 
 }
+
 apply plugin: 'com.google.gms.google-services'

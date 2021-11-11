@@ -40,6 +40,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.my.localizadorapp.GPSTracker;
+import com.my.localizadorapp.NewAddOnItemlisner;
 import com.my.localizadorapp.NewOnItemlisner;
 import com.my.localizadorapp.OnItemClickListener;
 import com.my.localizadorapp.Preference;
@@ -51,6 +52,7 @@ import com.my.localizadorapp.act.InviteNewFriend;
 import com.my.localizadorapp.act.NotificationScree;
 import com.my.localizadorapp.adapter.AvailableAdapter;
 import com.my.localizadorapp.adapter.MyCircleListAdapter;
+import com.my.localizadorapp.adapter.MyCircleListAdd_Adapter;
 import com.my.localizadorapp.databinding.HomeFragmentBinding;
 import com.my.localizadorapp.model.CircleListModel;
 import com.my.localizadorapp.model.CricleCreate;
@@ -68,7 +70,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItemClickListener,NewOnItemlisner {
+public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItemClickListener,NewOnItemlisner, NewAddOnItemlisner {
 
     HomeFragmentBinding binding;
     private GoogleMap mMap;
@@ -90,7 +92,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
     String addressStreet = "";
 
     ArrayList<CircleListModel.Result> modelList_my_circle = new ArrayList<>();
+    ArrayList<CircleListModel.CircleDatum> modelList_my_circleAdd = new ArrayList<>();
     MyCircleListAdapter mAdapter;
+    MyCircleListAdd_Adapter mAdapterNew;
     String CircleName ="";
     String CircleCode ="";
     String UserId = "";
@@ -109,6 +113,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
             Battery = String.valueOf(batteryPct);
 
             binding.txtBatery.setText(String.valueOf(batteryPct) + "%");
+
         }
     };
 
@@ -141,7 +146,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
         UserName = Preference.get(getActivity(), Preference.KEY_UserName);
 
 
-        binding.txtUserName.setText(UserName);
         binding.txtCircle.setText(CircleName);
 
         binding.imgNotification.setOnClickListener(v -> {
@@ -259,6 +263,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
             binding.progressBar.setVisibility(View.VISIBLE);
             ApiGetCircleList();
+            ApiGetMemberList(CircleCode);
 
         } else {
 
@@ -458,7 +463,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
             Preference.save(getActivity(), Preference.KEY_address, addressStreet);
 
-            binding.txtAddress.setText(addressStreet + "");
+           // binding.txtAddress.setText(addressStreet + "");
 
             Log.e("region====", region);
 
@@ -485,6 +490,23 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
             }
         });
+    }
+
+   private void setAdapterCircleAdd(ArrayList<CircleListModel.CircleDatum> modelList_my_circleAdd) {
+
+        //this.modelList_my_circleAdd.add(new RatingModel("Corn"));
+       mAdapterNew = new MyCircleListAdd_Adapter(getActivity(),modelList_my_circleAdd,HomeFragment.this);
+        binding.recyclerCircleAdd.setHasFixedSize(true);
+        // use a linear layout manager
+        binding.recyclerCircleAdd.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerCircleAdd.setAdapter(mAdapterNew);
+       mAdapterNew.SetOnItemClickListener(new MyCircleListAdd_Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, CircleListModel.CircleDatum model) {
+
+            }
+        });
+
     }
 
     public void ApiMethodCircleCreate(String cricelName) {
@@ -602,8 +624,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
                         Preference.save(getActivity(),Preference.KEY_CircleCount, String.valueOf(myclass.circleCount));
 
                         modelList_my_circle = (ArrayList<CircleListModel.Result>) myclass.result;
+                        modelList_my_circleAdd = (ArrayList<CircleListModel.CircleDatum>) myclass.getCircleData();
 
                         setAdapter(modelList_my_circle);
+                        setAdapterCircleAdd(modelList_my_circleAdd);
 
                     } else {
 
@@ -644,9 +668,20 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
                         if(myclass.getResult()!=null)
                         {
+
+                            double OwnerLat= Double.parseDouble(myclass.getOwnerDetail().getLat());
+                            double OwnerLon= Double.parseDouble(myclass.getOwnerDetail().getLat());
+
+                            String Address = getAddress(getActivity(), OwnerLat, OwnerLon);
+
+                            binding.txtUserName.setText(myclass.getOwnerDetail().getUserName());
+                            binding.txtAddress.setText(Address);
+
                             modelListCircleDetails.clear();
                             modelListCircleDetails = (ArrayList<MemberListDataModel>) myclass.getResult ();
                             setAdapterCircleDetails(modelListCircleDetails);
+
+
 
                             if(!modelListCircleDetails.isEmpty())
                             {
@@ -808,5 +843,23 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
     }
 
 
+    @Override
+    public void onItemClick1(String code, String CircleName) {
 
+        CircleName = CircleName;
+        binding.txtCircle.setText(CircleName);
+        binding.llListCircle.setVisibility(View.GONE);
+        binding.llData.setVisibility(View.VISIBLE);
+
+        if (sessionManager.isNetworkAvailable()) {
+            binding.progressBar.setVisibility(View.VISIBLE);
+            Log.e("bhbjhv","aya"+code);
+
+            ApiGetMemberList(code);
+
+        }else{
+            Toast.makeText(getActivity(), R.string.checkInternet, Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }

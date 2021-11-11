@@ -226,7 +226,7 @@
 
         <RelativeLayout
             android:layout_alignParentBottom="true"
-            android:id="@+id/RRDelete"
+            android:id="@+id/RRLeave"
             android:background="@drawable/btn_bg"
             android:layout_margin="@dimen/_10sdp"
             android:layout_width="match_parent"
@@ -239,7 +239,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp"
                 android:gravity="center"
-                android:text="@string/delete_circle"
+                android:text="@string/Leave_circle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
