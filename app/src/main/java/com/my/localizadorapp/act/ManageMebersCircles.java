@@ -18,7 +18,9 @@ public class ManageMebersCircles extends AppCompatActivity {
         binding= DataBindingUtil.setContentView(this,R.layout.activity_manage_mebers_circles);
 
         binding.RRback.setOnClickListener(v -> {
+
             onBackPressed();
+            
         });
     }
 }

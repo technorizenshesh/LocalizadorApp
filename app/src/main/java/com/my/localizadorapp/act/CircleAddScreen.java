@@ -1,5 +1,7 @@
 package com.my.localizadorapp.act;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -13,14 +15,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
+import com.my.localizadorapp.Chat.SessionManagerTwo;
 import com.my.localizadorapp.GPSTracker;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityCircleAddScreenBinding;
 import com.my.localizadorapp.model.SignUpModel;
 import com.my.localizadorapp.model.SignUpdataModel;
+import com.my.localizadorapp.utils.Constant;
 import com.my.localizadorapp.utils.RetrofitClients;
 import com.my.localizadorapp.utils.SessionManager;
 
@@ -42,6 +47,7 @@ public class CircleAddScreen extends AppCompatActivity {
     String longitude="";
 
     String Battery="";
+    private String token="";
 
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -50,11 +56,8 @@ public class CircleAddScreen extends AppCompatActivity {
             int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
             float batteryPct = level * 100 / (float) scale;
             Battery = String.valueOf(batteryPct);
-
         }
     };
-    private String token="";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,18 +65,17 @@ public class CircleAddScreen extends AppCompatActivity {
         binding= DataBindingUtil.setContentView(this,R.layout.activity_circle_add_screen);
 
        registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+       try {
+         token=  getToken(this);
+       }catch (Exception e){
 
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(runnable -> {
-            token = runnable.getToken();
-            Log.e( "Tokennnn" ,token);
-        });
+       }
 
         //Gps Lat Long
         gpsTracker=new GPSTracker(this);
         if(gpsTracker.canGetLocation()){
-            latitude ="23.2599";
-            longitude ="77.4126";
-
+            latitude = String.valueOf(gpsTracker.getLatitude());
+            longitude = String.valueOf(gpsTracker.getLongitude());
            // latitude = String.valueOf(gpsTracker.getLatitude());
           //  longitude = String.valueOf(gpsTracker.getLongitude());
 
@@ -131,6 +133,23 @@ public class CircleAddScreen extends AppCompatActivity {
         });
     }
 
+    static   String getToken(Context context) {
+        final String[] tokenr = new String[1];
+             FirebaseApp.initializeApp(context);
+
+            FirebaseMessaging.getInstance().getToken()
+                    .addOnCompleteListener(task -> {
+                        if (!task.isSuccessful()) {
+                          //  Log.w(TAG, "" + getString(R.string.fetching_fcm_token_failed), task.getException());
+                            return;
+                        }
+                        // Get new FCM registration token
+                         tokenr[0] = task.getResult();
+
+                    });
+
+        return tokenr[0];
+    }
 
     public void ApiMethodSignUp()
     {
@@ -159,7 +178,12 @@ public class CircleAddScreen extends AppCompatActivity {
                         sessionManager.saveUserId(UserId);
                         sessionManager.saveUserName(UserName);
 
-                         Preference.save(CircleAddScreen.this,Preference.KEY_USER_ID,UserId);
+                        ///////
+                        String responseString = new Gson().toJson(response.body());
+                        SessionManagerTwo.writeString(CircleAddScreen.this, Constant.USER_INFO, responseString);
+                       ///////
+
+                        Preference.save(CircleAddScreen.this,Preference.KEY_USER_ID,UserId);
                          Preference.save(CircleAddScreen.this,Preference.KEY_UserName,UserName);
                          Preference.save(CircleAddScreen.this,Preference.KEY_CircleCode,UserCode);
 

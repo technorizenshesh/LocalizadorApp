@@ -5,8 +5,11 @@ import com.my.localizadorapp.model.AddAddressModel;
 import com.my.localizadorapp.model.CategoryModel;
 import com.my.localizadorapp.model.ChangeMobileModel;
 import com.my.localizadorapp.model.CircleListModel;
+import com.my.localizadorapp.model.CircleListNewModel;
 import com.my.localizadorapp.model.CricleCreate;
 import com.my.localizadorapp.model.DeleteModel;
+import com.my.localizadorapp.model.GetAddressModel;
+import com.my.localizadorapp.model.GetUserChatModel;
 import com.my.localizadorapp.model.MemberListModel;
 import com.my.localizadorapp.model.PrivacyModel;
 import com.my.localizadorapp.model.ProductShopDeatils;
@@ -16,10 +19,15 @@ import com.my.localizadorapp.model.SignUpdataModel;
 import com.my.localizadorapp.model.UpdateLocationModel;
 import com.my.localizadorapp.model.UpdatedCircleModel;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface Api {
 
@@ -35,6 +43,9 @@ public interface Api {
     String Api_delete_circle = "delete_circle";
     String Api_add_address = "add_address";
     String update_location = "update_location";
+    String get_address = "get_address";
+    String delete_member = "delete_member";
+    String get_circle_user = "get_circle_user";
 
     String Api_PrivacyPolicy = "get_privacy";
     String Api_Terms = "get_terms";
@@ -42,6 +53,7 @@ public interface Api {
     String get_category = "get_category";
     String get_product_by_category = "get_product_by_category";
     String get_product_details = "get_product_details";
+    String update_profile = "update_profile";
 
     @FormUrlEncoded
     @POST(Api_signup)
@@ -83,7 +95,9 @@ public interface Api {
     Call<AddAddressModel> Api_add_address(
             @Field("user_id") String user_id,
             @Field("address_type") String address_type,
-            @Field("address") String address
+            @Field("address") String address,
+            @Field("lat") String lat,
+            @Field("lon") String lon
 
     );
 
@@ -120,6 +134,19 @@ public interface Api {
     );
 
     @FormUrlEncoded
+    @POST(get_circle_user)
+    Call<GetUserChatModel> get_circle_user(
+            @Field("code") String code
+    );
+
+    @FormUrlEncoded
+    @POST(delete_member)
+    Call<ResponseBody> delete_member(
+            @Field("user_id") String user_id,
+            @Field("code") String code
+    );
+
+    @FormUrlEncoded
     @POST(Api_delete_circle)
     Call<DeleteModel> Api_delete_circle(
             @Field("circle_id") String circle_id
@@ -128,6 +155,18 @@ public interface Api {
     @FormUrlEncoded
     @POST(Api_get_circle)
     Call<CircleListModel> Api_get_circle(
+            @Field("user_id") String user_id
+    );
+
+    @FormUrlEncoded
+    @POST(Api_get_circle)
+    Call<CircleListNewModel> Api_get_circle_new(
+            @Field("user_id") String user_id
+    );
+
+    @FormUrlEncoded
+    @POST(get_address)
+    Call<GetAddressModel> get_address(
             @Field("user_id") String user_id
     );
 
@@ -167,6 +206,15 @@ public interface Api {
     @POST(get_product_details)
     Call<ProductShopDeatils> get_product_details(
             @Field("product_id") String product_id
+    );
+
+    @Multipart
+    @POST(update_profile)
+    Call<SignUpModel>update_profile(
+            @Part("user_id") RequestBody user_id    ,
+            @Part("name") RequestBody name,
+            @Part("mobile") RequestBody mobile,
+            @Part MultipartBody.Part part1
     );
 
 }

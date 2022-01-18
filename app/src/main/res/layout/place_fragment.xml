@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     >
-
 
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
        >
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/progresh_background"
+            android:elevation="6dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/purple_200"
+            android:indeterminateTintMode="src_atop"
+            android:padding="5dp"
+            android:visibility="gone"
+            />
 
         <TextView
             android:textStyle="bold"
@@ -97,9 +110,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/llemty"
             android:layout_marginTop="@dimen/_40sdp"
             android:layout_below="@+id/RRtab"
-            android:visibility="visible"
+            android:visibility="gone"
             android:padding="@dimen/_10sdp"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -151,12 +165,24 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/RRAddressLst"
             android:layout_below="@+id/RRtab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/txtEmty"
+                android:layout_centerInParent="true"
+                android:text="No Address."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp">
+
+            </TextView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMyAddress"
@@ -169,16 +195,16 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:id="@+id/RRAdd"
-                android:layout_width="@dimen/_60sdp"
-                android:layout_height="@dimen/_45sdp"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_margin="@dimen/_10sdp"
                 android:background="@drawable/btn_bg">
 
                 <ImageView
                     android:layout_centerInParent="true"
                     android:src="@drawable/plus"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     >
                 </ImageView>
 

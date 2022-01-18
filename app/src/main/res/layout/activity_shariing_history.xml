@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:background="@color/white"
         android:layout_width="match_parent"
@@ -48,6 +48,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:elevation="@dimen/_10sdp"
             android:padding="@dimen/_10sdp"
             android:layout_margin="@dimen/_10sdp"
@@ -104,6 +105,19 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+        <TextView
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp"
+            android:text="No Data Found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+    </RelativeLayout>
 
 </layout>

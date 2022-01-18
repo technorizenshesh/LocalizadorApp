@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
+import com.my.localizadorapp.model.GetAddressModel;
 import com.my.localizadorapp.model.RatingModel;
 
 import java.util.ArrayList;
@@ -22,16 +23,16 @@ import java.util.ArrayList;
 public class MyAddressAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context mContext;
-    private ArrayList<RatingModel> modelList;
+    private ArrayList<GetAddressModel.Result> modelList;
     private OnItemClickListener mItemClickListener;
 
 
-    public MyAddressAdapter(Context context, ArrayList<RatingModel> modelList) {
+    public MyAddressAdapter(Context context, ArrayList<GetAddressModel.Result> modelList) {
         this.mContext = context;
         this.modelList = modelList;
     }
 
-    public void updateList(ArrayList<RatingModel> modelList) {
+    public void updateList(ArrayList<GetAddressModel.Result> modelList) {
         this.modelList = modelList;
         notifyDataSetChanged();
     }
@@ -46,10 +47,11 @@ public class MyAddressAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //Here you can fill your row view
         if (holder instanceof ViewHolder) {
-            final RatingModel model = getItem(position);
+            final GetAddressModel.Result model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
 
-            //genericViewHolder.txtName.setText(model.circleName);
+            genericViewHolder.txtAddressType.setText(model.getAddressType());
+            genericViewHolder.txtAddress.setText(model.getAddress());
         }
     }
 
@@ -62,28 +64,27 @@ public class MyAddressAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.mItemClickListener = mItemClickListener;
     }
 
-    private RatingModel getItem(int position) {
+    private GetAddressModel.Result getItem(int position) {
         return modelList.get(position);
     }
 
 
     public interface OnItemClickListener {
 
-        void onItemClick(View view, int position, RatingModel model);
+        void onItemClick(View view, int position, GetAddressModel.Result model);
 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        RelativeLayout RRDetails;
-
-
-        TextView txtName;
+        TextView txtAddressType;
+        TextView txtAddress;
 
         public ViewHolder(final View itemView) {
             super(itemView);
 
-        //  this.txtName=itemView.findViewById(R.id.txtName);
+        this.txtAddressType=itemView.findViewById(R.id.txtAddressType);
+        this.txtAddress=itemView.findViewById(R.id.txtAddress);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

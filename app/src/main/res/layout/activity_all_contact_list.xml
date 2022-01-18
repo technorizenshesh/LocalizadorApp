@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:background="@color/white"
+            android:id="@+id/RRtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
+
+            <RelativeLayout
+                android:id="@+id/RRback"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="match_parent"
+                >
+
+                <ImageView
+                    android:src="@drawable/cross_icon"
+                    android:layout_centerInParent="true"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    >
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:id="@+id/txtName"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:text="My Contact List"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/progresh_background"
+            android:elevation="6dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/purple_200"
+            android:indeterminateTintMode="src_atop"
+            android:padding="5dp"
+            android:visibility="gone"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/RRtoolbar"
+            android:id="@+id/recyclerMyAllContact"
+            android:layout_width="match_parent"
+            android:layout_above="@+id/RRShare"
+            android:layout_height="wrap_content"
+            />
+
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/RRShare"
+            android:background="@drawable/btn_bg"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:gravity="center"
+                android:text="Invite Friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

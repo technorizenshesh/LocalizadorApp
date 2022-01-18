@@ -52,7 +52,7 @@
                     android:id="@+id/txtCircle"
                     android:padding="@dimen/_5sdp"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:drawableRight="@drawable/drp_dwn_white"
+                    android:drawableRight="@drawable/baseline_keyboard_arrow_down"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp"
                     android:text="@string/my_circle"

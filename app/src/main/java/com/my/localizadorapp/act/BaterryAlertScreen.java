@@ -16,11 +16,10 @@ public class BaterryAlertScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_baterry_alert_screen);
 
-        binding.RRback.setOnClickListener(v -> {
-
+        binding.RRback.setOnClickListener(v ->
+        {
             onBackPressed();
-
         });
-
+        
     }
 }

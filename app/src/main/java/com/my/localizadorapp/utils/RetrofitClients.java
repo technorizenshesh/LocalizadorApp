@@ -12,13 +12,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClients {
 
-    private static final String BASE_URL ="https://myspotbh.com/localizador/webservice/";
+  //  private static final String BASE_URL ="https://myspotbh.com/localizador/webservice/";
+    private static final String BASE_URL ="https://technorizen.com/localizador/webservice/";
     private static RetrofitClients mInstance;
     private Retrofit retrofit;
 
     private RetrofitClients(){
-
+        final  HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
                 .connectTimeout(400, TimeUnit.SECONDS)
                 .readTimeout(400, TimeUnit.SECONDS).build();
 

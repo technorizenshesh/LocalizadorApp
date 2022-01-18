@@ -18,7 +18,7 @@
     <string name="emergency_contacts">Emergency Contacts</string>
     <string name="most_visited_places">Most Visited Places</string>
     <string name="unlock_premium">Unlock Premium</string>
-    <string name="satellite">Satellite</string>
+    <string name="unlock_premium_ads">Unlock Premium By Watching Ads</string>
     <string name="by_shaking_phone">By Shaking Phone</string>
     <string name="share_this_invite_code_with_your_friends_and_family">Share this invite code with your friends and family.</string>
     <string name="cwg_tcb">CWG-TCB</string>
@@ -39,5 +39,27 @@
     <string name="Leave_circle">Leave Circle</string>
     <string name="place">Place</string>
     <string name="current_location">Current Location</string>
+<!--
     <string name="place_api_key">AIzaSyC4Eg_qGdkZrcW-td6QsmJAk2g4nzPaat0</string>
+-->
+    <string name="place_api_key">AIzaSyCjm3GS5HaNLYXnxqqF_IhsufMpQgcx8T0</string>
+
+    <string name="buy_with_googlepay_button_content_description">Buy with Google Pay</string>
+
+
+    ////
+    <!-- Payment notification -->
+    <string name="channel_name">Payment Channel</string>
+    <string name="send_notification">Send Notification</string>
+    <string name="notification_title" translatable="false">Account top up</string>
+    <string name="notification_text">Your account balance in close to zero. Top it up now.</string>
+    <string name="pay_other_method">Top-up using a different method</string>
+
+    <!-- Checkout -->
+    <string name="googlepay_status_unavailable">Unfortunately, Google Pay is not available on this device.</string>
+    <string name="payments_show_name">Successfully received payment data for %s!</string>
+    <string name="gateway_replace_name_example">"Gateway name set to \"example\" - please modify Constants.java and replace it with your own gateway."</string>
+    <string name="checkout_item_description">Description</string>
+    <string name="go_to_setting">Go to Setting</string>
+
 </resources>

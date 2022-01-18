@@ -65,6 +65,7 @@
                     </RelativeLayout>
 
                     <ImageView
+                        android:id="@+id/imgUser"
                         android:layout_marginLeft="@dimen/_20sdp"
                         android:src="@drawable/user_nav"
                         android:layout_width="@dimen/_40sdp"
@@ -103,11 +104,6 @@
                         android:layout_height="wrap_content">
 
                     </TextView>
-
-
-
-
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -180,13 +176,10 @@
 
                     </TextView>
 
-
-
-
-
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/llPurchesitem"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
@@ -263,6 +256,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llChat"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
@@ -303,6 +297,7 @@
 
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_centerInParent="true"
@@ -338,6 +333,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/LlDriving"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
@@ -354,14 +350,14 @@
                     </ImageView>
 
                     <TextView
-                        android:gravity="center"
-                        android:textColor="@color/gray_new"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:textSize="@dimen/_16sdp"
-                        android:text="Driving Protection"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="39dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:text="Driving Protection"
+                        android:textColor="@color/gray_new"
+                        android:textSize="@dimen/_16sdp">
 
                     </TextView>
 
@@ -369,6 +365,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llEmergancy"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"

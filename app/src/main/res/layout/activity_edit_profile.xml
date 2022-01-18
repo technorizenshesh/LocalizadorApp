@@ -21,8 +21,8 @@
             android:indeterminateTint="@color/purple_200"
             android:indeterminateTintMode="src_atop"
             android:padding="5dp"
-            android:visibility="gone" />
-
+            android:visibility="gone"
+            />
 
         <RelativeLayout
             android:id="@+id/RRtoolbar"
@@ -104,6 +104,7 @@
                     >
 
                     <ImageView
+                        android:id="@+id/imgUser"
                         android:src="@drawable/user_nav"
                         android:layout_gravity="center"
                         android:layout_width="@dimen/_100sdp"
@@ -156,7 +157,7 @@
                     android:textColor="@color/gray_new"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:textSize="@dimen/_16sdp"
-                    android:text="91- 9770531114"
+                    android:text=""
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp">
 

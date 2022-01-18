@@ -7,8 +7,6 @@
     android:padding="@dimen/_5sdp"
     >
 
-
-
     <TextView
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_gravity="center"
@@ -16,68 +14,50 @@
         android:textSize="@dimen/_14sdp"
         android:text="Share for"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        >
     </TextView>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_marginTop="@dimen/_20sdp"
-        android:padding="@dimen/_5sdp"
-        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         >
 
-        <TextView
+        <RadioGroup
+            android:id="@+id/RGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Kilometers"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp">
+            >
 
-        </TextView>
+            <RadioButton
+                android:checked="true"
+                android:id="@+id/RRdr"
+                android:paddingLeft="@dimen/_10sdp"
+                android:textSize="@dimen/_16sdp"
+                android:text="kilometer"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
 
-        <ImageView
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/selected_radio_btn"
-            android:layout_width="@dimen/_17sdp"
-            android:layout_height="@dimen/_17sdp">
+            </RadioButton>
 
-        </ImageView>
+            <RadioButton
+                android:id="@+id/RRdr1"
+                android:paddingLeft="@dimen/_10sdp"
+                android:textSize="@dimen/_16sdp"
+                android:text="Miles"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
 
+            </RadioButton>
 
+        </RadioGroup>
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/RRkg"
-        android:padding="@dimen/_5sdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <TextView
-            android:layout_gravity="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp"
-            android:text="Kilometers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </TextView>
-
-        <ImageView
-            android:layout_width="@dimen/_15sdp"
-            android:layout_height="@dimen/_15sdp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/unselected_radio_btn">
-
-        </ImageView>
-
-
-
-    </RelativeLayout>
-
+    </LinearLayout>
 
 </LinearLayout>

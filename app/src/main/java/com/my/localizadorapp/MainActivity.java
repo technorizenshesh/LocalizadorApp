@@ -11,37 +11,46 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.my.localizadorapp.act.HomeActivity;
-import com.my.localizadorapp.act.LoginActivity;
-import com.my.localizadorapp.act.MapsActivity;
 import com.my.localizadorapp.act.SignUpActivity;
 import com.my.localizadorapp.utils.SessionManager;
 
-public class MainActivity extends AppCompatActivity implements
-        LocationListener,
-        ResultCallback<LocationSettingsResult> {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements LocationListener,
+        ResultCallback<LocationSettingsResult>
+{
 
     public static final int RequestPermissionCode = 1;
     SessionManager sessionManager;
+    private RelativeLayout googlePayButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sessionManager=new SessionManager(MainActivity.this);
+      sessionManager=new SessionManager(MainActivity.this);
+        MobileAds.initialize(this, initializationStatus -> {
 
-        if (permissioncheck()) {
+
+        });
+        if (permissioncheck()){
             finds();
         } else {
-
            requestPermission();
         }
 
@@ -55,10 +64,13 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void requestPermission() {
+
         ActivityCompat.requestPermissions(MainActivity.this, new String[]
                 {
                         android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                        android.Manifest.permission.ACCESS_FINE_LOCATION
+                        android.Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.READ_CONTACTS,
+                        Manifest.permission.WRITE_CONTACTS,
 
                 }, RequestPermissionCode);
 
@@ -67,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             requestPermission();
         }
+
     }
 
     private void finds() {
@@ -89,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements
                     finish();
                 }
             }
-            
         }, 3000);
     }
 
@@ -98,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements
 
     }
     @Override
-    public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
+    public void onResult(@NonNull LocationSettingsResult locationSettingsResult){
 
     }
 

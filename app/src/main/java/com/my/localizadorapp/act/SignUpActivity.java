@@ -8,11 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.my.localizadorapp.Chat.SessionManagerTwo;
 import com.my.localizadorapp.GPSTracker;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivitySignUpBinding;
 import com.my.localizadorapp.model.SignUpModel;
+import com.my.localizadorapp.utils.Constant;
 import com.my.localizadorapp.utils.RetrofitClients;
 import com.my.localizadorapp.utils.SessionManager;
 
@@ -48,32 +51,20 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         binding.RRContinue.setOnClickListener(v -> {
-
              Mobile = binding.edtMobile.getText().toString();
-
             if(Mobile.length()>=10 )
-            {
-
-                if (sessionManager.isNetworkAvailable()) {
-
+            { if (sessionManager.isNetworkAvailable()) {
                     binding.progressBar.setVisibility(View.VISIBLE);
-
                     ApiMethodlogin();
-
                 }else {
-
                     Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
                 }
-               // startActivity(new Intent(SignUpActivity.this,OtpScreenActivity.class).putExtra("mobile",Mobile));
-
             }else
             {
                 Toast.makeText(this, "Please Valid Mobile Number", Toast.LENGTH_SHORT).show();
             }
-
            /*Intent i = new Intent(LoginActivity.this, MapsActivity.class);
             startActivity(i);*/
-
         });
 
         binding.txtLogin.setOnClickListener(v -> {
@@ -97,17 +88,24 @@ public class SignUpActivity extends AppCompatActivity {
                     binding.progressBar.setVisibility(View.GONE);
 
                     SignUpModel myclass= response.body();
+                    String responseString = new Gson().toJson(response.body());
 
                     String status = myclass.status;
                     String message = myclass.message;
 
                     if (status.equalsIgnoreCase("1")){
 
+                        SessionManagerTwo.writeString(SignUpActivity.this, Constant.USER_INFO, responseString);
+
                         String UserId = myclass.result.id;
                         String UserName = myclass.result.userName;
 
+                        String UserImage = myclass.result.image;
+
                         sessionManager.saveUserId(UserId);
                         sessionManager.saveUserName(UserName);
+
+                        Preference.save(SignUpActivity.this, Preference.key_image,UserImage);
 
                         Preference.save(SignUpActivity.this,Preference.KEY_USER_ID,UserId);
                         Preference.save(SignUpActivity.this,Preference.KEY_UserName,UserName);

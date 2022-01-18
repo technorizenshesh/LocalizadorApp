@@ -1,16 +1,17 @@
 package com.my.localizadorapp.act;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import com.braintreepayments.cardform.view.CardForm;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityBenifitActiviityBinding;
@@ -30,7 +31,7 @@ public class BenifitActiviity extends AppCompatActivity {
 
         Intent intent=getIntent();
 
-        if(intent !=null)
+        if(intent != null)
         {
             name=intent.getStringExtra("Name").toString();
             binding.txtName.setText(name);
@@ -42,11 +43,12 @@ public class BenifitActiviity extends AppCompatActivity {
 
         binding.RRtrack.setOnClickListener(v -> {
 
-            AlertDaliogRecharge();
+          //  startActivity(new Intent(BenifitActiviity.this, NewActiv.class));
+           startActivity(new Intent(BenifitActiviity.this,CheckoutActivity.class));
+       //     AlertDaliogRecharge();
 
         });
     }
-
 
     private void AlertDaliogRecharge() {
 
@@ -71,13 +73,14 @@ public class BenifitActiviity extends AppCompatActivity {
                 .postalCodeRequired(false)
                 .mobileNumberRequired(false)
                 //.mobileNumberExplanation("SMS is required on this number")
-                .setup(BenifitActiviity .this);
+                .setup(BenifitActiviity.this);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 alertDialog.dismiss();
+
             }
         });
 
@@ -87,6 +90,7 @@ public class BenifitActiviity extends AppCompatActivity {
 
         alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+
     }
 
 }

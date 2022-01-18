@@ -35,7 +35,7 @@ public class PurchaseItemsActivityDetails extends AppCompatActivity {
     private AlertDialog alertDialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_purchase_items_details);
 

@@ -19,8 +19,10 @@ public static String KEY_address = "address";
 public static String KEY_battery = "batery";
 public static String KEY_CircleName = "circleName";
 public static String KEY_CircleCode = "circleCode";
-public static String KEY_CircleCount = "circleCode";
+public static String KEY_CircleCount = "circleCount";
 public static String key_switch_shift_change = "shift_change";
+public static String key_On_off = "key_On_off";
+public static String key_image = "image";
 
 
 
