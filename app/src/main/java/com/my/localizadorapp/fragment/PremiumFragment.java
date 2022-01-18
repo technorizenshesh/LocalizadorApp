@@ -19,7 +19,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.my.localizadorapp.MainActivity;
 import com.my.localizadorapp.R;
-import com.my.localizadorapp.act.BenifitActiviity;
+import com.my.localizadorapp.act.CheckoutActivity;
 import com.my.localizadorapp.act.NotificationScree;
 import com.my.localizadorapp.act.PrivacyPolicy;
 import com.my.localizadorapp.act.TermsActivity;
@@ -44,19 +44,22 @@ public class PremiumFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.premium_fragment, container, false);
 
         binding.llOne.setOnClickListener(v -> {
-            Intent i = new Intent(getActivity(), BenifitActiviity.class);
+           // Intent i = new Intent(getActivity(), BenifitActiviity.class);
+            Intent i = new Intent(getActivity(), CheckoutActivity.class);
             i.putExtra("Name","1 Week Subscription Plan");
             startActivity(i);
         });
 
         binding.llTwo.setOnClickListener(v -> {
-            Intent i = new Intent(getActivity(), BenifitActiviity.class);
+           // Intent i = new Intent(getActivity(), BenifitActiviity.class);
+            Intent i = new Intent(getActivity(), CheckoutActivity.class);
             i.putExtra("Name","1 Month Subscription Plan");
             startActivity(i);
         });
 
         binding.llThree.setOnClickListener(v -> {
-            Intent i = new Intent(getActivity(), BenifitActiviity.class);
+          //  Intent i = new Intent(getActivity(), BenifitActiviity.class);
+            Intent i = new Intent(getActivity(), CheckoutActivity.class);
             i.putExtra("Name","1 Year Subscription Plan");
             startActivity(i);
         });

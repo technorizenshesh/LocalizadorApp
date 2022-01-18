@@ -66,7 +66,6 @@ public class CircleDetailsActivity extends AppCompatActivity {
 
         binding.txtCircleName.setText(CircleName);
 
-
         binding.RRUserProfile.setOnClickListener(v -> {
 
             startActivity(new Intent(CircleDetailsActivity.this, MyAccountActivity.class));

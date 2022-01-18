@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityMyAccountBinding;
@@ -88,6 +89,12 @@ public class MyAccountActivity extends AppCompatActivity {
 
                         binding.txtName1.setText(""+UserName);
                         binding.txtMobile.setText("91-"+Mobile);
+
+                        if(!myclass.result.image.equalsIgnoreCase(""))
+                        {
+                            Glide.with(MyAccountActivity.this).load(myclass.result.image).circleCrop().into(binding.imgUser);
+                        }
+
 
                         Toast.makeText(MyAccountActivity.this, message, Toast.LENGTH_SHORT).show();
 

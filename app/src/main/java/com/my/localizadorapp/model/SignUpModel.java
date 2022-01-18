@@ -14,6 +14,30 @@ public class SignUpModel {
     @Expose
     public String status;
 
+    public SignUpdataModel.Result getResult() {
+        return result;
+    }
+
+    public void setResult(SignUpdataModel.Result result) {
+        this.result = result;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public class Result {
 
         @SerializedName("id")

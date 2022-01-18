@@ -14,12 +14,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.Gson;
+import com.my.localizadorapp.Chat.DataManager;
+import com.my.localizadorapp.Chat.SessionManagerTwo;
 import com.my.localizadorapp.GPSTracker;
 import com.my.localizadorapp.MainActivity;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityLoginBinding;
 import com.my.localizadorapp.model.SignUpModel;
+import com.my.localizadorapp.utils.Constant;
 import com.my.localizadorapp.utils.RetrofitClients;
 import com.my.localizadorapp.utils.SessionManager;
 
@@ -86,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void ApiMethodlogin() {
-
         Call<SignUpModel> call = RetrofitClients
                 .getInstance()
                 .getApi()
@@ -95,24 +98,29 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<SignUpModel> call, Response<SignUpModel> response) {
                 try {
-
                     binding.progressBar.setVisibility(View.GONE);
 
                     SignUpModel myclass= response.body();
+                    String responseString = new Gson().toJson(response.body());
 
                     String status = myclass.status;
                     String message = myclass.message;
 
                     if (status.equalsIgnoreCase("1")){
 
+                       SessionManagerTwo.writeString(LoginActivity.this, Constant.USER_INFO, responseString);
+
                         String UserId = myclass.result.id;
                         String UserName = myclass.result.userName;
+                        String UserImage = myclass.result.image;
 
                         sessionManager.saveUserId(UserId);
                         sessionManager.saveUserName(UserName);
 
                         Preference.save(LoginActivity.this,Preference.KEY_USER_ID,UserId);
                         Preference.save(LoginActivity.this,Preference.KEY_UserName,UserName);
+
+                        Preference.save(LoginActivity.this, Preference.key_image,UserImage);
 
                         Preference.save(LoginActivity.this,Preference.KEY_CircleName,myclass.result.circleName);
                         Preference.save(LoginActivity.this,Preference.KEY_CircleCode,myclass.result.code);

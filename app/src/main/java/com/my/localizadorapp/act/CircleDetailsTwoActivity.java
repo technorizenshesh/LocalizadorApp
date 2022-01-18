@@ -28,8 +28,11 @@ import com.my.localizadorapp.model.UpdatedCircleModel;
 import com.my.localizadorapp.utils.RetrofitClients;
 import com.my.localizadorapp.utils.SessionManager;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -75,7 +78,7 @@ public class CircleDetailsTwoActivity extends AppCompatActivity {
 
                binding.progressBar.setVisibility(View.VISIBLE);
 
-               //ApiDeleteCircle();
+               Apidelete_member();
 
            }else {
 
@@ -257,6 +260,54 @@ public class CircleDetailsTwoActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<MemberListModel> call, Throwable t) {
+                binding.progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    public void Apidelete_member() {
+
+        String User_id = Preference.get(CircleDetailsTwoActivity.this,Preference.KEY_USER_ID);
+        String Code = Preference.get(CircleDetailsTwoActivity.this,Preference.KEY_CircleCode);
+
+        Call<ResponseBody> call = RetrofitClients
+                .getInstance()
+                .getApi()
+                .delete_member(User_id,Code);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+
+                    binding.progressBar.setVisibility(View.GONE);
+
+                    String responseString = response.body().string();
+
+                    JSONObject jsonObject = new JSONObject(responseString);
+
+                    String message=jsonObject.getString("message");
+
+                    if(jsonObject.getString("message").equalsIgnoreCase("1"))
+                    {
+
+                    Toast.makeText(CircleDetailsTwoActivity.this, message, Toast.LENGTH_SHORT).show();
+
+                     startActivity(new Intent(CircleDetailsTwoActivity.this,HomeActivity.class));
+
+                    }else
+                    {
+                        Toast.makeText(CircleDetailsTwoActivity.this, message, Toast.LENGTH_SHORT).show();
+
+                    }
+
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 binding.progressBar.setVisibility(View.GONE);
             }
         });

@@ -125,6 +125,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/llManageMeber"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
@@ -143,20 +144,18 @@
                     </ImageView>
 
                     <TextView
-
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
                         android:text="Manage Members and Circles"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
-
                     </TextView>
-
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/llTodolist"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
@@ -231,6 +230,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llMyDevice"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
@@ -248,7 +248,6 @@
                     </ImageView>
 
                     <TextView
-
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
@@ -294,6 +293,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/llInvitation"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
@@ -312,20 +312,19 @@
                     </ImageView>
 
                     <TextView
-
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
                         android:text="Incoming Invitations"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
-
                     </TextView>
 
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/llEmergancy"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
@@ -366,6 +365,7 @@
                 </View>
 
                 <LinearLayout
+                    android:id="@+id/RRMap"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
@@ -500,6 +500,7 @@
                 </LinearLayout>
 
                 <View
+                    android:visibility="gone"
                     android:background="@color/gray_new"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
@@ -508,6 +509,7 @@
                 </View>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
@@ -521,22 +523,19 @@
                         android:src="@drawable/support"
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_25sdp">
-
                     </ImageView>
 
                     <TextView
-
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"
                         android:text="Map Mode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
-
                     </TextView>
 
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
@@ -578,6 +577,7 @@
 
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="horizontal"

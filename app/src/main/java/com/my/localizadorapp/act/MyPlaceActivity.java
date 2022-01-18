@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -62,12 +63,24 @@ public class MyPlaceActivity extends AppCompatActivity implements OnMapReadyCall
     int PERMISSION_ID = 44;
     SessionManager sessionManager;
 
+    String Type="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_my_place);
 
         sessionManager =new SessionManager(MyPlaceActivity.this);
+
+        Intent intent1=getIntent();
+
+        if(intent1!=null)
+        {
+            Type=intent1.getStringExtra("Type").toString();
+
+            binding.edtType.setText(Type);
+
+        }
 
         if (checkPermissions()) {
             if (isLocationEnabled()) {
@@ -83,18 +96,29 @@ public class MyPlaceActivity extends AppCompatActivity implements OnMapReadyCall
 
         binding.RRsave.setOnClickListener(v -> {
 
-            finish();
-            //String edtType
-         /*   if (sessionManager.isNetworkAvailable()) {
+            String AddressType=binding.edtType.getText().toString();
+            String Address=binding.tvAddress.getText().toString();
 
-                binding.progressBar.setVisibility(View.VISIBLE);
+            if(AddressType.equalsIgnoreCase(""))
+            {
+                Toast.makeText(MyPlaceActivity.this, "Please Enter AddressType", Toast.LENGTH_SHORT).show();
 
-                ApiMethodAddAddress("","");
+            }else if(AddressType.equalsIgnoreCase(""))
+            {
+                Toast.makeText(MyPlaceActivity.this, "Please Enter Address..", Toast.LENGTH_SHORT).show();
 
-            }else {
-                Toast.makeText(MyPlaceActivity.this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
-            }*/
+            }else
+            {
+                if (sessionManager.isNetworkAvailable()) {
 
+                    binding.progressBar.setVisibility(View.VISIBLE);
+
+                    ApiMethodAddAddress(AddressType,Address);
+
+                }else {
+                    Toast.makeText(MyPlaceActivity.this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
+                }
+            }
         });
 
         binding.RRback.setOnClickListener(v -> {
@@ -221,10 +245,13 @@ public class MyPlaceActivity extends AppCompatActivity implements OnMapReadyCall
 
         String UserId = Preference.get(MyPlaceActivity.this,Preference.KEY_USER_ID);
 
+        String lat= String.valueOf(latitude);
+        String lon= String.valueOf(longitude);
+
         Call<AddAddressModel> call = RetrofitClients
                 .getInstance()
                 .getApi()
-                .Api_add_address(UserId,AddressType,Addreess);
+                .Api_add_address(UserId,AddressType,Addreess,lat,lon);
         call.enqueue(new Callback<AddAddressModel>() {
             @Override
             public void onResponse(Call<AddAddressModel> call, Response<AddAddressModel> response) {
@@ -239,7 +266,7 @@ public class MyPlaceActivity extends AppCompatActivity implements OnMapReadyCall
 
                     if (status.equalsIgnoreCase("1")){
 
-
+                              finish();
                     }else {
 
                         Toast.makeText(MyPlaceActivity.this, message, Toast.LENGTH_SHORT).show();
@@ -257,6 +284,5 @@ public class MyPlaceActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
     }
-
 
 }

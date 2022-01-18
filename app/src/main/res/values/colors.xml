@@ -13,4 +13,6 @@
     <color name="red">#F11A1A</color>
     <color name="gray_light">#F2F2F2</color>
 
+    <color name="price_button_grey">#555</color>
+
 </resources>

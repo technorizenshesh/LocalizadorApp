@@ -30,22 +30,26 @@ public class PremiumActivity extends AppCompatActivity {
         binding.imgCross.setOnClickListener(v -> {
 
             onBackPressed();
+
         });
 
         binding.llOne.setOnClickListener(v -> {
-            Intent i = new Intent(PremiumActivity.this, BenifitActiviity.class);
+            //Intent i = new Intent(PremiumActivity.this, BenifitActiviity.class);
+            Intent i = new Intent(PremiumActivity.this, CheckoutActivity.class);
             i.putExtra("Name","1 Week Subscription Plan");
             startActivity(i);
         });
 
         binding.llTwo.setOnClickListener(v -> {
-            Intent i = new Intent(PremiumActivity.this, BenifitActiviity.class);
+           // Intent i = new Intent(PremiumActivity.this, BenifitActiviity.class);
+            Intent i = new Intent(PremiumActivity.this, CheckoutActivity.class);
             i.putExtra("Name","1 Month Subscription Plan");
             startActivity(i);
         });
 
         binding.llThree.setOnClickListener(v -> {
-            Intent i = new Intent(PremiumActivity.this, BenifitActiviity.class);
+         //   Intent i = new Intent(PremiumActivity.this, BenifitActiviity.class);
+           Intent i = new Intent(PremiumActivity.this, CheckoutActivity.class);
             i.putExtra("Name","1 Year Subscription Plan");
             startActivity(i);
         });
@@ -65,20 +69,20 @@ public class PremiumActivity extends AppCompatActivity {
 
     private void setAdapter() {
 
-        this.modelList.add(new RatingModel("Corn"));
-        this.modelList.add(new RatingModel("Tomotoes"));
-        mAdapter = new RatingPrimiumAdapter(PremiumActivity.this,modelList);
-        binding.recyclerRating.setHasFixedSize(true);
-        // use a linear layout manager
-        binding.recyclerRating.setLayoutManager(new LinearLayoutManager(PremiumActivity.this, LinearLayoutManager.HORIZONTAL, true));
-        binding.recyclerRating.setAdapter(mAdapter);
-        mAdapter.SetOnItemClickListener(new RatingPrimiumAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position, RatingModel model) {
+    this.modelList.add(new RatingModel("Corn"));
+    this.modelList.add(new RatingModel("Tomotoes"));
+    mAdapter = new RatingPrimiumAdapter(PremiumActivity.this,modelList);
+    binding.recyclerRating.setHasFixedSize(true);
+    // use a linear layout manager
+    binding.recyclerRating.setLayoutManager(new LinearLayoutManager(PremiumActivity.this, LinearLayoutManager.HORIZONTAL, true));
+    binding.recyclerRating.setAdapter(mAdapter);
+    mAdapter.SetOnItemClickListener(new RatingPrimiumAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(View view, int position, RatingModel model) {
 
-            }
-        });
-    }
+        }
+    });
 
+}
 
 }

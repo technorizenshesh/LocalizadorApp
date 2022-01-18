@@ -15,12 +15,14 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
+import com.my.localizadorapp.Chat.SessionManagerTwo;
 import com.my.localizadorapp.GPSTracker;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityCircleAddScreenBinding;
 import com.my.localizadorapp.model.SignUpModel;
 import com.my.localizadorapp.model.SignUpdataModel;
+import com.my.localizadorapp.utils.Constant;
 import com.my.localizadorapp.utils.RetrofitClients;
 import com.my.localizadorapp.utils.SessionManager;
 
@@ -42,6 +44,7 @@ public class CircleAddScreen extends AppCompatActivity {
     String longitude="";
 
     String Battery="";
+    private String token="";
 
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -50,11 +53,8 @@ public class CircleAddScreen extends AppCompatActivity {
             int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
             float batteryPct = level * 100 / (float) scale;
             Battery = String.valueOf(batteryPct);
-
         }
     };
-    private String token="";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +71,8 @@ public class CircleAddScreen extends AppCompatActivity {
         //Gps Lat Long
         gpsTracker=new GPSTracker(this);
         if(gpsTracker.canGetLocation()){
-            latitude ="23.2599";
-            longitude ="77.4126";
-
+            latitude = String.valueOf(gpsTracker.getLatitude());
+            longitude = String.valueOf(gpsTracker.getLongitude());
            // latitude = String.valueOf(gpsTracker.getLatitude());
           //  longitude = String.valueOf(gpsTracker.getLongitude());
 
@@ -159,7 +158,12 @@ public class CircleAddScreen extends AppCompatActivity {
                         sessionManager.saveUserId(UserId);
                         sessionManager.saveUserName(UserName);
 
-                         Preference.save(CircleAddScreen.this,Preference.KEY_USER_ID,UserId);
+                        ///////
+                        String responseString = new Gson().toJson(response.body());
+                        SessionManagerTwo.writeString(CircleAddScreen.this, Constant.USER_INFO, responseString);
+                       ///////
+
+                        Preference.save(CircleAddScreen.this,Preference.KEY_USER_ID,UserId);
                          Preference.save(CircleAddScreen.this,Preference.KEY_UserName,UserName);
                          Preference.save(CircleAddScreen.this,Preference.KEY_CircleCode,UserCode);
 

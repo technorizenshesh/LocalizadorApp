@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    tools:ignore="MissingDefaultResource"
+    >
+
+    <RelativeLayout
+        android:id="@+id/RRUserProfile"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:padding="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:id="@+id/RRuser"
+            android:background="@drawable/circle_new"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:src="@drawable/bg_yel"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                >
+
+            </ImageView>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/RRuser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtAddressType"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                android:text="Home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/txtAddress"
+                android:layout_toRightOf="@+id/RRuser"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textSize="@dimen/_13sdp"
+                android:text="lig indore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:src="@drawable/arr_right"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            >
+        </ImageView>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

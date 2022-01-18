@@ -8,7 +8,6 @@
     android:background="@color/white"
     >
 
-
    <ImageView
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_gravity="center"
@@ -16,7 +15,6 @@
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
         >
-
     </ImageView>
 
     <TextView
@@ -54,9 +52,6 @@
         android:layout_height="@dimen/_50sdp">
 
     </EditText>
-
-
-
 
     <RelativeLayout
         android:layout_marginTop="@dimen/_10sdp"

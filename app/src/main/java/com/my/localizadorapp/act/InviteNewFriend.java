@@ -29,6 +29,18 @@ public class InviteNewFriend extends AppCompatActivity {
            onShareClicked();
        });
 
+       binding.RRShare1.setOnClickListener(v -> {
+           onShareClicked();
+       });
+
+       binding.llMyCotact.setOnClickListener(v -> {
+         startActivity(new Intent(InviteNewFriend.this,AllContactList.class));
+       });
+
+       binding.llMyCotact1.setOnClickListener(v -> {
+         startActivity(new Intent(InviteNewFriend.this,AllContactList.class));
+       });
+
        binding.RRback.setOnClickListener(v -> {
           onBackPressed();
        });
@@ -48,4 +60,5 @@ public class InviteNewFriend extends AppCompatActivity {
         startActivity(Intent.createChooser(intent, "Share Link"));
 
     }
+
 }

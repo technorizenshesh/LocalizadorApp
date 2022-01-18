@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <LinearLayout
+        android:weightSum="3"
+        android:padding="@dimen/_5sdp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+
+        <LinearLayout
+            android:id="@+id/llAuto"
+            android:layout_margin="3sp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:id="@+id/RRNORMAL"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/map_border"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                >
+
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:src="@drawable/normal_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    >
+                </ImageView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtOne"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="NORMAL"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llStreet"
+            android:layout_margin="3sp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:id="@+id/RRTERRAIN"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/map_border2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                >
+
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:src="@drawable/street"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    >
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtTwo"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="TERRAIN"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_10sdp">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llSatellite"
+            android:layout_margin="3sp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:id="@+id/RRSATELLITE"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/map_border2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                >
+
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:src="@drawable/map_satelite"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_80sdp"
+                    >
+
+                </ImageView>
+
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/txtThree"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="SATELLITE"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_10sdp">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</layout>

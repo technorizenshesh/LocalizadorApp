@@ -8,12 +8,16 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.os.BatteryManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -25,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -58,13 +63,29 @@ public class MyService extends Service {
     private Timer mTimer = null; // timer handling
    // VeryCycleProviderInterface apiInterface;
 
-    public MyService() {}
+      String Battery="";
+
+    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context ctxt, Intent intent) {
+            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+            int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+            float batteryPct = level * 100 / (float) scale;
+            Battery = String.valueOf(batteryPct);
+        }
+    };
+
+    public MyService()
+    {
+
+    }
 
     @Override
     public void onCreate() {
         //apiInterface = ApiClient.getClient().create(VeryCycleProviderInterface.class);
         requestNewLocationData();
 
+      registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         String channelId = "channel-01";
 
@@ -106,8 +127,10 @@ public class MyService extends Service {
                 .setCategory(Notification.CATEGORY_SERVICE)
                 .build();
         startForeground(2, notification);
-
+        
     }
+
+
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -156,6 +179,7 @@ public class MyService extends Service {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         mFusedLocationClient.getLastLocation().addOnCompleteListener(
                 new OnCompleteListener<Location>() {
                     @Override
@@ -174,7 +198,7 @@ public class MyService extends Service {
 //                            sendBroadcast(intent1);
                              Log.e("Location====", String.valueOf(location.getLatitude()));
 
-                            updateProviderLatLon(String.valueOf(location.getLongitude()),String.valueOf(location.getLongitude()),"80.0%");
+                            updateProviderLatLon(String.valueOf(location.getLongitude()),String.valueOf(location.getLongitude()),Battery);
 
                            // updateProviderLatLon(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), DataManager.getInstance().getUserData(getApplicationContext()).result.id);
 
@@ -216,7 +240,7 @@ public class MyService extends Service {
 
                     if (status.equalsIgnoreCase("1")) {
 
-                        //Toast.makeText(MyService.this, "Updated Services", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(MyService.this, "Updated Services", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
                     }
@@ -288,7 +312,6 @@ public class MyService extends Service {
         AlarmManager mgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         mgr.setRepeating(AlarmManager.RTC_WAKEUP, ct, 1 * 1000, restartServicePI);
 
-
     }
 
     @Override
@@ -298,7 +321,5 @@ public class MyService extends Service {
             this.stopSelf();
         }
     }
-
-
 
 }
