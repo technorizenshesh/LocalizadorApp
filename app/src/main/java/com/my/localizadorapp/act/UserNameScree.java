@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityUserNameScreeBinding;
 
@@ -20,6 +21,8 @@ public class UserNameScree extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_user_name_scree);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
 
         Intent intent =getIntent();
 

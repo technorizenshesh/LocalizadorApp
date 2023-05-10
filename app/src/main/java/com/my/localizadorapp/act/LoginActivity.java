@@ -1,7 +1,8 @@
 package com.my.localizadorapp.act;
 
 
-import static com.my.localizadorapp.act.CircleAddScreen.getToken;
+
+import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.my.localizadorapp.Chat.SessionManagerTwo;
 import com.my.localizadorapp.GPSTracker;
@@ -42,12 +46,30 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
         sessionManager =new SessionManager(LoginActivity.this);
 
         try {
-            token=  getToken(this);
-        }catch (Exception e){
+            try {
+                FirebaseApp.initializeApp(this);
+
+                FirebaseMessaging.getInstance().getToken()
+                        .addOnCompleteListener(task -> {
+                            if (!task.isSuccessful()) {
+                                Log.e(TAG, "onCreate:FirebaseMessaging "+task.getException().toString());
+
+                                return;
+                            }
+                            token = task.getResult();
+                            Log.e(TAG, "onCreate:FirebaseMessaging "+token);
+
+                        });
+
+            }catch (Exception e){
+                Log.e(TAG, "onCreate:FirebaseMessaging "+e.toString());
+
+            }        }catch (Exception e){
 
         }
 
@@ -64,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
 
              Mobile = binding.edtMobile.getText().toString();
 
-            if(Mobile.length()>=10 )
+            if(Mobile.length()>=6 )
             {
                 if (sessionManager.isNetworkAvailable()) {
 

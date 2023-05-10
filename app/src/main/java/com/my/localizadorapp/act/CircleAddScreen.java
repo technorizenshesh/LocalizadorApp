@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
@@ -63,11 +64,26 @@ public class CircleAddScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_circle_add_screen);
-
-       registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
+        registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
        try {
-         token=  getToken(this);
+           FirebaseApp.initializeApp(this);
+
+           FirebaseMessaging.getInstance().getToken()
+                   .addOnCompleteListener(task -> {
+                       if (!task.isSuccessful()) {
+                           Log.e(TAG, "onCreate:FirebaseMessaging "+task.getException().toString());
+
+                           return;
+                       }
+                     token = task.getResult();
+                       Log.e(TAG, "onCreate:FirebaseMessaging "+token);
+
+                   });
+
        }catch (Exception e){
+           Log.e(TAG, "onCreate:FirebaseMessaging "+e.toString());
 
        }
 
@@ -133,27 +149,11 @@ public class CircleAddScreen extends AppCompatActivity {
         });
     }
 
-    static   String getToken(Context context) {
-        final String[] tokenr = new String[1];
-             FirebaseApp.initializeApp(context);
 
-            FirebaseMessaging.getInstance().getToken()
-                    .addOnCompleteListener(task -> {
-                        if (!task.isSuccessful()) {
-                          //  Log.w(TAG, "" + getString(R.string.fetching_fcm_token_failed), task.getException());
-                            return;
-                        }
-                        // Get new FCM registration token
-                         tokenr[0] = task.getResult();
-
-                    });
-
-        return tokenr[0];
-    }
 
     public void ApiMethodSignUp()
     {
-        Log.e( "Tokennnn" ,token);
+        Log.e( "Tokennnn" ,""+token);
 
         Call<SignUpdataModel> call = RetrofitClients.getInstance().getApi()
                 .Api_signup(UserName,CircleName,Mobile,token,latitude,longitude,"1234","yes",Battery);

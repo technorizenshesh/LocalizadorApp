@@ -8,14 +8,17 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.StateSet;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
@@ -23,6 +26,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.my.localizadorapp.GPSTracker;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
@@ -39,7 +51,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
-
     Fragment fragment;
     ActivityHomeNavBinding binding;
     private View promptsView;
@@ -53,6 +64,10 @@ public class HomeActivity extends AppCompatActivity {
     GPSTracker gpsTracker;
 
     String Battery="";
+    private static final String TAG = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
+    private RewardedAd rewardedAd;
+    private boolean isLoading = false;
 
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -232,6 +247,107 @@ public class HomeActivity extends AppCompatActivity {
 
         fragment = new HomeFragment();
         loadFragment(fragment);
+
+        MobileAds.initialize(this, initializationStatus -> {
+            loadRewardedAd();
+
+        });
+    }
+
+    private void loadRewardedAd() {
+        if (rewardedAd == null) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            RewardedAd.load(
+                    getApplicationContext(),
+                    AD_UNIT_ID,
+                    adRequest,
+                    new RewardedAdLoadCallback() {
+                        @Override
+                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                            // Handle the error.
+                            Log.d(StateSet.TAG, StateSet.TAG + loadAdError.getMessage());
+                            rewardedAd = null;
+                            //  Toast.makeText(HomeActivity.this, "onAdFailedToLoad", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onAdLoaded(@NonNull RewardedAd rd) {
+                            rewardedAd = rd;
+                            Log.d(StateSet.TAG, StateSet.TAG + "onAdLoaded");
+                            if (!isLoading) {
+
+                                 showRewardedVideo();
+                            }
+                            //  Toast.makeText(HomeActivity.this, "onAdLoaded", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+    private void showRewardedVideo() {
+
+        if (rewardedAd == null) {
+            Log.d(TAG, TAG + "The rewarded ad wasn't ready yet.");
+            Toast.makeText(this, "The rewarded ad wasn't ready yet.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // showVideoButton.setVisibility(View.INVISIBLE);
+        isLoading = true;
+
+        rewardedAd.setFullScreenContentCallback(
+                new FullScreenContentCallback() {
+                    @Override
+                    public void onAdShowedFullScreenContent() {
+                        // Called when ad is shown.
+                        Log.d(TAG, TAG + "onAdShowedFullScreenContent");
+                       /* Toast.makeText(HomeActivity.this, "onAdShowedFullScreenContent", Toast.LENGTH_SHORT)
+                                .show();*/
+                    }
+
+                    @Override
+                    public void onAdFailedToShowFullScreenContent(AdError adError) {
+                        // Called when ad fails to show.
+                        Log.d(TAG, TAG + "onAdFailedToShowFullScreenContent");
+                        // Don't forget to set the ad reference to null so you
+                        // don't show the ad a second time.
+                        rewardedAd = null;
+                       /* Toast.makeText(
+                                HomeActivity.this, "onAdFailedToShowFullScreenContent", Toast.LENGTH_SHORT)
+                                .show();*/
+                    }
+
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+                        // Called when ad is dismissed.
+                        // Don't forget to set the ad reference to null so you
+                        // don't show the ad a second time.
+                        rewardedAd = null;
+                        Log.d(TAG, TAG + "onAdDismissedFullScreenContent");
+                        // Toast.makeText(HomeActivity.this, "onAdDismissedFullScreenContent", Toast.LENGTH_SHORT).show();
+                        // Preload the next rewarded ad.
+
+                        loadRewardedAd();
+
+                    }
+                });
+        // Activity activityContext = getActivity();
+        rewardedAd.show(
+                this,
+                new OnUserEarnedRewardListener() {
+                    @Override
+                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                        // Handle the reward.
+                        Log.d("TAG", TAG + "The user earned the reward.");
+                        int rewardAmount = rewardItem.getAmount();
+                        String rewardType = rewardItem.getType();
+                        //session.setSWIPECount(session.getSWIPECount() + 5);
+                        //  RewardCollectedApi
+                        //     ("5");
+                        // TastyToast.makeText(getContext(), "5 Swipes Added", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                        //getMyScore("",coi__n);
+                        loadRewardedAd();
+                    }
+
+                });
     }
 
 

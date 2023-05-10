@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 import com.my.localizadorapp.Chat.SessionManagerTwo;
 import com.my.localizadorapp.GPSTracker;
@@ -38,7 +40,13 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_sign_up);
+        MobileAds.initialize(this, initializationStatus -> {
+            //loadRewardedAd();
 
+        });
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
         sessionManager =new SessionManager(SignUpActivity.this);
 
         //Gps Lat Long
@@ -52,8 +60,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         binding.RRContinue.setOnClickListener(v -> {
              Mobile = binding.edtMobile.getText().toString();
-            if(Mobile.length()>=10 )
-            { if (sessionManager.isNetworkAvailable()) {
+            if(Mobile.length()>=6)
+            {
+                if (sessionManager.isNetworkAvailable()) {
                     binding.progressBar.setVisibility(View.VISIBLE);
                     ApiMethodlogin();
                 }else {

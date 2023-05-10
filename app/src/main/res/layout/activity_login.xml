@@ -23,6 +23,7 @@
             android:visibility="gone" />
 
         <ImageView
+             android:id="@+id/logi"
             android:layout_marginTop="@dimen/_50sdp"
             android:layout_centerHorizontal="true"
             android:scaleType="fitXY"
@@ -30,6 +31,18 @@
             android:layout_height="@dimen/_120sdp"
             android:src="@drawable/logonew"
             />
+        <com.google.android.gms.ads.AdView
+            android:layout_below="@+id/logi"
+            android:layout_margin="@dimen/_10sdp"
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+
+
 
         <androidx.cardview.widget.CardView
             android:layout_margin="@dimen/_10sdp"
@@ -65,9 +78,17 @@
                     android:layout_margin="@dimen/_10sdp"
                     android:background="@drawable/btn_new"
                     >
-
-                    <TextView
+                    <com.rilixtech.widget.countrycodepicker.CountryCodePicker
                         android:id="@+id/txtCountry"
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        app:ccp_hideNameCode="true"
+                        app:ccp_showFullName="false"
+                        app:ccp_defaultCode="91"
+                        app:ccp_showFlag="false"/>
+                    <TextView
+                        android:visibility="gone"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="match_parent"
                         android:gravity="center"

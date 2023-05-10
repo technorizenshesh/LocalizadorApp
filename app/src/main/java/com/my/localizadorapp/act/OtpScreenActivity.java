@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import com.google.android.gms.ads.AdRequest;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityOtpScreenBinding;
 
@@ -21,8 +22,10 @@ public class OtpScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        binding= DataBindingUtil.setContentView(this,R.layout.activity_otp_screen);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
 
-       Intent intent=getIntent();
+        Intent intent=getIntent();
        if(intent!=null)
        {
            Mobile=intent.getStringExtra("mobile").toString();

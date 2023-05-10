@@ -31,9 +31,7 @@ import com.my.localizadorapp.utils.SessionManager;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements LocationListener,
-        ResultCallback<LocationSettingsResult>
-{
-
+        ResultCallback<LocationSettingsResult> {
     public static final int RequestPermissionCode = 1;
     SessionManager sessionManager;
     private RelativeLayout googlePayButton;
@@ -57,8 +55,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     }
 
     private boolean permissioncheck() {
-        int FourthPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION);
-        int FifthPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION);
+        int FourthPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(),
+                android.Manifest.permission.ACCESS_COARSE_LOCATION);
+        int FifthPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION);
         return FourthPermissionResult ==
                 PackageManager.PERMISSION_GRANTED && FifthPermissionResult == PackageManager.PERMISSION_GRANTED;
     }

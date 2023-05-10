@@ -122,7 +122,6 @@ public class PremiumActivity extends AppCompatActivity {
                     });
         }
     }
-
     private void showRewardedVideo() {
 
         if (rewardedAd == null) {
