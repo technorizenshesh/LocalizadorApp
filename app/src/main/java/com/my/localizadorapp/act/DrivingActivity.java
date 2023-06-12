@@ -122,7 +122,7 @@ public class DrivingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_driving);
         MobileAds.initialize(this, initializationStatus -> {
-            loadRewardedAd();
+         //   loadRewardedAd();
 
         });
 /*

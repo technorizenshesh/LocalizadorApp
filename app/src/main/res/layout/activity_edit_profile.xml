@@ -147,21 +147,54 @@
                     android:layout_height="1sp">
 
                 </View>
-
-                <EditText
-                   android:id="@+id/txtMobile"
-                    android:padding="@dimen/_10sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:background="@null"
-                    android:textColor="@color/gray_new"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:textSize="@dimen/_16sdp"
-                    android:text=""
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp">
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    >
+                    <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+                        android:id="@+id/txtCountry"
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        app:ccp_hideNameCode="true"
+                        app:ccp_showFullName="false"
+                        app:ccp_showFlag="false"/>
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+91"
+                        android:textSize="@dimen/_16sdp">
 
-                </EditText>
+                    </TextView>
+
+                    <View
+                        android:id="@+id/br"
+                        android:layout_width="1sp"
+                        android:layout_height="match_parent"
+                        android:layout_toRightOf="@+id/txtCountry"
+                        android:background="@color/bg_SPLASH">
+
+                    </View>
+
+                    <EditText
+                        android:id="@+id/edtMobile"
+                        android:maxLength="11"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toRightOf="@+id/br"
+                        android:background="@null"
+                        android:hint="Phone number"
+                        android:padding="@dimen/_10sdp"
+                        android:textSize="@dimen/_14sdp">
+
+                    </EditText>
+
+                </RelativeLayout>
+
 
                 <View
                     android:layout_marginRight="@dimen/_20sdp"

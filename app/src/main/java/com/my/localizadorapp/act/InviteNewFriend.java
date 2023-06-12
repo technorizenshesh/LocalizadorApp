@@ -128,7 +128,7 @@ public class InviteNewFriend extends AppCompatActivity {
 
          UserCode = Preference.get(InviteNewFriend.this,Preference.KEY_CircleCode);
         MobileAds.initialize(this, initializationStatus -> {
-            loadRewardedAd();
+          //  loadRewardedAd();
 
         });
         binding.txtCode.setText(UserCode);

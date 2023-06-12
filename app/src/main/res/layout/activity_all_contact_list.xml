@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         >
 
-        <RelativeLayout
+          <RelativeLayout
             android:background="@color/white"
             android:id="@+id/RRtoolbar"
             android:layout_width="match_parent"
@@ -48,6 +48,17 @@
 
 
         </RelativeLayout>
+        <com.google.android.gms.ads.AdView
+            android:layout_below="@+id/RRtoolbar"
+            android:layout_margin="@dimen/_10sdp"
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -64,10 +75,10 @@
             />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_below="@+id/RRtoolbar"
+
+            android:layout_below="@+id/adView"
             android:id="@+id/recyclerMyAllContact"
             android:layout_width="match_parent"
-            android:layout_above="@+id/RRShare"
             android:layout_height="wrap_content"
             />
 

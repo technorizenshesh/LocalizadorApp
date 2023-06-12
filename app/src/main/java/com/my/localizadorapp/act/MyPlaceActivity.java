@@ -172,7 +172,7 @@ public class MyPlaceActivity extends AppCompatActivity implements OnMapReadyCall
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_my_place);
         MobileAds.initialize(this, initializationStatus -> {
-            loadRewardedAd();
+           // loadRewardedAd();
 
         });
         sessionManager =new SessionManager(MyPlaceActivity.this);

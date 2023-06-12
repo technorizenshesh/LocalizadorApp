@@ -34,7 +34,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
-    String Mobile="";
+    String Mobile="",country_code="";
     GPSTracker gpsTracker;
     SessionManager sessionManager;
     String latitude="";
@@ -46,19 +46,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        binding.adView.loadAd(adRequest);
         sessionManager =new SessionManager(LoginActivity.this);
-
         try {
             try {
                 FirebaseApp.initializeApp(this);
-
                 FirebaseMessaging.getInstance().getToken()
                         .addOnCompleteListener(task -> {
                             if (!task.isSuccessful()) {
                                 Log.e(TAG, "onCreate:FirebaseMessaging "+task.getException().toString());
-
                                 return;
                             }
                             token = task.getResult();
@@ -85,15 +80,13 @@ public class LoginActivity extends AppCompatActivity {
         binding.RRContinue.setOnClickListener(v -> {
 
              Mobile = binding.edtMobile.getText().toString();
+             country_code = binding.txtCountry.getSelectedCountryCode().toString();
 
             if(Mobile.length()>=6 )
             {
                 if (sessionManager.isNetworkAvailable()) {
-
                     binding.progressBar.setVisibility(View.VISIBLE);
-
                     ApiMethodlogin();
-
                 }else {
 
                     Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
@@ -110,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         Call<SignUpModel> call = RetrofitClients
                 .getInstance()
                 .getApi()
-                .Api_login(Mobile,token,latitude,longitude,"1234");
+                .Api_login(Mobile,token,latitude,longitude,"1234",country_code);
         call.enqueue(new Callback<SignUpModel>() {
             @Override
             public void onResponse(Call<SignUpModel> call, Response<SignUpModel> response) {
@@ -124,16 +117,12 @@ public class LoginActivity extends AppCompatActivity {
                     String message = myclass.message;
 
                     if (status.equalsIgnoreCase("1")){
-
                        SessionManagerTwo.writeString(LoginActivity.this, Constant.USER_INFO, responseString);
-
                         String UserId = myclass.result.id;
                         String UserName = myclass.result.userName;
                         String UserImage = myclass.result.image;
-
                         sessionManager.saveUserId(UserId);
                         sessionManager.saveUserName(UserName);
-
                         Preference.save(LoginActivity.this,Preference.KEY_USER_ID,UserId);
                         Preference.save(LoginActivity.this,Preference.KEY_UserName,UserName);
 
@@ -143,7 +132,8 @@ public class LoginActivity extends AppCompatActivity {
                         Preference.save(LoginActivity.this,Preference.KEY_CircleCode,myclass.result.code);
                         Preference.save(LoginActivity.this,Preference.KEY_CircleCode,myclass.result.code);
 
-                        startActivity(new Intent(LoginActivity.this,HomeActivity.class).putExtra("mobile",Mobile));
+                        startActivity(new Intent(LoginActivity.this,HomeActivity.class)
+                                .putExtra("mobile",Mobile));
 
                         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
 

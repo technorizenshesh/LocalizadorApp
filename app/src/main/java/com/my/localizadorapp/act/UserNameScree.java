@@ -21,9 +21,9 @@ public class UserNameScree extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_user_name_scree);
-        AdRequest adRequest = new AdRequest.Builder().build();
+      /*  AdRequest adRequest = new AdRequest.Builder().build();
         binding.adView.loadAd(adRequest);
-
+*/
         Intent intent =getIntent();
 
         if(intent!=null)

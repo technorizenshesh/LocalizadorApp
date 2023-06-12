@@ -134,11 +134,6 @@
             android:theme="@style/AppTheme" />
         <activity
             android:exported="false"
-            android:name=".act.OtpLoginScreen"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:exported="false"
             android:name=".act.SignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

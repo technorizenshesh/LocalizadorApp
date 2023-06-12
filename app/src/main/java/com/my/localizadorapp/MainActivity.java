@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         });
         if (permissioncheck()){
             finds();
+
         } else {
            requestPermission();
         }
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
+                sessionManager.setADES("");
                 String User_id = Preference.get(MainActivity.this,Preference.KEY_USER_ID);
 
                 if(User_id != null && !User_id.trim().equalsIgnoreCase("0")){

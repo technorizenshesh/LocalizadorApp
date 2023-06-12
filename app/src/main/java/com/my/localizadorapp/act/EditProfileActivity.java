@@ -1,5 +1,6 @@
 package com.my.localizadorapp.act;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -63,9 +70,7 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_edit_profile);
-
         sessionManager =new SessionManager(EditProfileActivity.this);
-
         binding.RRback.setOnClickListener(v -> {
             onBackPressed();
         });
@@ -98,7 +103,7 @@ public class EditProfileActivity extends AppCompatActivity {
         binding.txtSave.setOnClickListener(v -> {
 
           Name=binding.txtName1.getText().toString();
-          Mobile=binding.txtMobile.getText().toString();
+          Mobile=binding.edtMobile.getText().toString();
 
          if(Name.equalsIgnoreCase(""))
          {
@@ -133,6 +138,54 @@ public class EditProfileActivity extends AppCompatActivity {
 
             Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
         }
+        loadAd();
+
+    }
+    public void loadAd() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(
+                this,
+                "ca-app-pub-3940256099942544/1033173712",
+                adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        Log.i("TAG", "onAdLoaded");
+                        if (interstitialAd != null) {
+                            interstitialAd.show(EditProfileActivity.this);
+                        } else {
+                        }
+                        interstitialAd.setFullScreenContentCallback(
+                                new FullScreenContentCallback() {
+                                    @Override
+                                    public void onAdDismissedFullScreenContent() {
+                                        Log.d("TAG", "The ad was dismissed.");
+
+                                    }
+
+                                    @Override
+                                    public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                        Log.d("TAG", "The ad failed to show.");
+                                    }
+
+                                    @Override
+                                    public void onAdShowedFullScreenContent() {
+                                        Log.d("TAG", "The ad was shown.");
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.i("TAG", loadAdError.getMessage());
+                        String error =
+                                String.format(
+                                        "domain: %s, code: %d, message: %s",
+                                        loadAdError.getDomain(), loadAdError.getCode(), loadAdError.getMessage());
+
+                    }
+                });
     }
 
     public void ApiMethodmyProfile() {
@@ -149,20 +202,23 @@ public class EditProfileActivity extends AppCompatActivity {
                 try {
 
                     binding.progressBar.setVisibility(View.GONE);
-
                     SignUpModel myclass= response.body();
 
                     String status = myclass.status;
                     String message = myclass.message;
-
                     if (status.equalsIgnoreCase("1")){
 
                         String UserName = myclass.result.userName;
                         String UserMobile = myclass.result.mobile;
+                        String country_code = myclass.result.country_code;
 
                         binding.txtName1.setText(""+UserName);
-                        binding.txtMobile.setText(UserMobile+"");
-
+                        binding.edtMobile.setText(UserMobile+"");
+                        Log.e("TAG", "onResponse:  country_codecountry_codecountry_code "+country_code );
+if (!country_code.equalsIgnoreCase("")){
+   // binding.txtCountry.setCountryPreference("+"+country_code);
+    binding.txtCountry.setCountryForPhoneCode(Integer.parseInt(country_code));
+}
 
                         if(!myclass.result.image.equalsIgnoreCase(""))
                         {
@@ -282,12 +338,12 @@ public class EditProfileActivity extends AppCompatActivity {
         RequestBody UserId = RequestBody.create(MediaType.parse("text/plain"), Userid);
         RequestBody name = RequestBody.create(MediaType.parse("text/plain"), Name);
         RequestBody mobile = RequestBody.create(MediaType.parse("text/plain"), Mobile);
-
+        RequestBody cc = RequestBody.create(MediaType.parse("text/plain"), binding.txtCountry.getSelectedCountryCode()+"");
 
         Call<SignUpModel> call = RetrofitClients
                 .getInstance()
                 .getApi()
-                .update_profile(UserId,name,mobile,imgFile);
+                .update_profile(UserId,name,mobile,cc,imgFile);
         call.enqueue(new Callback<SignUpModel>() {
             @Override
             public void onResponse(Call<SignUpModel> call, Response<SignUpModel> response) {
@@ -302,7 +358,10 @@ public class EditProfileActivity extends AppCompatActivity {
                 {
 
                     binding.txtName1.setText(finallyPr.result.userName+"");
-                    binding.txtMobile.setText(finallyPr.result.mobile+"");
+                    binding.edtMobile.setText(finallyPr.result.mobile+"");
+                   // binding.edtMobile.setText(finallyPr.result.mobile+"");
+                     if (!finallyPr.result.country_code.equalsIgnoreCase("")){
+                    binding.txtCountry.setCountryPreference(finallyPr.result.country_code);}
 
                     if(!finallyPr.result.image.equalsIgnoreCase(""))
                     {

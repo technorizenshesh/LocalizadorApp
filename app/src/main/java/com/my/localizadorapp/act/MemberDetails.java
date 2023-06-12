@@ -152,7 +152,7 @@ public class MemberDetails extends AppCompatActivity implements OnMapReadyCallba
         binding= DataBindingUtil.setContentView(this,R.layout.activity_member_details);
 
         MobileAds.initialize(this, initializationStatus -> {
-            loadRewardedAd();
+          //  loadRewardedAd();
 
         });
         Intent intent=getIntent();

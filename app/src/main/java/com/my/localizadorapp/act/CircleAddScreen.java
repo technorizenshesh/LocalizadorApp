@@ -64,8 +64,7 @@ public class CircleAddScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_circle_add_screen);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        binding.adView.loadAd(adRequest);
+
         registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
        try {
            FirebaseApp.initializeApp(this);
@@ -78,8 +77,6 @@ public class CircleAddScreen extends AppCompatActivity {
                            return;
                        }
                      token = task.getResult();
-                       Log.e(TAG, "onCreate:FirebaseMessaging "+token);
-
                    });
 
        }catch (Exception e){
@@ -154,9 +151,9 @@ public class CircleAddScreen extends AppCompatActivity {
     public void ApiMethodSignUp()
     {
         Log.e( "Tokennnn" ,""+token);
-
+       String  country_code = Preference.get(this,Preference.Country);
         Call<SignUpdataModel> call = RetrofitClients.getInstance().getApi()
-                .Api_signup(UserName,CircleName,Mobile,token,latitude,longitude,"1234","yes",Battery);
+                .Api_signup(UserName,CircleName,Mobile,token,latitude,longitude,"1234","yes",Battery,country_code);
         call.enqueue(new Callback<SignUpdataModel>() {
             @Override
             public void onResponse(Call<SignUpdataModel> call, Response<SignUpdataModel> response) {

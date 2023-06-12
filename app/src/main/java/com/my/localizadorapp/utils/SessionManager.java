@@ -32,6 +32,7 @@ public class SessionManager {
     public static final String KEY_USER_PROFILE_PICTURE = "keyUserProfile";
     public static final String KEY_DEVICE_TOKEN = "keyDeviceToken";
     public static final String KEY_USER_STATUS = "keyUserStatus";
+    public static final String ADES = "ades";
 
 
     public void saveUserToken(String userAuthKey){
@@ -99,6 +100,17 @@ public class SessionManager {
 
     public String getUserID(){
         String userID = preferences.getString(KEY_USER_ID,"");
+        return userID;
+    }
+    public void setADES(String id){
+        editor = preferences.edit();
+        editor.putString(ADES, id);
+        editor.apply();
+
+    }
+
+    public String getADES(){
+        String userID = preferences.getString(ADES,"");
         return userID;
     }
 

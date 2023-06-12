@@ -35,9 +35,10 @@ public class SignUpdataModel {
         @SerializedName("gender")
         @Expose
         public String gender;
+
         @SerializedName("country_code")
         @Expose
-        public String countryCode;
+        public String country_code;
         @SerializedName("mobile")
         @Expose
         public String mobile;

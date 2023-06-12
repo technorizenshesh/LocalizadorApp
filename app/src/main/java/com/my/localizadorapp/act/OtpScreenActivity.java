@@ -14,17 +14,12 @@ import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityOtpScreenBinding;
 
 public class OtpScreenActivity extends AppCompatActivity {
-
     ActivityOtpScreenBinding binding;
     String Mobile="";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        binding= DataBindingUtil.setContentView(this,R.layout.activity_otp_screen);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        binding.adView.loadAd(adRequest);
-
         Intent intent=getIntent();
        if(intent!=null)
        {
@@ -106,7 +101,7 @@ public class OtpScreenActivity extends AppCompatActivity {
 
        binding.RRContinue.setOnClickListener(v -> {
 
-           startActivity(new Intent(OtpScreenActivity.this,UserNameScree.class).putExtra("mobile1",Mobile));
+           //startActivity(new Intent(OtpScreenActivity.this,UserNameScree.class).putExtra("mobile1",Mobile));
 
        });
 

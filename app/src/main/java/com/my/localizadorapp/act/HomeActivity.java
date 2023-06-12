@@ -32,6 +32,10 @@ import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.OnUserEarnedRewardListener;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
@@ -65,9 +69,11 @@ public class HomeActivity extends AppCompatActivity {
 
     String Battery="";
     private static final String TAG = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
+   // private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
+    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712";
     private RewardedAd rewardedAd;
     private boolean isLoading = false;
+    private InterstitialAd interstitialAd;
 
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -116,19 +122,22 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         binding.dashboard.RRPremium.setOnClickListener(v -> {
-            startActivity(new Intent(HomeActivity.this, PremiumActivity.class));
+            startActivity(new Intent(HomeActivity.this,
+                    PremiumActivity.class));
             //fragment = new PremiumFragment();
             //loadFragment(fragment);
         });
 
         binding.childNavDrawer.llChat.setOnClickListener(v -> {
 
-            startActivity(new Intent(HomeActivity.this, ChatMessageActivity.class));
+            startActivity(new Intent(HomeActivity.this,
+                    ChatMessageActivity.class));
         });
 
         binding.childNavDrawer.llPrimium.setOnClickListener(v -> {
             navmenu();
-            startActivity(new Intent(HomeActivity.this, PremiumActivity.class));
+            startActivity(new Intent(HomeActivity.
+                    this, PremiumActivity.class));
             /*fragment = new PremiumFragment();
             loadFragment(fragment);*/
         });
@@ -137,7 +146,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 navmenu();
-                Intent i = new Intent(HomeActivity.this, SupportScreen.class);
+                Intent i = new Intent(HomeActivity.
+                        this, SupportScreen.class);
                 startActivity(i);
             }
         });
@@ -146,7 +156,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 navmenu();
-                Intent i = new Intent(HomeActivity.this, ShariingHistory.class);
+                Intent i = new Intent(HomeActivity.
+                        this, ShariingHistory.class);
                 startActivity(i);
             }
         });
@@ -155,7 +166,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 navmenu();
-                Intent i = new Intent(HomeActivity.this, PrivacyPolicy.class);
+                Intent i = new Intent(
+                        HomeActivity.this,
+                        PrivacyPolicy.class);
                 startActivity(i);
             }
         });
@@ -163,7 +176,8 @@ public class HomeActivity extends AppCompatActivity {
         binding.childNavDrawer.LlDriving.setOnClickListener(v -> {
 
             navmenu();
-            Intent i = new Intent(HomeActivity.this, DrivingProtection.class);
+            Intent i = new Intent(HomeActivity.this,
+                    DrivingProtection.class);
             startActivity(i);
 
         });
@@ -172,7 +186,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 navmenu();
-                Intent i = new Intent(HomeActivity.this, PurchaseItemsActivity.class);
+                Intent i = new Intent(
+                        HomeActivity.this,
+                        PurchaseItemsActivity.class);
                 startActivity(i);
             }
         });
@@ -190,7 +206,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(HomeActivity.this, SettingActivity.class);
+                Intent i = new Intent(HomeActivity.this
+                        , SettingActivity.class);
                 startActivity(i);
             }
         });
@@ -199,7 +216,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(HomeActivity.this, EmergancyContact.class);
+                Intent i = new Intent(HomeActivity.this
+                        , EmergancyContact.class);
                 startActivity(i);
             }
         });
@@ -207,7 +225,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.childNavDrawer.RRProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+               // showInterstitial();
                 Intent i = new Intent(HomeActivity.this, MyAccountActivity.class);
                 startActivity(i);
             }
@@ -217,7 +235,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(HomeActivity.this, TutorialOneActivity.class);
+                Intent i = new Intent(HomeActivity.this
+                        , TutorialOneActivity.class);
                 startActivity(i);
             }
         });
@@ -228,7 +247,8 @@ public class HomeActivity extends AppCompatActivity {
 
                 Preference.clearPreference(HomeActivity.this);
 
-                Intent i = new Intent(HomeActivity.this, SignUpActivity.class);
+                Intent i = new Intent(HomeActivity
+                        .this, SignUpActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -247,109 +267,17 @@ public class HomeActivity extends AppCompatActivity {
 
         fragment = new HomeFragment();
         loadFragment(fragment);
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {}
+        });
 
-        MobileAds.initialize(this, initializationStatus -> {
+        loadAd();
+       /* MobileAds.initialize(this, initializationStatus -> {
             loadRewardedAd();
 
-        });
+        });*/
     }
-
-    private void loadRewardedAd() {
-        if (rewardedAd == null) {
-            AdRequest adRequest = new AdRequest.Builder().build();
-            RewardedAd.load(
-                    getApplicationContext(),
-                    AD_UNIT_ID,
-                    adRequest,
-                    new RewardedAdLoadCallback() {
-                        @Override
-                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                            // Handle the error.
-                            Log.d(StateSet.TAG, StateSet.TAG + loadAdError.getMessage());
-                            rewardedAd = null;
-                            //  Toast.makeText(HomeActivity.this, "onAdFailedToLoad", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onAdLoaded(@NonNull RewardedAd rd) {
-                            rewardedAd = rd;
-                            Log.d(StateSet.TAG, StateSet.TAG + "onAdLoaded");
-                            if (!isLoading) {
-
-                                 showRewardedVideo();
-                            }
-                            //  Toast.makeText(HomeActivity.this, "onAdLoaded", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
-    }
-    private void showRewardedVideo() {
-
-        if (rewardedAd == null) {
-            Log.d(TAG, TAG + "The rewarded ad wasn't ready yet.");
-            Toast.makeText(this, "The rewarded ad wasn't ready yet.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        // showVideoButton.setVisibility(View.INVISIBLE);
-        isLoading = true;
-
-        rewardedAd.setFullScreenContentCallback(
-                new FullScreenContentCallback() {
-                    @Override
-                    public void onAdShowedFullScreenContent() {
-                        // Called when ad is shown.
-                        Log.d(TAG, TAG + "onAdShowedFullScreenContent");
-                       /* Toast.makeText(HomeActivity.this, "onAdShowedFullScreenContent", Toast.LENGTH_SHORT)
-                                .show();*/
-                    }
-
-                    @Override
-                    public void onAdFailedToShowFullScreenContent(AdError adError) {
-                        // Called when ad fails to show.
-                        Log.d(TAG, TAG + "onAdFailedToShowFullScreenContent");
-                        // Don't forget to set the ad reference to null so you
-                        // don't show the ad a second time.
-                        rewardedAd = null;
-                       /* Toast.makeText(
-                                HomeActivity.this, "onAdFailedToShowFullScreenContent", Toast.LENGTH_SHORT)
-                                .show();*/
-                    }
-
-                    @Override
-                    public void onAdDismissedFullScreenContent() {
-                        // Called when ad is dismissed.
-                        // Don't forget to set the ad reference to null so you
-                        // don't show the ad a second time.
-                        rewardedAd = null;
-                        Log.d(TAG, TAG + "onAdDismissedFullScreenContent");
-                        // Toast.makeText(HomeActivity.this, "onAdDismissedFullScreenContent", Toast.LENGTH_SHORT).show();
-                        // Preload the next rewarded ad.
-
-                        loadRewardedAd();
-
-                    }
-                });
-        // Activity activityContext = getActivity();
-        rewardedAd.show(
-                this,
-                new OnUserEarnedRewardListener() {
-                    @Override
-                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                        // Handle the reward.
-                        Log.d("TAG", TAG + "The user earned the reward.");
-                        int rewardAmount = rewardItem.getAmount();
-                        String rewardType = rewardItem.getType();
-                        //session.setSWIPECount(session.getSWIPECount() + 5);
-                        //  RewardCollectedApi
-                        //     ("5");
-                        // TastyToast.makeText(getContext(), "5 Swipes Added", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
-                        //getMyScore("",coi__n);
-                        loadRewardedAd();
-                    }
-
-                });
-    }
-
 
     @Override
     protected void onResume() {
@@ -471,5 +399,69 @@ public class HomeActivity extends AppCompatActivity {
         super.onDestroy();
         stopService(new Intent(this, MyService.class));
     }
+    public void loadAd() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(
+                this,
+                AD_UNIT_ID,
+                adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitiald) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        HomeActivity.this.interstitialAd = interstitiald;
+                        Log.i(TAG, "onAdLoaded");
+                       // Toast.makeText(HomeActivity.this, "onAdLoaded()", Toast.LENGTH_SHORT).show();
+                        interstitialAd.setFullScreenContentCallback(
+                                new FullScreenContentCallback() {
+                                    @Override
+                                    public void onAdDismissedFullScreenContent() {
+                                        // Called when fullscreen content is dismissed.
+                                        // Make sure to set your reference to null so you don't
+                                        // show it a second time.
+                                        HomeActivity.this.interstitialAd = null;
+                                        Log.d("TAG", "The ad was dismissed.");
 
+                                    }
+
+                                    @Override
+                                    public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                        // Called when fullscreen content failed to show.
+                                        // Make sure to set your reference to null so you don't
+                                        // show it a second time.
+                                        HomeActivity.this.interstitialAd = null;
+                                        Log.d("TAG", "The ad failed to show.");
+                                    }
+
+                                    @Override
+                                    public void onAdShowedFullScreenContent() {
+                                        // Called when fullscreen content is shown.
+                                        Log.d("TAG", "The ad was shown.");
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.i(TAG, loadAdError.getMessage());
+                        interstitialAd = null;
+
+                        String error =
+                                String.format(
+                                        "domain: %s, code: %d, message: %s",
+                                        loadAdError.getDomain(), loadAdError.getCode(), loadAdError.getMessage());
+
+                    }
+                });
+    }
+
+    private void showInterstitial() {
+        // Show the ad if it's ready. Otherwise toast and restart the game.
+        if (interstitialAd != null) {
+            interstitialAd.show(this);
+        } else {
+        }
+    }
 }

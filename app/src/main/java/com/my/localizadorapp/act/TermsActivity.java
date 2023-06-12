@@ -132,7 +132,7 @@ public class TermsActivity extends AppCompatActivity {
         binding= DataBindingUtil.setContentView(this,R.layout.activity_terms);
 
         MobileAds.initialize(this, initializationStatus -> {
-            loadRewardedAd();
+           // loadRewardedAd();
 
         });
 

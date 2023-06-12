@@ -1,10 +1,12 @@
 package com.my.localizadorapp.act;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,6 +18,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.adapter.AllContactAdapter;
@@ -45,6 +54,11 @@ public class AllContactList extends AppCompatActivity {
        binding = DataBindingUtil.setContentView(this,R.layout.activity_all_contact_list);
 
         UserCode = Preference.get(AllContactList.this,Preference.KEY_CircleCode);
+        MobileAds.initialize(this, initializationStatus -> {
+            // loadRewardedAd();
+
+        });
+        loadAd();
 
 
         modelList.clear();
@@ -89,6 +103,53 @@ public class AllContactList extends AppCompatActivity {
         });
 
     }
+    public void loadAd() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(
+                this,
+                "ca-app-pub-3940256099942544/1033173712",
+                adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        Log.i("TAG", "onAdLoaded");
+                        if (interstitialAd != null) {
+                            interstitialAd.show(AllContactList.this);
+                        } else {
+                        }
+                        interstitialAd.setFullScreenContentCallback(
+                                new FullScreenContentCallback() {
+                                    @Override
+                                    public void onAdDismissedFullScreenContent() {
+                                        Log.d("TAG", "The ad was dismissed.");
+
+                                    }
+
+                                    @Override
+                                    public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                        Log.d("TAG", "The ad failed to show.");
+                                    }
+
+                                    @Override
+                                    public void onAdShowedFullScreenContent() {
+                                        Log.d("TAG", "The ad was shown.");
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.i("TAG", loadAdError.getMessage());
+                        String error =
+                                String.format(
+                                        "domain: %s, code: %d, message: %s",
+                                        loadAdError.getDomain(), loadAdError.getCode(), loadAdError.getMessage());
+
+                    }
+                });
+    }
+
 
     private void setAdapter(ArrayList<GetAllContackModel> modelList) {
 
@@ -107,6 +168,8 @@ public class AllContactList extends AppCompatActivity {
     }
 
 
+
+    @SuppressLint("Range")
     private ArrayList<GetAllContackModel> getContactList() {
 
          cr = getContentResolver();
@@ -115,7 +178,7 @@ public class AllContactList extends AppCompatActivity {
 
         if ((cur != null ? cur.getCount() : 0) > 0) {
             while (cur != null && cur.moveToNext()) {
-                String id = cur.getString(
+              String id = cur.getString(
                         cur.getColumnIndex(ContactsContract.Contacts._ID));
                 String name = cur.getString(cur.getColumnIndex(
                         ContactsContract.Contacts.DISPLAY_NAME));

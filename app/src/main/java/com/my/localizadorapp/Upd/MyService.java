@@ -58,7 +58,7 @@ import retrofit2.Response;
 public class MyService extends Service {
     public static String TAG ="MyService";
     FusedLocationProviderClient mFusedLocationClient;
-    public static final int notify = 5000;  // interval between two services(Here Service run every 1 Minute)
+    public static final int notify = 15000;  // interval between two services(Here Service run every 1 Minute)
     private Handler mHandler = new Handler();   // run on another Thread to avoid crash
     private Timer mTimer = null; // timer handling
    // VeryCycleProviderInterface apiInterface;
@@ -220,7 +220,6 @@ public class MyService extends Service {
 
         String UserId = Preference.get(getApplicationContext(), Preference.KEY_USER_ID);
 
-
         Log.e("kjsghfjdgsf","userId = " + UserId);
         Log.e("kjsghfjdgsf","lat = " + lat);
         Log.e("kjsghfjdgsf","lon = " + lon);
@@ -305,9 +304,9 @@ public class MyService extends Service {
         System.out.println("service in onTaskRemoved");
         long ct = System.currentTimeMillis(); // get current time
         Intent restartService = new Intent(getApplicationContext(),MyService.class);
-        PendingIntent restartServicePI = PendingIntent.getService (
+        PendingIntent restartServicePI = PendingIntent.getService(
                 getApplicationContext(), 0, restartService,
-                0);
+               0| PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager mgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         mgr.setRepeating(AlarmManager.RTC_WAKEUP, ct, 1 * 1000, restartServicePI);

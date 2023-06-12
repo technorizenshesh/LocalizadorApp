@@ -55,7 +55,7 @@ public class PurchaseItemsActivity extends AppCompatActivity implements ProductO
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_purchase_items);
         MobileAds.initialize(this, initializationStatus -> {
-            loadRewardedAd();
+           // loadRewardedAd();
 
         });
         sessionManager = new SessionManager(PurchaseItemsActivity.this);

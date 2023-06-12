@@ -133,7 +133,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         MobileAds.initialize(this, initializationStatus -> {
-            loadRewardedAd();
+          //  loadRewardedAd();
 
         });
         RRtrack=(RelativeLayout) findViewById(R.id.RRtrack);

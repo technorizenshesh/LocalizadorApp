@@ -66,7 +66,8 @@ public interface Api {
             @Field("lon") String lon,
             @Field("password") String password,
             @Field("owner") String owner,
-            @Field("battery") String battery
+            @Field("battery") String battery,
+            @Field("country_code") String country_code
     );
 
     @FormUrlEncoded
@@ -76,7 +77,8 @@ public interface Api {
             @Field("register_id") String register_id,
             @Field("lat") String lat,
             @Field("lon") String lon,
-            @Field("password") String password
+            @Field("password") String password,
+            @Field("country_code") String country_code
     );
 
     @FormUrlEncoded
@@ -214,6 +216,7 @@ public interface Api {
             @Part("user_id") RequestBody user_id    ,
             @Part("name") RequestBody name,
             @Part("mobile") RequestBody mobile,
+            @Part("country_code") RequestBody cc,
             @Part MultipartBody.Part part1
     );
 
