@@ -59,7 +59,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_2sdp"
-                            android:text="People"
+                            android:text="@string/people"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_10sdp">
 
@@ -99,7 +99,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_2sdp"
-                            android:text="Places"
+                            android:text="@string/places"
                             android:textColor="@color/gray"
                             android:textSize="@dimen/_10sdp">
 
@@ -138,7 +138,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_2sdp"
-                            android:text="Premium"
+                            android:text="@string/premium"
                             android:textColor="@color/gray"
                             android:textSize="@dimen/_10sdp">
 
@@ -177,7 +177,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_2sdp"
-                            android:text="Menu"
+                            android:text="@string/menu"
                             android:textColor="@color/gray"
                             android:textSize="@dimen/_10sdp">
 

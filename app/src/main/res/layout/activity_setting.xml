@@ -546,6 +546,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
@@ -563,7 +564,7 @@
                     </ImageView>
 
                     <TextView
-
+android:visibility="gone"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_gravity="center"
                         android:textSize="@dimen/_16sdp"

@@ -39,9 +39,9 @@
     <string name="Leave_circle">Leave Circle</string>
     <string name="place">Place</string>
     <string name="current_location">Current Location</string>
-<!--
-    <string name="place_api_key">AIzaSyC4Eg_qGdkZrcW-td6QsmJAk2g4nzPaat0</string>
--->
+    <!--
+        <string name="place_api_key">AIzaSyC4Eg_qGdkZrcW-td6QsmJAk2g4nzPaat0</string>
+    -->
     <string name="place_api_key">AIzaSyCjm3GS5HaNLYXnxqqF_IhsufMpQgcx8T0</string>
 
     <string name="buy_with_googlepay_button_content_description">Buy with Google Pay</string>

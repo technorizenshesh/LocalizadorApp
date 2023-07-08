@@ -50,7 +50,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text="Device Details"
+                android:text="@string/device_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -83,7 +83,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text="Device Name"
+                android:text="@string/device_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -117,7 +117,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text="Device Version"
+                android:text="@string/device_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -158,14 +158,14 @@
             >
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14sdp"
                 android:gravity="center"
                 android:text="@string/go_to_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp">
 
             </TextView>
 

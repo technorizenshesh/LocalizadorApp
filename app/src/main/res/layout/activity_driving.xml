@@ -42,7 +42,7 @@
                     android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sdp"
-                    android:text="Driving Protection"
+                    android:text="@string/driving_protection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 

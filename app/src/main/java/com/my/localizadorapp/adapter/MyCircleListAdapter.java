@@ -24,13 +24,11 @@ import java.util.ArrayList;
 
 
 public class MyCircleListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-
     private Context mContext;
     private ArrayList<CircleListModel.Result> modelList;
     private OnItemClickListener mItemClickListener;
     private NewOnItemlisner newOnItemlisner;
     int pos=0;
-
 
     public MyCircleListAdapter(Context context, ArrayList<CircleListModel.Result> modelList,NewOnItemlisner newOnItemlisner) {
         this.mContext = context;

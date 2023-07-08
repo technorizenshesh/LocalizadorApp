@@ -104,7 +104,7 @@
                     android:textColor="@color/black"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:textSize="@dimen/_16sdp"
-                    android:text="New Mobile Number"
+                    android:text="@string/new_mobile_number"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp">
 

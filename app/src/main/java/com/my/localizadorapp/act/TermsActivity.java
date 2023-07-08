@@ -135,7 +135,7 @@ public class TermsActivity extends AppCompatActivity {
            // loadRewardedAd();
 
         });
-
+/*https://technorizen.com/localizador/privacy.html*/
         binding.RRback.setOnClickListener(v -> {
             onBackPressed();
         });
@@ -143,7 +143,10 @@ public class TermsActivity extends AppCompatActivity {
         sessionManager=new SessionManager(this);
         if (sessionManager.isNetworkAvailable()) {
             binding.progressBar.setVisibility(View.VISIBLE);
-            getApiPrivacy();
+            binding.container.loadUrl("https://technorizen.com/localizador/privacy.html");
+            binding.progressBar.setVisibility(View.GONE);
+
+            // getApiPrivacy();
         }else {
             Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
         }

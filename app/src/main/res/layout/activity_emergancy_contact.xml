@@ -61,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Following people will receive SOS message from you in case of emergency."
+                    android:text="@string/following_people_will_receive_sos_message_from_you_in_case_of_emergency"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp">
 
@@ -162,7 +162,7 @@
                         android:layout_centerInParent="true"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Send Msg."
+                        android:text="@string/send_msg"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp">
 

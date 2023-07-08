@@ -90,21 +90,21 @@
 
                         <TextView
                             android:id="@+id/txtCode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:layout_gravity="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_14sdp"
                             android:gravity="center"
                             android:text="@string/cwg_tcb"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14sdp">
 
                         </TextView>
 
                     </RelativeLayout>
 
                     <TextView
-                        android:text="This code is valid until September 30, 2021"
+                        android:text="@string/this_code_is_valid_until_september_30_2021"
                         android:gravity="center"
                         android:padding="@dimen/_10sdp"
                         android:layout_gravity="center"
@@ -115,7 +115,7 @@
                     </TextView>
 
                     <TextView
-                        android:text="Tip: you can share this code in any way you want: text it, email it, write it down or say it."
+                        android:text="@string/tip_you_can_share_this_code_in_any_way_you_want_text_it_email_it_write_it_down_or_say_it"
                         android:gravity="center"
                         android:padding="@dimen/_10sdp"
                         android:layout_gravity="center"
@@ -139,7 +139,7 @@
                             android:textColor="@color/white"
                             android:textSize="@dimen/_14sdp"
                             android:gravity="center"
-                            android:text="Share Code"
+                            android:text="@string/share_code"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 

@@ -98,7 +98,7 @@
                     android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:text="You need to have at least one ither member in your circle to set battery alerts."
+                    android:text="@string/you_need_to_have_at_least_one_ither_member_in_your_circle_to_set_battery_alerts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 

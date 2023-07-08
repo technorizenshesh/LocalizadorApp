@@ -37,7 +37,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text="Manage Invitations"
+                android:text="@string/manage_invitations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -85,7 +85,7 @@
                     android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:text="Invitations from your friends and family will be placed here."
+                    android:text="@string/invitations_from_your_friends_and_family_will_be_placed_here"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 

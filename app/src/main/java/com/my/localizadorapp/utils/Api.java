@@ -8,6 +8,7 @@ import com.my.localizadorapp.model.CircleListModel;
 import com.my.localizadorapp.model.CircleListNewModel;
 import com.my.localizadorapp.model.CricleCreate;
 import com.my.localizadorapp.model.DeleteModel;
+import com.my.localizadorapp.model.FAQModel;
 import com.my.localizadorapp.model.GetAddressModel;
 import com.my.localizadorapp.model.GetUserChatModel;
 import com.my.localizadorapp.model.MemberListModel;
@@ -51,6 +52,7 @@ public interface Api {
     String Api_Terms = "get_terms";
     String Api_get_support = "get_support";
     String get_category = "get_category";
+    String get_faq = "get_faq";
     String get_product_by_category = "get_product_by_category";
     String get_product_details = "get_product_details";
     String update_profile = "update_profile";
@@ -197,6 +199,8 @@ public interface Api {
 
     @POST(get_category)
     Call<CategoryModel> get_category();
+    @POST(get_faq)
+    Call<FAQModel> get_faq();
 
     @FormUrlEncoded
     @POST(get_product_by_category)

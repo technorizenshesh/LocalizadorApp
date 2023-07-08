@@ -50,7 +50,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text="Circle Details"
+                android:text="@string/circle_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -95,7 +95,7 @@
                         android:layout_gravity="center"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16sdp"
-                        android:text="Circle Name"
+                        android:text="@string/circle_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -143,7 +143,7 @@
                         android:layout_gravity="center"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16sdp"
-                        android:text="Invite New Member"
+                        android:text="@string/invite_new_member"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -192,7 +192,7 @@
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_16sdp"
-                            android:text="User"
+                            android:text="@string/user"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
@@ -203,7 +203,7 @@
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp"
-                            android:text="Circle owner"
+                            android:text="@string/circle_owner"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
@@ -245,14 +245,14 @@
             >
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14sdp"
                 android:gravity="center"
                 android:text="@string/delete_circle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp">
 
             </TextView>
 

@@ -107,7 +107,10 @@ public class PrivacyPolicy extends AppCompatActivity {
         sessionManager=new SessionManager(this);
         if (sessionManager.isNetworkAvailable()) {
             binding.progressBar.setVisibility(View.VISIBLE);
-            getApiPrivacy();
+           // getApiPrivacy();
+            binding.container.loadUrl("https://technorizen.com/localizador/privacy.html");
+            binding.progressBar.setVisibility(View.GONE);
+
         }else {
             Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
         }

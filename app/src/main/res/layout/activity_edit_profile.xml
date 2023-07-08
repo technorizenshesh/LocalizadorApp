@@ -133,7 +133,7 @@
                     android:textColor="@color/gray_new"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:textSize="@dimen/_16sdp"
-                    android:text="Name"
+                    android:text="@string/name"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp">
 
@@ -187,7 +187,7 @@
                         android:layout_height="match_parent"
                         android:layout_toRightOf="@+id/br"
                         android:background="@null"
-                        android:hint="Phone number"
+                        android:hint="@string/phone_number"
                         android:padding="@dimen/_10sdp"
                         android:textSize="@dimen/_14sdp">
 
