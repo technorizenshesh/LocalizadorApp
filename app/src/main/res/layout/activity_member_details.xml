@@ -141,7 +141,7 @@
 
                         <TextView
                             android:id="@+id/txtUserName"
-                            android:text="Me"
+                            android:text="@string/me"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                         </TextView>
 
                         <TextView
-                            android:text="Just Updated"
+                            android:text="@string/just_updated"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/bg_SPLASH"
