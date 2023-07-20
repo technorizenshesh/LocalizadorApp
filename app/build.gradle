@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 namespace="com.my.localizadorapp"
     defaultConfig {
-        applicationId "com.my.localizadorapp"
+        applicationId "com.ubicar.localizadordecelularmovilpornumerogps"
         minSdkVersion 23
         targetSdkVersion 33
         versionCode 1
@@ -90,7 +90,7 @@ dependencies {
 
     //CropingImage
     implementation 'com.karumi:dexter:6.0.1'
-    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     implementation 'id.zelory:compressor:2.1.0'
 
     //Place
@@ -120,6 +120,7 @@ dependencies {
 
     implementation('com.jaredrummler:android-device-names:2.1.0')
     implementation 'com.github.joielechong:countrycodepicker:2.4.2'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

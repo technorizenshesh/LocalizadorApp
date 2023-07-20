@@ -18,6 +18,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.my.localizadorapp.Chat.SessionManagerTwo;
 import com.my.localizadorapp.GPSTracker;
+import com.my.localizadorapp.Localizadorapp;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivitySignUpBinding;
@@ -58,7 +59,10 @@ public class SignUpActivity extends AppCompatActivity {
         }else{
             gpsTracker.showSettingsAlert();
         }
+binding.changeLang.setOnClickListener(v -> {
+    Localizadorapp.changeLangDialog(SignUpActivity.this);
 
+});
         binding.RRContinue.setOnClickListener(v -> {
              Mobile = binding.edtMobile.getText().toString();
             country_code = binding.txtCountry.getSelectedCountryCode().toString();

@@ -38,7 +38,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentBottom="true"
                     ads:adSize="BANNER"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+                    ads:adUnitId="ca-app-pub-5017067604593087/6009526144">
                 </com.google.android.gms.ads.AdView>
                 <TextView
                     android:layout_gravity="center"
@@ -210,6 +210,7 @@
                     android:isScrollContainer="false"
                     android:layoutDirection="rtl"
                     android:id="@+id/recyclerRating"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -257,6 +258,7 @@
 
 
                     <TextView
+                        android:visibility="gone"
                         android:padding="@dimen/_5sdp"
                         android:id="@+id/txtTrms"
                         android:textStyle="bold"

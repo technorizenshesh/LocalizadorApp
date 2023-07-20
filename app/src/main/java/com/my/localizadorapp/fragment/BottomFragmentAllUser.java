@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.my.localizadorapp.OnItemClickListener;
@@ -27,6 +28,7 @@ import com.my.localizadorapp.databinding.FragmentBottomBinding;
 import com.my.localizadorapp.databinding.FragmentBottomUserBinding;
 import com.my.localizadorapp.model.MemberListDataModel;
 import com.my.localizadorapp.model.MemberListModel;
+import com.my.localizadorapp.utils.Constant;
 import com.my.localizadorapp.utils.RetrofitClients;
 import com.my.localizadorapp.utils.SessionManager;
 
@@ -131,8 +133,12 @@ public class BottomFragmentAllUser extends BottomSheetDialogFragment {
 
                         if(myclass.getOwnerDetail()!=null)
                         {
-                            binding.txtUserName.setText(myclass.getOwnerDetail().getUserName());
+                            Log.e("TAG", "onResponse:xxx -------------"+myclass.getOwnerDetail() );
+                            Glide.with(requireActivity()).load(Constant.BASE_URL_IMAGE+myclass.getOwnerDetail().
+                                    getImage()).placeholder(getActivity().getDrawable(R.drawable.user))
+                                    .circleCrop().into(binding.user);
 
+                            binding.txtUserName.setText(myclass.getOwnerDetail().getUserName());
                             String Address = getAddress(getActivity(),myclass.getOwnerDetail().getLat(),myclass.getOwnerDetail().getLon());
                             binding.txtAddress.setText(Address+"");
 
@@ -187,6 +193,7 @@ public class BottomFragmentAllUser extends BottomSheetDialogFragment {
             String country = addresses.get(0).getCountryName();
             String postalCode = addresses.get(0).getPostalCode();
             String region = addresses.get(0).getAdminArea();
+            Log.e("region====addressStreetaddressStreet ", addressStreet);
 
             Preference.save(getActivity(), Preference.KEY_address, addressStreet);
 

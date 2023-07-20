@@ -1,5 +1,7 @@
 package com.my.localizadorapp.act;
 
+import static com.my.localizadorapp.Preference.LANGUAGE;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +18,7 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.adapter.FAQAdapter;
 import com.my.localizadorapp.databinding.ActivityFaqScreenBinding;
@@ -37,7 +40,7 @@ public class FaqScreen extends AppCompatActivity {
 
     public void loadInterstitialAd() {
         AdRequest adRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(FaqScreen.this, "ca-app-pub-3940256099942544/1033173712", adRequest, new InterstitialAdLoadCallback() {
+        InterstitialAd.load(FaqScreen.this, "ca-app-pub-5017067604593087/6794040495", adRequest, new InterstitialAdLoadCallback() {
             @Override
             public void onAdLoaded(@NonNull InterstitialAd interstitialA) {
                 interstitialAd = interstitialA;
@@ -105,7 +108,12 @@ public class FaqScreen extends AppCompatActivity {
     }
 
     public void get_faq() {
-        Call<FAQModel> call = RetrofitClients.getInstance().getApi().get_faq();
+        String language = Preference.get(getApplicationContext(), LANGUAGE);
+        String  lang="sp";
+        if (language.equalsIgnoreCase("en")){
+            lang = "en";
+}
+        Call<FAQModel> call = RetrofitClients.getInstance().getApi().get_faq(lang);
         call.enqueue(new Callback<FAQModel>() {
             @Override
             public void onResponse(Call<FAQModel> call, Response<FAQModel> response) {

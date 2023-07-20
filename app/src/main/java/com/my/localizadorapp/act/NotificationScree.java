@@ -11,10 +11,12 @@ import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityNotificationScreeBinding;
+import com.my.localizadorapp.utils.SessionManager;
 
 public class NotificationScree extends AppCompatActivity {
 
@@ -24,7 +26,7 @@ public class NotificationScree extends AppCompatActivity {
     public void loadInterstitialAd() {
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(NotificationScree.this
-                , "ca-app-pub-3940256099942544/1033173712",
+                , "ca-app-pub-5017067604593087/6794040495",
                 adRequest, new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialA) {
@@ -65,7 +67,18 @@ public class NotificationScree extends AppCompatActivity {
        binding= DataBindingUtil.setContentView(this,R.layout.activity_notification_scree);
         AdRequest adRequest = new AdRequest.Builder().build();
         binding.adView.loadAd(adRequest);
-       
+        MobileAds.initialize(this, initializationStatus -> {
+            //loadRewardedAd();
+            String ads = new SessionManager(this).getADES();
+            Log.e("TAG", "onCreate: dvxvxvxvf -----" + ads);
+
+            if (ads.equalsIgnoreCase("")) {
+                loadInterstitialAd();
+                Log.e("TAG", "onCreate: hgjfhnfdh");
+            }
+            Log.e("TAG", "onCreate: dvxvxvxvf");
+
+        });
 
         binding.RRback.setOnClickListener(v -> {
            onBackPressed();

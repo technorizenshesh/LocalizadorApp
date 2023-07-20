@@ -64,7 +64,7 @@ public class PlaceFragment extends Fragment {
     public void loadInterstitialAd() {
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(requireActivity()
-                , "ca-app-pub-3940256099942544/1033173712",
+                , "ca-app-pub-5017067604593087/6794040495",
                 adRequest, new InterstitialAdLoadCallback() {
             @Override
             public void onAdLoaded(@NonNull InterstitialAd interstitialA) {

@@ -13,8 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClients {
 
   //  private static final String BASE_URL ="https://myspotbh.com/localizador/webservice/";
-    private static final String BASE_URL ="https://technorizen.com/localizador/webservice/";
-    private static RetrofitClients mInstance;
+     static final String BASE_URL ="https://technorizen.com/techno_public_html/_E_F_G_H_I_J_K_L_BACKUP/localizador/webservice/";
+    /*https:\/\/technorizen.com\/techno_public_html\/_E_F_G_H_I_J_K_L_BACKUP\/localizador\/uploads\/images\*/
+     private static RetrofitClients mInstance;
     private Retrofit retrofit;
 
     private RetrofitClients(){

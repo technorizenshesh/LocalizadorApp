@@ -1,5 +1,7 @@
 package com.my.localizadorapp.Upd;
 
+import static com.my.localizadorapp.Localizadorapp.createPendingIntentGetActivity;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -121,7 +123,7 @@ public class MyService extends Service {
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
 
         Notification notification = notificationBuilder.setOngoing(true)
-                .setSmallIcon(R.drawable.logonew)
+                .setSmallIcon(R.drawable.logo_publish)
                 .setContentTitle("")
                 .setPriority(NotificationManager.IMPORTANCE_MIN)
                 .setCategory(Notification.CATEGORY_SERVICE)
@@ -198,7 +200,7 @@ public class MyService extends Service {
 //                            sendBroadcast(intent1);
                              Log.e("Location====", String.valueOf(location.getLatitude()));
 
-                            updateProviderLatLon(String.valueOf(location.getLongitude()),String.valueOf(location.getLongitude()),Battery);
+                            updateProviderLatLon(String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()),Battery);
 
                            // updateProviderLatLon(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), DataManager.getInstance().getUserData(getApplicationContext()).result.id);
 
@@ -304,9 +306,11 @@ public class MyService extends Service {
         System.out.println("service in onTaskRemoved");
         long ct = System.currentTimeMillis(); // get current time
         Intent restartService = new Intent(getApplicationContext(),MyService.class);
-        PendingIntent restartServicePI = PendingIntent.getService(
-                getApplicationContext(), 0, restartService,
-               0| PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent restartServicePI =
+                createPendingIntentGetActivity(getApplicationContext(),restartService);
+              //  PendingIntent.getService(
+              //  getApplicationContext(), 0, restartService,
+             //  0| PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager mgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         mgr.setRepeating(AlarmManager.RTC_WAKEUP, ct, 1 * 1000, restartServicePI);

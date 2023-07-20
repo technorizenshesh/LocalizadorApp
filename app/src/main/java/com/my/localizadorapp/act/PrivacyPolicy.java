@@ -1,5 +1,8 @@
 package com.my.localizadorapp.act;
 
+
+import static com.my.localizadorapp.Preference.LANGUAGE;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -21,6 +24,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
+import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityPrivacyPolicyBinding;
 import com.my.localizadorapp.model.PrivacyModel;
@@ -45,7 +49,7 @@ public class PrivacyPolicy extends AppCompatActivity {
     public void loadInterstitialAd() {
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(PrivacyPolicy.this
-                , "ca-app-pub-3940256099942544/1033173712",
+                , "ca-app-pub-5017067604593087/6794040495",
                 adRequest, new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialA) {
@@ -108,8 +112,17 @@ public class PrivacyPolicy extends AppCompatActivity {
         if (sessionManager.isNetworkAvailable()) {
             binding.progressBar.setVisibility(View.VISIBLE);
            // getApiPrivacy();
-            binding.container.loadUrl("https://technorizen.com/localizador/privacy.html");
-            binding.progressBar.setVisibility(View.GONE);
+            String language = Preference.get(getApplicationContext(), LANGUAGE);
+            String  lang="sp";
+            if (language.equalsIgnoreCase("en")){
+                lang = "en";
+                binding.container.loadUrl("https://technorizen.com/techno_public_html/_E_F_G_H_I_J_K_L_BACKUP/localizador/privacy.html");
+
+            }else {
+                binding.container.loadUrl("https://technorizen.com/techno_public_html/_E_F_G_H_I_J_K_L_BACKUP/localizador/privacy_sp.html");
+
+            }
+              binding.progressBar.setVisibility(View.GONE);
 
         }else {
             Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();

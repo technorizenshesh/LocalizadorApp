@@ -18,7 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.StateSet;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
@@ -31,15 +30,13 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.OnUserEarnedRewardListener;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
-import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.my.localizadorapp.GPSTracker;
+import com.my.localizadorapp.Localizadorapp;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.Upd.MyService;
@@ -47,6 +44,7 @@ import com.my.localizadorapp.databinding.ActivityHomeNavBinding;
 import com.my.localizadorapp.fragment.HomeFragment;
 import com.my.localizadorapp.fragment.PlaceFragment;
 import com.my.localizadorapp.model.CricleCreate;
+import com.my.localizadorapp.model.SignUpModel;
 import com.my.localizadorapp.utils.RetrofitClients;
 import com.my.localizadorapp.utils.SessionManager;
 
@@ -55,10 +53,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
+    private static final String TAG = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+    // private static final String AD_UNIT_ID = "ca-app-pub-5017067604593087/6794040495	";
+    private static final String AD_UNIT_ID = "ca-app-pub-5017067604593087/6794040495";
     Fragment fragment;
     ActivityHomeNavBinding binding;
-    private View promptsView;
-    private AlertDialog alertDialog;
     boolean doubleBackToExitPressedOnce = false;
 
     SessionManager sessionManager;
@@ -67,10 +66,9 @@ public class HomeActivity extends AppCompatActivity {
     double longitude = 0;
     GPSTracker gpsTracker;
 
-    String Battery="";
-    private static final String TAG = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-   // private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
-    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712";
+    String Battery = "";
+    private View promptsView;
+    private AlertDialog alertDialog;
     private RewardedAd rewardedAd;
     private boolean isLoading = false;
     private InterstitialAd interstitialAd;
@@ -82,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
             int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
             float batteryPct = level * 100 / (float) scale;
             Battery = String.valueOf(batteryPct);
-           // binding.txtBatery.setText(String.valueOf(batteryPct) + "%");
+            // binding.txtBatery.setText(String.valueOf(batteryPct) + "%");
         }
     };
 
@@ -92,13 +90,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_nav);
 
-       registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         String UserName = Preference.get(HomeActivity.this, Preference.KEY_UserName);
         String IMage = Preference.get(HomeActivity.this, Preference.key_image);
 
-        if(!IMage.equalsIgnoreCase(""))
-        {
+        if (!IMage.equalsIgnoreCase("")) {
             Glide.with(HomeActivity.this).load(IMage).placeholder(R.drawable.user_default).error(R.drawable.user_default).circleCrop().into(binding.childNavDrawer.imgUser);
         }
 
@@ -142,15 +139,13 @@ public class HomeActivity extends AppCompatActivity {
             loadFragment(fragment);*/
         });
 
-        binding.childNavDrawer.llSupport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navmenu();
-                Intent i = new Intent(HomeActivity.
-                        this, SupportScreen.class);
-                startActivity(i);
-            }
+        binding.childNavDrawer.llSupport.setOnClickListener(v -> {
+            navmenu();
+            Intent i = new Intent(HomeActivity.
+                    this, SupportScreen.class);
+            startActivity(i);
         });
+        binding.childNavDrawer.changeLang.setOnClickListener(v -> Localizadorapp.changeLangDialog(HomeActivity.this));
 
         binding.childNavDrawer.LLsharingHistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,7 +220,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.childNavDrawer.RRProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // showInterstitial();
+                // showInterstitial();
                 Intent i = new Intent(HomeActivity.this, MyAccountActivity.class);
                 startActivity(i);
             }
@@ -233,8 +228,7 @@ public class HomeActivity extends AppCompatActivity {
 
         binding.childNavDrawer.llTutorial.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Intent i = new Intent(HomeActivity.this
                         , TutorialOneActivity.class);
                 startActivity(i);
@@ -269,7 +263,8 @@ public class HomeActivity extends AppCompatActivity {
         loadFragment(fragment);
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {}
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
         });
 
         loadAd();
@@ -282,7 +277,62 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+     /*   String lang = Locale.getDefault().getLanguage().toString();
+        if (lang.equalsIgnoreCase("es")) {
+            Preference.save(HomeActivity.this, Preference.LANGUAGE, "es");
+
+        } else {
+            Preference.save(HomeActivity.this, Preference.LANGUAGE, "en");
+
+
+        }
+        if ("es".equals(Preference.get(HomeActivity.this, Preference.LANGUAGE))) {
+            Localizadorapp.updateResources(HomeActivity.this, "es");
+        } else {
+            Localizadorapp.updateResources(HomeActivity.this, "en");
+        }
+        Log.e("TAG", "finds:    langlanglanglang   ===   " + lang);
+*/
         ContextCompat.startForegroundService(getApplicationContext(), new Intent(getApplicationContext(), MyService.class));
+        ApiMethodmyProfile();
+    }
+
+    public void ApiMethodmyProfile() {
+
+        String UserId = Preference.get(HomeActivity.this, Preference.KEY_USER_ID);
+        Call<SignUpModel> call = RetrofitClients
+                .getInstance()
+                .getApi()
+                .Api_get_profile(UserId);
+        call.enqueue(new Callback<SignUpModel>() {
+            @Override
+            public void onResponse(@NonNull Call<SignUpModel> call, @NonNull Response<SignUpModel> response) {
+                try {
+                    if (response.body() != null) {
+                        if (response.body().status.equalsIgnoreCase("1")) {
+                            SignUpModel myclass = response.body();
+                            assert myclass != null;
+                            String status = myclass.status;
+                            String message = myclass.message;
+                            String UserName = myclass.result.userName;
+                            String country_code = myclass.result.country_code;
+                            Preference.save(HomeActivity.this, Preference.PHONE, "+" + myclass.getResult().country_code + myclass.getResult().mobile);
+                        } else {
+
+
+                        }
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SignUpModel> call, Throwable t) {
+            }
+        });
     }
 
     public void navmenu() {
@@ -322,9 +372,9 @@ public class HomeActivity extends AppCompatActivity {
 
                 if (!JoinCircle.equalsIgnoreCase("")) {
 
-                 ApiMethodJoinCircle(JoinCircle);
+                    ApiMethodJoinCircle(JoinCircle);
 
-                }else {
+                } else {
                     Toast.makeText(HomeActivity.this, "Please Enter Valid Code.", Toast.LENGTH_SHORT).show();
                 }
 
@@ -343,21 +393,18 @@ public class HomeActivity extends AppCompatActivity {
         Call<CricleCreate> call = RetrofitClients
                 .getInstance()
                 .getApi()
-                .Api_Join_circle(UserId, Code, String.valueOf(latitude), String.valueOf(longitude),Battery);
+                .Api_Join_circle(UserId, Code, String.valueOf(latitude), String.valueOf(longitude), Battery);
         call.enqueue(new Callback<CricleCreate>() {
             @Override
             public void onResponse(Call<CricleCreate> call, Response<CricleCreate> response) {
                 try {
-
-                    CricleCreate myclass = response.body();
-
-                    String status = myclass.status;
-                    String message = myclass.message;
-
-                    if (status.equalsIgnoreCase("1")) {
-
-                        Toast.makeText(HomeActivity.this, message, Toast.LENGTH_SHORT).show();
-
+                    if (response.body() != null) {
+                        CricleCreate myclass = response.body();
+                        String status = myclass.status;
+                        String message = myclass.message;
+                        if (status.equalsIgnoreCase("1")) {
+                            Toast.makeText(HomeActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -399,6 +446,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onDestroy();
         stopService(new Intent(this, MyService.class));
     }
+
     public void loadAd() {
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(
@@ -412,7 +460,7 @@ public class HomeActivity extends AppCompatActivity {
                         // an ad is loaded.
                         HomeActivity.this.interstitialAd = interstitiald;
                         Log.i(TAG, "onAdLoaded");
-                       // Toast.makeText(HomeActivity.this, "onAdLoaded()", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(HomeActivity.this, "onAdLoaded()", Toast.LENGTH_SHORT).show();
                         interstitialAd.setFullScreenContentCallback(
                                 new FullScreenContentCallback() {
                                     @Override

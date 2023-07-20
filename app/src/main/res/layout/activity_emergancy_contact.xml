@@ -108,10 +108,11 @@
                             >
 
                             <TextView
+                                android:id="@+id/text_contact"
                                 android:layout_marginTop="@dimen/_15sdp"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_16sdp"
-                                android:text="07312546987"
+                                android:text=""
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 

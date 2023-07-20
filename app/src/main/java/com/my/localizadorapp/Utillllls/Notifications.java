@@ -16,6 +16,8 @@
 
 package com.my.localizadorapp.Utillllls;
 
+import static com.my.localizadorapp.Localizadorapp.createPendingIntentGetActivity2;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -104,9 +106,10 @@ public class Notifications {
       // Create pendingIntent to respond to the click event
       Intent selectOptionIntent = new Intent(context, PaymentNotificationIntentService.class);
       selectOptionIntent.setAction(ACTION_SELECT_PREFIX + option);
-      notificationLayout.setOnClickPendingIntent(buttonId, PendingIntent.getService(
-          context, REQUEST_CODE_SELECT_OPTION, selectOptionIntent,
-          PendingIntent.FLAG_UPDATE_CURRENT));
+      notificationLayout.setOnClickPendingIntent(buttonId, createPendingIntentGetActivity2(context,selectOptionIntent,REQUEST_CODE_SELECT_OPTION));
+           //   PendingIntent.getService(
+        //  context, REQUEST_CODE_SELECT_OPTION, selectOptionIntent,
+       //   PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
     // Set Google Pay button action
@@ -114,7 +117,7 @@ public class Notifications {
     payIntent.setAction(ACTION_PAY_GOOGLE_PAY);
     payIntent.putExtra(OPTION_PRICE_EXTRA, OPTION_PRICE_CENTS.get(selectedOption));
     notificationLayout.setOnClickPendingIntent(
-        R.id.googlePayButton, pendingIntentForActivity(context, payIntent));
+        R.id.googlePayButton, createPendingIntentGetActivity2(context, payIntent,REQUEST_CODE_START_ACTIVITY));
 
     // Create a notification and set the notification channel
     Notification notification = new NotificationCompat
@@ -152,9 +155,9 @@ public class Notifications {
     notificationMgr.createNotificationChannel(channel);
   }
 
-  private static PendingIntent pendingIntentForActivity(Context context, Intent intent) {
+ /* private static PendingIntent pendingIntentForActivity(Context context, Intent intent) {
     return PendingIntent.getActivity(
         context, REQUEST_CODE_START_ACTIVITY, intent,
         PendingIntent.FLAG_UPDATE_CURRENT);
-  }
+  }*/
 }

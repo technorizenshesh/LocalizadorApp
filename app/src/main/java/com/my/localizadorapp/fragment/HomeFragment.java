@@ -29,6 +29,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -61,6 +62,7 @@ import com.my.localizadorapp.model.CircleListModel;
 import com.my.localizadorapp.model.CricleCreate;
 import com.my.localizadorapp.model.MemberListDataModel;
 import com.my.localizadorapp.model.MemberListModel;
+import com.my.localizadorapp.utils.Constant;
 import com.my.localizadorapp.utils.RetrofitClients;
 import com.my.localizadorapp.utils.SessionManager;
 
@@ -244,14 +246,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
           });
 
-        if (sessionManager.isNetworkAvailable()) {
+       /* if (sessionManager.isNetworkAvailable()) {
             binding.progressBar.setVisibility(View.VISIBLE);
 
             ApiGetCircleList();
         } else {
             Toast.makeText(getActivity(), R.string.checkInternet, Toast.LENGTH_SHORT).show();
         }
-
+*/
         getCurrentLocation();
 
         return binding.getRoot();
@@ -580,41 +582,38 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
             @Override
             public void onResponse(Call<CircleListModel> call, Response<CircleListModel> response) {
                 try {
-
                     binding.progressBar.setVisibility(View.GONE);
 
-                    CircleListModel myclass = response.body();
+                     if (response.body()!=null){
 
-                    String status = myclass.status;
-                    String message = myclass.message;
+                         if (response.body().status.equalsIgnoreCase("1")) {
+                             CircleListModel myclass = response.body();
+                             Preference.save(getActivity(),Preference.KEY_CircleCount, String.valueOf(myclass.circleCount));
+                             modelList_my_circle = (ArrayList<CircleListModel.Result>) myclass.result;
+                             modelList_my_circleAdd = (ArrayList<CircleListModel.CircleDatum>) myclass.getCircleData();
+                             if(modelList_my_circle!=null)
+                             {
+                                 setAdapter(modelList_my_circle);
+                                 ApiGetMemberList(modelList_my_circle.get(0).getCode());
 
-                    if (status.equalsIgnoreCase("1")) {
+                                 //ApiGetMemberList(CircleCode);
+                             }
 
-                        Preference.save(getActivity(),Preference.KEY_CircleCount, String.valueOf(myclass.circleCount));
-
-                        modelList_my_circle = (ArrayList<CircleListModel.Result>) myclass.result;
-                        modelList_my_circleAdd = (ArrayList<CircleListModel.CircleDatum>) myclass.getCircleData();
-
-                        if(modelList_my_circle!=null)
-                        {
-                            setAdapter(modelList_my_circle);
-
-                            ApiGetMemberList(modelList_my_circle.get(0).getCode());
-
-                            //ApiGetMemberList(CircleCode);
-                        }
-
-                        if(modelList_my_circleAdd!=null)
-                        {
-                            setAdapterCircleAdd(modelList_my_circleAdd);
-                        }
+                             if(modelList_my_circleAdd!=null)
+                             {
+                                 setAdapterCircleAdd(modelList_my_circleAdd);
+                             }
 
 
-                    } else {
+                         } else {
 
-                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                             //Toast.makeText(getActivity(), "NO Data ", Toast.LENGTH_SHORT).show();
+                             Toast.makeText(getActivity(), getString(R.string.no_circle_found), Toast.LENGTH_SHORT).show();
 
-                    }
+                         }
+                     }
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -623,7 +622,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
             @Override
             public void onFailure(Call<CircleListModel> call, Throwable t) {
                 binding.progressBar.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.no_circle_found), Toast.LENGTH_SHORT).show();
+
+                // Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -784,9 +785,15 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
                         if(myclass.getResult()!=null)
                         {
+                            Log.e("TAG", "onResponse: -------------"+myclass.getOwnerDetail().toString() );
+                            Log.e("TAG", "onResponse: -------------"+myclass.getOwnerDetail().getLat() );
+                            Log.e("TAG", "onResponse: -------------"+myclass.getOwnerDetail().getLat() );
 
                             double OwnerLat= Double.parseDouble(myclass.getOwnerDetail().getLat());
                             double OwnerLon= Double.parseDouble(myclass.getOwnerDetail().getLat());
+                            Glide.with(requireActivity()).load(Constant.BASE_URL_IMAGE+myclass.getOwnerDetail().
+                                            getImage()).placeholder(getActivity().getDrawable(R.drawable.user))
+                                    .circleCrop().into(binding.user);
 
                             String Address = getAddress(getActivity(), OwnerLat, OwnerLon);
 
@@ -806,8 +813,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
 
                                 for(int i=0;i<modelListCircleDetails.size();i++)
                                 {
-                                    LatLng sydney = new LatLng(Double.parseDouble(modelListCircleDetails.get(i).getLat()), Double.parseDouble(modelListCircleDetails.get(i).getLon()));
-
+                                    LatLng sydney = new LatLng(Double.parseDouble(modelListCircleDetails.get(i).getLat()),
+                                            Double.parseDouble(modelListCircleDetails.get(i).getLon()));
                                     Marker mSydney = mMap.addMarker(new MarkerOptions()
                                             .position(sydney)
                                             .title(UserName)
@@ -824,14 +831,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
                                         .snippet("Population: 4,627,300")
                                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.user)));
                                 markers.add(mark1);
-
-
-                                //  mMap.animateCamera(CameraUpdateFactory.newCameraPosition(getCameraPositionWithBearing(new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude()))));
-
                                 allINGoogleMap(markers);
-
                             }
-
                         }
                     }else {
                         modelListCircleDetails.clear();
@@ -849,45 +850,37 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
             }
         });
     }
-
     public void ApiMethodJoinCircle(String Code) {
-
         String UserId = Preference.get(getActivity(), Preference.KEY_USER_ID);
-
-        Call<CricleCreate> call = RetrofitClients
-                .getInstance()
-                .getApi()
-                .Api_Join_circle(UserId, Code, String.valueOf(latitude), String.valueOf(longitude),Battery);
+        Call<CricleCreate> call = RetrofitClients.getInstance().getApi().Api_Join_circle(
+                UserId, Code, String.valueOf(latitude), String.valueOf(longitude),Battery);
         call.enqueue(new Callback<CricleCreate>() {
             @Override
-            public void onResponse(Call<CricleCreate> call, Response<CricleCreate> response) {
+            public void onResponse(Call<CricleCreate> call, @NonNull Response<CricleCreate> response) {
                 try {
-
                     binding.progressBar.setVisibility(View.GONE);
 
-                    CricleCreate myclass = response.body();
-
-                    String status = myclass.status;
-                    String message = myclass.message;
-
+                    if (response.body()!=null){
+                    String status = response.body().status;
+                    String message = response.body().message;
                     if (status.equalsIgnoreCase("1")) {
-
                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-
                     } else {
-
-                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getActivity(), getString(R.string.no_circle_found), Toast.LENGTH_SHORT).show();
                     }
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                binding.progressBar.setVisibility(View.VISIBLE);
+                ApiGetCircleList();
             }
-
             @Override
             public void onFailure(Call<CricleCreate> call, Throwable t) {
                 binding.progressBar.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.no_circle_found), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

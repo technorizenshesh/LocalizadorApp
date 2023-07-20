@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
-                android:text="NORMAL"
+                android:text="@string/normal"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp">
 
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
-                android:text="TERRAIN"
+                android:text="@string/terrain"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/_10sdp">
 
@@ -132,7 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
-                android:text="SATELLITE"
+                android:text="@string/satellite"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/_10sdp">
 

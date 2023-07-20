@@ -23,7 +23,7 @@
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:textSize="@dimen/_14sdp"
-        android:text="Share for"
+        android:text="@string/share_for"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="15 minutes"
+            android:text="@string/_15_minutes"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp">
 
@@ -69,7 +69,7 @@
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp"
-            android:text="30 minutes"
+            android:text="@string/_30_minutes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -97,7 +97,7 @@
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp"
-            android:text="1 hour"
+            android:text="@string/_1_hour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -125,7 +125,7 @@
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp"
-            android:text="8 hours"
+            android:text="@string/_8_hours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -155,7 +155,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Share Location"
+            android:text="@string/share_location"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp">
 

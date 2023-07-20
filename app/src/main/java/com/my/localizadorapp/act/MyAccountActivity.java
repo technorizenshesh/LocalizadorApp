@@ -83,7 +83,7 @@ public class MyAccountActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(
                 this,
-                "ca-app-pub-3940256099942544/1033173712",
+                "ca-app-pub-5017067604593087/6794040495",
                 adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
@@ -151,12 +151,12 @@ public class MyAccountActivity extends AppCompatActivity {
 
                     binding.progressBar.setVisibility(View.GONE);
 
-                    SignUpModel myclass= response.body();
 
-                    String status = myclass.status;
-                    String message = myclass.message;
-
-                    if (status.equalsIgnoreCase("1")){
+                    assert response.body() != null;
+                    if (response.body().status.equalsIgnoreCase("1")){
+                        SignUpModel myclass= response.body();
+                        String status = myclass.status;
+                        String message = myclass.message;
                         String UserName = myclass.result.userName;
                         String country_code = myclass.result.country_code;
                          Mobile = myclass.result.mobile;
@@ -172,7 +172,7 @@ public class MyAccountActivity extends AppCompatActivity {
 
                     }else {
 
-                        Toast.makeText(MyAccountActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MyAccountActivity.this, response.body().message, Toast.LENGTH_SHORT).show();
 
                     }
                 } catch (Exception e) {

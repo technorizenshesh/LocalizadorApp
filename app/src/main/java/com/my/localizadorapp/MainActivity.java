@@ -1,34 +1,29 @@
 package com.my.localizadorapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.my.localizadorapp.act.HomeActivity;
 import com.my.localizadorapp.act.SignUpActivity;
 import com.my.localizadorapp.utils.SessionManager;
 
-import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LocationListener,
         ResultCallback<LocationSettingsResult> {
@@ -37,20 +32,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private RelativeLayout googlePayButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-      sessionManager=new SessionManager(MainActivity.this);
+        sessionManager = new SessionManager(MainActivity.this);
         MobileAds.initialize(this, initializationStatus -> {
-
-
         });
-        if (permissioncheck()){
+        if (permissioncheck()) {
             finds();
-
         } else {
-           requestPermission();
+            requestPermission();
         }
 
     }
@@ -65,15 +56,26 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     }
 
     private void requestPermission() {
+if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.TIRAMISU){
+    ActivityCompat.requestPermissions(MainActivity.this, new String[]
+            {
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.READ_CONTACTS,
+                    Manifest.permission.WRITE_CONTACTS,
 
-        ActivityCompat.requestPermissions(MainActivity.this, new String[]
-                {
-                        android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                        android.Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.READ_CONTACTS,
-                        Manifest.permission.WRITE_CONTACTS,
+            }, RequestPermissionCode);
+}else {
+    ActivityCompat.requestPermissions(MainActivity.this, new String[]
+            {
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.READ_CONTACTS,
+                    Manifest.permission.WRITE_CONTACTS,
 
-                }, RequestPermissionCode);
+            }, RequestPermissionCode);
+}
+
 
         if (permissioncheck()) {
             finds();
@@ -84,24 +86,37 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     }
 
     private void finds() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                sessionManager.setADES("");
-                String User_id = Preference.get(MainActivity.this,Preference.KEY_USER_ID);
+        String lang = Locale.getDefault().getLanguage().toString();
+        if (lang.equalsIgnoreCase("es")) {
+            Preference.save(MainActivity.this, Preference.LANGUAGE, "es");
 
-                if(User_id != null && !User_id.trim().equalsIgnoreCase("0")){
+        } else {
+            Preference.save(MainActivity.this, Preference.LANGUAGE, "en");
 
-                   Intent intent=new Intent(MainActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
 
-                }else
-                {
-                    Intent intent=new Intent(MainActivity.this, SignUpActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+        }
+        if ("es".equals(Preference.get(MainActivity.this, Preference.LANGUAGE))) {
+            Localizadorapp.updateResources(MainActivity.this, "es");
+        } else {
+            Localizadorapp.updateResources(MainActivity.this, "en");
+        }
+        Log.e("TAG", "finds:    langlanglanglang   ===   " + lang);
+
+
+        new Handler().postDelayed(() -> {
+            sessionManager.setADES("");
+            String User_id = Preference.get(MainActivity.this, Preference.KEY_USER_ID);
+
+            if (User_id != null && !User_id.trim().equalsIgnoreCase("0")) {
+
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+
+            } else {
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
+                finish();
             }
         }, 3000);
     }
@@ -110,8 +125,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     public void onLocationChanged(@NonNull Location location) {
 
     }
+
     @Override
-    public void onResult(@NonNull LocationSettingsResult locationSettingsResult){
+    public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
 
     }
 

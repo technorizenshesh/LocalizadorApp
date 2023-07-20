@@ -1,6 +1,7 @@
 package com.my.localizadorapp.adapter;
 
 
+
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -8,13 +9,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.model.MemberListDataModel;
+import com.my.localizadorapp.utils.Constant;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,13 +58,14 @@ public class AvailableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             final ViewHolder genericViewHolder = (ViewHolder) holder;
 
             genericViewHolder.txtUserName.setText(model.getUserDetail().getUserName());
-
+            Glide.with(mContext).load(Constant.BASE_URL_IMAGE+model.getUserDetail()
+                    .getImage()).placeholder(mContext.getDrawable(R.drawable.user)).circleCrop().into(genericViewHolder.user);
             if (model.getUserDetail().getLat() != null && model.getUserDetail().getLon() != null) {
                 double lat = Double.parseDouble(model.getUserDetail().getLat());
                 double lon = Double.parseDouble(model.getUserDetail().getLon());
 
                 String Address = getAddress(mContext, lat, lon);
-
+                Log.e("TAG", "onBindViewHolder: "+Address);
                 genericViewHolder.txtAddress.setText(Address);
             }
 
@@ -94,13 +99,14 @@ public class AvailableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView txtUserName;
         TextView txtAddress;
         TextView txtBatery;
-
+ImageView user;
         public ViewHolder(final View itemView) {
             super(itemView);
 
             this.txtUserName = itemView.findViewById(R.id.txtUserName);
             this.txtAddress = itemView.findViewById(R.id.txtAddress);
             this.txtBatery = itemView.findViewById(R.id.txtBatery);
+            this.user = itemView.findViewById(R.id.user);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

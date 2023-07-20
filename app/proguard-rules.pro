@@ -19,3 +19,15 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep
+-keepclassmembers
+-keepclassmembers class com.my.localizadorapp.*{
+    public *;
+    private *;
+    protected *;
+}
+-dontwarn com.bumptech.glide.*
+-dontshrink
+-dontoptimize
+-keepattributes *Annotation*
+

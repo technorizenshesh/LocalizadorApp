@@ -8,6 +8,7 @@ import com.my.localizadorapp.model.CircleListModel;
 import com.my.localizadorapp.model.CircleListNewModel;
 import com.my.localizadorapp.model.CricleCreate;
 import com.my.localizadorapp.model.DeleteModel;
+import com.my.localizadorapp.model.EmargancyModel;
 import com.my.localizadorapp.model.FAQModel;
 import com.my.localizadorapp.model.GetAddressModel;
 import com.my.localizadorapp.model.GetUserChatModel;
@@ -26,9 +27,11 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface Api {
 
@@ -56,6 +59,7 @@ public interface Api {
     String get_product_by_category = "get_product_by_category";
     String get_product_details = "get_product_details";
     String update_profile = "update_profile";
+    String get_emergency = "get_emergency";
 
     @FormUrlEncoded
     @POST(Api_signup)
@@ -150,6 +154,9 @@ public interface Api {
             @Field("code") String code
     );
 
+    @GET(get_emergency)
+    Call<EmargancyModel> get_emergency();
+
     @FormUrlEncoded
     @POST(Api_delete_circle)
     Call<DeleteModel> Api_delete_circle(
@@ -200,7 +207,7 @@ public interface Api {
     @POST(get_category)
     Call<CategoryModel> get_category();
     @POST(get_faq)
-    Call<FAQModel> get_faq();
+    Call<FAQModel> get_faq(@Query("lang") String lang);
 
     @FormUrlEncoded
     @POST(get_product_by_category)

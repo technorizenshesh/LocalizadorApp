@@ -16,7 +16,6 @@ public class CricleCreate {
     public String status;
 
     public class Result {
-
         @SerializedName("id")
         @Expose
         public String id;

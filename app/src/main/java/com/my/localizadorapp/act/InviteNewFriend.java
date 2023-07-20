@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdError;
@@ -15,19 +16,22 @@ import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.OnUserEarnedRewardListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.databinding.ActivityInviteNewFriendBinding;
+import com.my.localizadorapp.utils.SessionManager;
 
 public class InviteNewFriend extends AppCompatActivity {
     private RewardedAd rewardedAd;
     private boolean isLoading = false;
 
     private static final String TAG = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
+    private static final String AD_UNIT_ID = "ca-app-pub-5017067604593087/6794040495	";
 
     private void loadRewardedAd() {
         if (rewardedAd == null) {
@@ -128,7 +132,15 @@ public class InviteNewFriend extends AppCompatActivity {
 
          UserCode = Preference.get(InviteNewFriend.this,Preference.KEY_CircleCode);
         MobileAds.initialize(this, initializationStatus -> {
-          //  loadRewardedAd();
+            //loadRewardedAd();
+            String ads = new SessionManager(this).getADES();
+            Log.e("TAG", "onCreate: dvxvxvxvf -----" + ads);
+
+            if (ads.equalsIgnoreCase("")) {
+                loadInterstitialAd();
+                Log.e("TAG", "onCreate: hgjfhnfdh");
+            }
+            Log.e("TAG", "onCreate: dvxvxvxvf");
 
         });
         binding.txtCode.setText(UserCode);
@@ -153,18 +165,59 @@ public class InviteNewFriend extends AppCompatActivity {
           onBackPressed();
        });
     }
+    InterstitialAd interstitialAd;
 
+
+    public void loadInterstitialAd() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(InviteNewFriend.this, "ca-app-pub-5017067604593087/6794040495", adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialA) {
+                interstitialAd = interstitialA;
+                interstitialAd.show(InviteNewFriend.this);
+                //  Toast.makeText(PlaceListAddress.this, "onAdLoaded()", Toast.LENGTH_SHORT).show();
+                interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+                        interstitialAd = null;
+                        Log.d("TAG", "The ad was dismissed.");
+                    }
+
+                    @Override
+                    public void onAdFailedToShowFullScreenContent(AdError adError) {
+                        interstitialAd = null;
+                        Log.d("TAG", "The ad failed to show.");
+                    }
+
+                    @Override
+                    public void onAdShowedFullScreenContent() {
+                        Log.d("TAG", "The ad was shown.");
+                    }
+                });
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                Log.i("TAG", "onAdFailedToLoad" + loadAdError.getMessage());
+                interstitialAd = null;
+            }
+        });
+    }
     private void onShareClicked() {
+        final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+      /*  try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName+" : Code - "+UserCode)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName+" : Code - "+UserCode)));
+        }*/
 
-        String link = "https://play.google.com/store/apps/details?id=com.recharge2mePlay.recharge2me : Code - "+UserCode;
-
+        String link = "https://play.google.com/store/apps/details?id="+
+                appPackageName+" : Code - "+UserCode;
         Uri uri = Uri.parse(link);
-
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, link.toString());
-        intent.putExtra(Intent.EXTRA_TITLE, "Recharge2me");
-
+        intent.putExtra(Intent.EXTRA_TEXT, link);
+        intent.putExtra(Intent.EXTRA_TITLE, getString(R.string.app_name));
         startActivity(Intent.createChooser(intent, "Share Link"));
 
     }

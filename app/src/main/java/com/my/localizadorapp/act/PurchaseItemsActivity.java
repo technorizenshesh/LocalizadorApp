@@ -78,7 +78,7 @@ public class PurchaseItemsActivity extends AppCompatActivity implements ProductO
     private boolean isLoading = false;
 
     private static final String TAG = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
+    private static final String AD_UNIT_ID = "ca-app-pub-5017067604593087/6794040495	";
 
     private void loadRewardedAd() {
         if (rewardedAd == null) {

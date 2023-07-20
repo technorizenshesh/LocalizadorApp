@@ -29,7 +29,7 @@
             android:scaleType="fitXY"
             android:layout_width="@dimen/_120sdp"
             android:layout_height="@dimen/_120sdp"
-            android:src="@drawable/logonew"
+            android:src="@drawable/logo_publish"
             />
         <androidx.cardview.widget.CardView
             android:layout_margin="@dimen/_10sdp"

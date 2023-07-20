@@ -1,5 +1,7 @@
 package com.my.localizadorapp.Notification;
 
+import static com.my.localizadorapp.Localizadorapp.createPendingIntentGetActivity;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -222,14 +224,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
            Intent intent = new Intent(this, HomeActivity.class);
            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-           PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent,
-                   PendingIntent.FLAG_ONE_SHOT);
+           PendingIntent pendingIntent = createPendingIntentGetActivity(this,intent);
+        //           PendingIntent.getActivity(this, 0 , intent,
+             //      PendingIntent.FLAG_ONE_SHOT);
 
            String channelId = "1";
            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
                    .setStyle(new NotificationCompat.BigTextStyle().bigText(Msg))
-                   .setSmallIcon(R.drawable.logonew)
+                   .setSmallIcon(R.drawable.logo_publish)
                    //.setLargeIcon(bitmap)
                    .setContentTitle(Title)
                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)

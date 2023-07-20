@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:918181947883:android:59a3c349ad4fe142f991ae",
         "android_client_info": {
-          "package_name": "com.my.localizadorapp"
+          "package_name": "com.ubicar.localizadordecelularmovilpornumerogps"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "918181947883-tj6uhdaikpkv69jf5mjbj4m4evj65rvf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.my.localizadorapp",
+            "package_name": "com.ubicar.localizadordecelularmovilpornumerogps",
             "certificate_hash": "07601957272bd2cdcf2c4b144175d46a1c7cc098"
           }
         },

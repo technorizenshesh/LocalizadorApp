@@ -4,7 +4,7 @@ public class Constant {
 
   //  public static final String BASE_URL = "http://lezdash.com/TropikVTCTaxi/webservice/";
 
-    public static final String BASE_URL = "http://tropikvtc.com/TropikVTCTaxi/webservice/";
+    public static final String BASE_URL_IMAGE ="https://technorizen.com/techno_public_html/_E_F_G_H_I_J_K_L_BACKUP/localizador/uploads/images/";
 
     public static final String USER_INFO = "user_info";
     public static final String LANGUAGE = "language";

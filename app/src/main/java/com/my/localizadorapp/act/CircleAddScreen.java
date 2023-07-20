@@ -2,6 +2,7 @@ package com.my.localizadorapp.act;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -15,7 +16,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
@@ -64,7 +71,18 @@ public class CircleAddScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_circle_add_screen);
+        MobileAds.initialize(this, initializationStatus -> {
+            //loadRewardedAd();
+            String ads=  new SessionManager(this).getADES();
+            Log.e("TAG", "onCreate: dvxvxvxvf -----"+ads );
 
+            if (ads.equalsIgnoreCase("")) {
+                loadInterstitialAd();
+                Log.e("TAG", "onCreate: hgjfhnfdh" );
+            }
+            Log.e("TAG", "onCreate: dvxvxvxvf" );
+
+        });
         registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
        try {
            FirebaseApp.initializeApp(this);
@@ -147,7 +165,46 @@ public class CircleAddScreen extends AppCompatActivity {
     }
 
 
+    InterstitialAd interstitialAd;
 
+
+    public void loadInterstitialAd() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(CircleAddScreen.this
+                , "ca-app-pub-5017067604593087/6794040495",
+                adRequest, new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialA) {
+                        interstitialAd = interstitialA;
+                        interstitialAd.show(CircleAddScreen.this);
+                        //  Toast.makeText(PlaceListAddress.this, "onAdLoaded()", Toast.LENGTH_SHORT).show();
+                        interstitialAd.setFullScreenContentCallback(
+                                new FullScreenContentCallback() {
+                                    @Override
+                                    public void onAdDismissedFullScreenContent() {
+                                        interstitialAd = null;
+                                        Log.d("TAG", "The ad was dismissed.");
+                                    }
+
+                                    @Override
+                                    public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                        interstitialAd = null;
+                                        Log.d("TAG", "The ad failed to show.");
+                                    }
+
+                                    @Override
+                                    public void onAdShowedFullScreenContent() {
+                                        Log.d("TAG", "The ad was shown.");
+                                    }
+                                });
+                    }
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        Log.i("TAG","onAdFailedToLoad"+ loadAdError.getMessage());
+                        interstitialAd = null;
+                    }
+                });
+    }
     public void ApiMethodSignUp()
     {
         Log.e( "Tokennnn" ,""+token);

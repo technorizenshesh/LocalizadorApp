@@ -38,7 +38,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_18sdp"
-                android:text="My Circle"
+                android:text="@string/my_circle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+            ads:adUnitId="ca-app-pub-5017067604593087/6009526144">
         </com.google.android.gms.ads.AdView>
 
         <LinearLayout
@@ -74,7 +74,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_18sdp"
-                android:text="No notifications yet"
+                android:text="@string/no_notifications_yet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
