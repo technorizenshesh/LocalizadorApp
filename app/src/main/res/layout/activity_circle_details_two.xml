@@ -50,7 +50,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text="Circle Details"
+                android:text="@string/circle_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 

@@ -24,6 +24,8 @@ public static String key_switch_shift_change = "shift_change";
 public static String key_On_off = "key_On_off";
 public static String key_image = "image";
 public static String Country = "country";
+public static String LANGUAGE = "language";
+public static String PHONE = "phone";
 
 
 
