@@ -40,6 +40,8 @@ import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.my.localizadorapp.GPSTracker;
+import com.my.localizadorapp.Localizadorapp;
+import com.my.localizadorapp.MainActivity;
 import com.my.localizadorapp.Preference;
 import com.my.localizadorapp.R;
 import com.my.localizadorapp.Upd.MyService;
@@ -47,8 +49,11 @@ import com.my.localizadorapp.databinding.ActivityHomeNavBinding;
 import com.my.localizadorapp.fragment.HomeFragment;
 import com.my.localizadorapp.fragment.PlaceFragment;
 import com.my.localizadorapp.model.CricleCreate;
+import com.my.localizadorapp.model.SignUpModel;
 import com.my.localizadorapp.utils.RetrofitClients;
 import com.my.localizadorapp.utils.SessionManager;
+
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -142,15 +147,13 @@ public class HomeActivity extends AppCompatActivity {
             loadFragment(fragment);*/
         });
 
-        binding.childNavDrawer.llSupport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navmenu();
-                Intent i = new Intent(HomeActivity.
-                        this, SupportScreen.class);
-                startActivity(i);
-            }
+        binding.childNavDrawer.llSupport.setOnClickListener(v -> {
+            navmenu();
+            Intent i = new Intent(HomeActivity.
+                    this, SupportScreen.class);
+            startActivity(i);
         });
+        binding.childNavDrawer.changeLang.setOnClickListener(v -> Localizadorapp.changeLangDialog(HomeActivity.this));
 
         binding.childNavDrawer.LLsharingHistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -282,7 +285,60 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+     /*   String lang = Locale.getDefault().getLanguage().toString();
+        if (lang.equalsIgnoreCase("es")) {
+            Preference.save(HomeActivity.this, Preference.LANGUAGE, "es");
+
+        } else {
+            Preference.save(HomeActivity.this, Preference.LANGUAGE, "en");
+
+
+        }
+        if ("es".equals(Preference.get(HomeActivity.this, Preference.LANGUAGE))) {
+            Localizadorapp.updateResources(HomeActivity.this, "es");
+        } else {
+            Localizadorapp.updateResources(HomeActivity.this, "en");
+        }
+        Log.e("TAG", "finds:    langlanglanglang   ===   " + lang);
+*/
         ContextCompat.startForegroundService(getApplicationContext(), new Intent(getApplicationContext(), MyService.class));
+        ApiMethodmyProfile();
+    }
+    public void ApiMethodmyProfile() {
+
+        String UserId = Preference.get(HomeActivity.this,Preference.KEY_USER_ID);
+        Call<SignUpModel> call = RetrofitClients
+                .getInstance()
+                .getApi()
+                .Api_get_profile(UserId);
+        call.enqueue(new Callback<SignUpModel>() {
+            @Override
+            public void onResponse(@NonNull Call<SignUpModel> call, @NonNull Response<SignUpModel> response) {
+                try {
+
+                    SignUpModel myclass= response.body();
+
+                    assert myclass != null;
+                    String status = myclass.status;
+                    String message = myclass.message;
+
+                    if (status.equalsIgnoreCase("1")){
+                        String UserName = myclass.result.userName;
+                        String country_code = myclass.result.country_code;
+                       Preference.save(HomeActivity.this,Preference.PHONE,"+"+myclass.getResult().country_code+myclass.getResult().mobile);
+                    }else {
+
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SignUpModel> call, Throwable t) {
+            }
+        });
     }
 
     public void navmenu() {

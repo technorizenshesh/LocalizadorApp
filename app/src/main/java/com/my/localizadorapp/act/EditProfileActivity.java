@@ -2,17 +2,24 @@ package com.my.localizadorapp.act;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
@@ -41,8 +48,13 @@ import com.my.localizadorapp.utils.SessionManager;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.sql.Array;
+import java.util.Calendar;
 import java.util.List;
 
 import id.zelory.compressor.Compressor;
@@ -77,7 +89,30 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         binding.RRUploadImage.setOnClickListener(v -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ){
 
+                Dexter.withActivity(EditProfileActivity.this)
+                        .withPermissions(Manifest.permission.CAMERA,
+                                Manifest.permission.READ_MEDIA_IMAGES)
+                        .withListener(new MultiplePermissionsListener() {
+                            @Override
+                            public void onPermissionsChecked(MultiplePermissionsReport report) {
+                                if (report.areAllPermissionsGranted()) {
+                                    //Intent intent =  new Intent(MediaStore.ACTION_PICK_IMAGES);
+                                    Intent intent = new Intent(Intent.ACTION_PICK,
+                                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                    // starting activity on below line.
+                                    startActivityForResult(intent, 2);
+                                } else {
+                                    showSettingDialogue();
+                                }
+                            }
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                                token.continuePermissionRequest();
+                            }
+                        }).check();
+            } else {
             Dexter.withActivity(EditProfileActivity.this)
                     .withPermissions(Manifest.permission.CAMERA,
                             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -86,7 +121,10 @@ public class EditProfileActivity extends AppCompatActivity {
                         @Override
                         public void onPermissionsChecked(MultiplePermissionsReport report) {
                             if (report.areAllPermissionsGranted()) {
-                                Intent intent = CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).getIntent(EditProfileActivity.this);
+
+                                Intent intent = CropImage.activity()
+                                        .setGuidelines(CropImageView.Guidelines.ON)
+                                        .getIntent(EditProfileActivity.this);
                                 startActivityForResult(intent, 1);
                             } else {
                                 showSettingDialogue();
@@ -96,7 +134,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
                             token.continuePermissionRequest();
                         }
-                    }).check();
+                    }).check();}
 
         });
 
@@ -222,7 +260,9 @@ if (!country_code.equalsIgnoreCase("")){
 
                         if(!myclass.result.image.equalsIgnoreCase(""))
                         {
-                            Glide.with(EditProfileActivity.this).load(myclass.result.image).placeholder(R.drawable.user_default).error(R.drawable.user_default).into(binding.imgUser);
+                            Glide.with(EditProfileActivity.this).load(myclass.result.image).placeholder(R.drawable.user_default).error(R.drawable.user_default).circleCrop().into(binding.imgUser);
+
+
                         }
 
                         Toast.makeText(EditProfileActivity.this, message, Toast.LENGTH_SHORT).show();
@@ -279,8 +319,9 @@ if (!country_code.equalsIgnoreCase("")){
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        CropImage.ActivityResult result = CropImage.getActivityResult(data);
         if (requestCode == 1) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
             if (resultCode == RESULT_OK) {
                 resultUri = result.getUri();
                 try {
@@ -316,8 +357,49 @@ if (!country_code.equalsIgnoreCase("")){
                 Exception error = result.getError();
             }
         }
-    }
+        else if (requestCode ==2){
+            if (resultCode == RESULT_OK) {
+                // compare the resultCode with the
+                // constant
+                    // Get the url of the image from data
+                assert data != null;
+                resultUri = data.getData();
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), resultUri);
 
+                  //  UserProfile_img = FileUtil.from(this, resultUri);
+                    Log.e("TAG", "persistImage: bitmapbitmap  "+bitmap );
+
+                    Glide.with(this).load(bitmap).circleCrop().into(binding.imgUser);
+                    isProfileImage = true;
+
+                    UserProfile_img=  persistImage(bitmap, " "+System.currentTimeMillis(),EditProfileActivity.this);
+                    Log.e("TAG", "persistImage: UserProfile_imgUserProfile_img  "+UserProfile_img.getAbsolutePath() );
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+    private static File persistImage(Bitmap bitmap, String name,Context cOntext) {
+        File filesDir = cOntext.getFilesDir();
+        File imageFile = new File(filesDir, name + ".jpg");
+
+        OutputStream os;
+        try {
+            os = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
+            os.flush();
+            os.close();
+        } catch (Exception e) {
+            Log.e("TAG", "persistImage: "+e.getMessage() );
+        }
+
+        return  imageFile;
+
+    }
 
     private void ApIUpdateMehod(){
 
@@ -354,10 +436,10 @@ if (!country_code.equalsIgnoreCase("")){
 
                 String status = finallyPr.status;
 
-                if (status.equalsIgnoreCase("1"))
-                {
+                if (status.equalsIgnoreCase("1")) {
+                        Toast.makeText(EditProfileActivity.this, finallyPr.message, Toast.LENGTH_SHORT).show();
 
-                    binding.txtName1.setText(finallyPr.result.userName+"");
+                  /*  binding.txtName1.setText(finallyPr.result.userName+"");
                     binding.edtMobile.setText(finallyPr.result.mobile+"");
                    // binding.edtMobile.setText(finallyPr.result.mobile+"");
                      if (!finallyPr.result.country_code.equalsIgnoreCase("")){
@@ -371,6 +453,7 @@ if (!country_code.equalsIgnoreCase("")){
                 } else {
                     binding.progressBar.setVisibility(View.GONE);
                     Toast.makeText(EditProfileActivity.this, finallyPr.message, Toast.LENGTH_SHORT).show();
+                }*/
                 }
             }
             @Override

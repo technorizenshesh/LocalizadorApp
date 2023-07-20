@@ -23,7 +23,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/bg_SPLASH"
                 android:textSize="@dimen/_16sdp"
-                android:text="Clip the tracker to a bag, dogs \ncollar, or your child’s Toy."
+                android:text="@string/clip_the_tracker_to_a_bag_dogs_ncollar_or_your_child_s_toy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -44,7 +44,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp"
                     android:gravity="center"
-                    android:text="Continue"
+                    android:text="@string/continued"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 

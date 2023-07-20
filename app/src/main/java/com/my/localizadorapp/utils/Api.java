@@ -8,6 +8,7 @@ import com.my.localizadorapp.model.CircleListModel;
 import com.my.localizadorapp.model.CircleListNewModel;
 import com.my.localizadorapp.model.CricleCreate;
 import com.my.localizadorapp.model.DeleteModel;
+import com.my.localizadorapp.model.EmargancyModel;
 import com.my.localizadorapp.model.FAQModel;
 import com.my.localizadorapp.model.GetAddressModel;
 import com.my.localizadorapp.model.GetUserChatModel;
@@ -26,6 +27,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -56,6 +58,7 @@ public interface Api {
     String get_product_by_category = "get_product_by_category";
     String get_product_details = "get_product_details";
     String update_profile = "update_profile";
+    String get_emergency = "get_emergency";
 
     @FormUrlEncoded
     @POST(Api_signup)
@@ -149,6 +152,9 @@ public interface Api {
             @Field("user_id") String user_id,
             @Field("code") String code
     );
+
+    @GET(get_emergency)
+    Call<EmargancyModel> get_emergency();
 
     @FormUrlEncoded
     @POST(Api_delete_circle)

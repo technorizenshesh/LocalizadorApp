@@ -95,7 +95,7 @@
                             android:layout_gravity="center"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_16sdp"
-                            android:text="Circle"
+                            android:text="@string/circle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
@@ -134,7 +134,7 @@
                             android:layout_gravity="center"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_16sdp"
-                            android:text="Add"
+                            android:text="@string/add"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
@@ -159,7 +159,7 @@
                     android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sdp"
-                    android:text="You need to have atleast one other member in your circle to chat."
+                    android:text="@string/you_need_to_have_at_least_one_other_member_in_your_circle_to_chat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -174,14 +174,14 @@
                     >
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_14sdp"
                         android:gravity="center"
-                        android:text="Invite New Member"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:text="@string/invite_new_member"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp">
 
                     </TextView>
 

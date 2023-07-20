@@ -11,5 +11,6 @@
     <color name="gray_light">#F2F2F2</color>
 
     <color name="price_button_grey">#555</color>
+    <color name="translucent_black">#00FFFFFF</color>
 
 </resources>

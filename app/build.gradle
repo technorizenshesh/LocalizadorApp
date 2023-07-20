@@ -90,7 +90,7 @@ dependencies {
 
     //CropingImage
     implementation 'com.karumi:dexter:6.0.1'
-    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     implementation 'id.zelory:compressor:2.1.0'
 
     //Place

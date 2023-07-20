@@ -119,7 +119,6 @@ public class ChatMessageActivity extends AppCompatActivity {
     private void setUi() {
 
         sessionManager = new SessionManager(ChatMessageActivity.this);
-
         if (sessionManager.isNetworkAvailable()) {
             binding.progressBar.setVisibility(View.VISIBLE);
             ApiGetCircleList();

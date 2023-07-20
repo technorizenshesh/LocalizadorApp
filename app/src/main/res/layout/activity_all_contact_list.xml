@@ -98,7 +98,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp"
                 android:gravity="center"
-                android:text="Invite Friends"
+                android:text="@string/invite_friends"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 

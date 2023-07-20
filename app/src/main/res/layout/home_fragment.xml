@@ -119,7 +119,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp"
-                        android:text="Join Circle"
+                        android:text="@string/join_circle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
