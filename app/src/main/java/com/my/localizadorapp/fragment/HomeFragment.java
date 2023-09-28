@@ -790,7 +790,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
                             Log.e("TAG", "onResponse: -------------"+myclass.getOwnerDetail().getLat() );
 
                             double OwnerLat= Double.parseDouble(myclass.getOwnerDetail().getLat());
-                            double OwnerLon= Double.parseDouble(myclass.getOwnerDetail().getLat());
+                            double OwnerLon= Double.parseDouble(myclass.getOwnerDetail().getLon());
                             Glide.with(requireActivity()).load(Constant.BASE_URL_IMAGE+myclass.getOwnerDetail().
                                             getImage()).placeholder(getActivity().getDrawable(R.drawable.user))
                                     .circleCrop().into(binding.user);
