@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-5017067604593087/6009526144">
+            ads:adUnitId="ca-app-pub-6669202856871108/4069679933">
         </com.google.android.gms.ads.AdView>
 
         <LinearLayout

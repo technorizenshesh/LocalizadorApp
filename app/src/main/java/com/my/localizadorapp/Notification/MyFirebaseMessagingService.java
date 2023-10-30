@@ -232,7 +232,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
                    .setStyle(new NotificationCompat.BigTextStyle().bigText(Msg))
-                   .setSmallIcon(R.drawable.logo_publish)
+                   .setSmallIcon(R.drawable.logo_pub_new)
                    //.setLargeIcon(bitmap)
                    .setContentTitle(Title)
                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)

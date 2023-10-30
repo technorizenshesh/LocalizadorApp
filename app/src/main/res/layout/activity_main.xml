@@ -18,7 +18,7 @@
             android:layout_width="@dimen/_120sdp"
             android:layout_height="@dimen/_120sdp"
             android:scaleType="fitXY"
-            android:src="@drawable/logo_publish"
+            android:src="@drawable/logo_pub_new"
             />
 
     </LinearLayout>

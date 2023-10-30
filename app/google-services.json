@@ -1,45 +1,26 @@
 {
   "project_info": {
-    "project_number": "918181947883",
-    "firebase_url": "https://locationapp-982c6-default-rtdb.firebaseio.com",
-    "project_id": "locationapp-982c6",
-    "storage_bucket": "locationapp-982c6.appspot.com"
+    "project_number": "53378627081",
+    "project_id": "localised-2d0c6",
+    "storage_bucket": "localised-2d0c6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:918181947883:android:59a3c349ad4fe142f991ae",
+        "mobilesdk_app_id": "1:53378627081:android:b2f1216774f81c7833ead8",
         "android_client_info": {
-          "package_name": "com.ubicar.localizadordecelularmovilpornumerogps"
+          "package_name": "com.ubicar.localizarcelularmovilperdido"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "918181947883-tj6uhdaikpkv69jf5mjbj4m4evj65rvf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.ubicar.localizadordecelularmovilpornumerogps",
-            "certificate_hash": "07601957272bd2cdcf2c4b144175d46a1c7cc098"
-          }
-        },
-        {
-          "client_id": "918181947883-g8b7m6adei75ehls0lfbvirik58vj7n8.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDan_tdhcTPG2UiWcoG8MXh1YcTljT-CEg"
+          "current_key": "AIzaSyAGRiQUgu_G1fLDZGV7fj_8oA0wZZLQ8lM"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "918181947883-g8b7m6adei75ehls0lfbvirik58vj7n8.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

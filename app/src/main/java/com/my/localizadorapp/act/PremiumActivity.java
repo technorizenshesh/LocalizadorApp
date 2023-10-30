@@ -39,10 +39,10 @@ public class PremiumActivity extends AppCompatActivity {
     private boolean isLoading = false;
 
     private static final String TAG = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-    private static final String AD_UNIT_ID = "ca-app-pub-5017067604593087/6794040495	";
+    private static final String AD_UNIT_ID = "ca-app-pub-6669202856871108/4796400259	";
     ActivityPremiumBinding binding;
-   // private static final String AD_UNIT_ID2 = "ca-app-pub-5017067604593087/6794040495";
-    private static final String AD_UNIT_ID2 = "ca-app-pub-5017067604593087/6794040495";
+   // private static final String AD_UNIT_ID2 = "ca-app-pub-6669202856871108/4796400259";
+    private static final String AD_UNIT_ID2 = "ca-app-pub-6669202856871108/4796400259";
 
     private ArrayList<RatingModel> modelList = new ArrayList<>();
     RatingPrimiumAdapter mAdapter;

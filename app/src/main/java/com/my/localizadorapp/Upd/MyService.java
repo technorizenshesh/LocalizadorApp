@@ -123,7 +123,7 @@ public class MyService extends Service {
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
 
         Notification notification = notificationBuilder.setOngoing(true)
-                .setSmallIcon(R.drawable.logo_publish)
+                .setSmallIcon(R.drawable.logo_pub_new)
                 .setContentTitle("")
                 .setPriority(NotificationManager.IMPORTANCE_MIN)
                 .setCategory(Notification.CATEGORY_SERVICE)
@@ -200,7 +200,8 @@ public class MyService extends Service {
 //                            sendBroadcast(intent1);
                              Log.e("Location====", String.valueOf(location.getLatitude()));
 
-                            updateProviderLatLon(String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()),Battery);
+                            updateProviderLatLon(String.valueOf(location.getLatitude()),
+                                    String.valueOf(location.getLongitude()),Battery);
 
                            // updateProviderLatLon(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), DataManager.getInstance().getUserData(getApplicationContext()).result.id);
 

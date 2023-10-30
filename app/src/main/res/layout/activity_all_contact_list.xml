@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-5017067604593087/6009526144"/>
+            ads:adUnitId="ca-app-pub-6669202856871108/4069679933"/>
 
 
         <ProgressBar

@@ -183,7 +183,7 @@ public class EditProfileActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(
                 this,
-                "ca-app-pub-5017067604593087/6794040495",
+                "ca-app-pub-6669202856871108/4796400259",
                 adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override

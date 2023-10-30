@@ -30,7 +30,9 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+<!--
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
+-->
 
     <meta-data
         android:name="com.google.android.gms.wallet.api.enabled"
@@ -49,7 +51,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5017067604593087~8683790944" />
+            android:value="ca-app-pub-6669202856871108~7697895762" />
         <meta-data
             android:name="com.google.android.gms.ads.AD_MANAGER_APP"
             android:value="true" />

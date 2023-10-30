@@ -34,7 +34,7 @@ public class SendFeedbaackReport extends AppCompatActivity {
     public void loadInterstitialAd() {
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(SendFeedbaackReport.this
-                , "ca-app-pub-5017067604593087/6794040495",
+                , "ca-app-pub-6669202856871108/4796400259",
                 adRequest, new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialA) {

@@ -54,8 +54,8 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-    // private static final String AD_UNIT_ID = "ca-app-pub-5017067604593087/6794040495	";
-    private static final String AD_UNIT_ID = "ca-app-pub-5017067604593087/6794040495";
+    // private static final String AD_UNIT_ID = "ca-app-pub-6669202856871108/4796400259	";
+    private static final String AD_UNIT_ID = "ca-app-pub-6669202856871108/4796400259";
     Fragment fragment;
     ActivityHomeNavBinding binding;
     boolean doubleBackToExitPressedOnce = false;

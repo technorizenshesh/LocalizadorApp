@@ -31,7 +31,7 @@ public class InviteNewFriend extends AppCompatActivity {
     private boolean isLoading = false;
 
     private static final String TAG = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-    private static final String AD_UNIT_ID = "ca-app-pub-5017067604593087/6794040495	";
+    private static final String AD_UNIT_ID = "ca-app-pub-6669202856871108/4796400259	";
 
     private void loadRewardedAd() {
         if (rewardedAd == null) {
@@ -170,7 +170,7 @@ public class InviteNewFriend extends AppCompatActivity {
 
     public void loadInterstitialAd() {
         AdRequest adRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(InviteNewFriend.this, "ca-app-pub-5017067604593087/6794040495", adRequest, new InterstitialAdLoadCallback() {
+        InterstitialAd.load(InviteNewFriend.this, "ca-app-pub-6669202856871108/4796400259", adRequest, new InterstitialAdLoadCallback() {
             @Override
             public void onAdLoaded(@NonNull InterstitialAd interstitialA) {
                 interstitialAd = interstitialA;

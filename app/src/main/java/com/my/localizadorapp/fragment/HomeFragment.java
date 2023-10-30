@@ -308,7 +308,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
     }
 
     private void AlertDaliog() {
-
         LayoutInflater li;
         RelativeLayout RRShare;
         AlertDialog.Builder alertDialogBuilder;
@@ -823,7 +822,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, OnItem
                                     markers.add(mSydney);
                                 }
 
-                                LatLng sydney = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLatitude());
+                                LatLng sydney = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
 
                                 Marker mark1 = mMap.addMarker(new MarkerOptions()
                                         .position(sydney)

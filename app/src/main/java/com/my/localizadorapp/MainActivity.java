@@ -63,7 +63,6 @@ if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.TIRAMISU){
                     android.Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.READ_CONTACTS,
                     Manifest.permission.WRITE_CONTACTS,
-
             }, RequestPermissionCode);
 }else {
     ActivityCompat.requestPermissions(MainActivity.this, new String[]
