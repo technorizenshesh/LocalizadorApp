@@ -233,7 +233,7 @@ public class MyPlaceActivity extends AppCompatActivity implements OnMapReadyCall
         });
 
         if (!Places.isInitialized()) {
-            Places.initialize(MyPlaceActivity.this, getString(R.string.place_api_key));
+            Places.initialize(MyPlaceActivity.this, getResources().getString(R.string.google_map_key));
         }
 
         binding.tvAddress.setOnClickListener(v -> {

@@ -226,6 +226,7 @@
             >
 
             <ImageView
+                android:visibility="gone"
                 android:scaleType="fitXY"
                 android:src="@drawable/premium"
                 android:layout_gravity="center"
